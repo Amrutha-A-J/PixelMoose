@@ -7,6 +7,9 @@ import {
   Chip,
   Container,
   CssBaseline,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Grid,
   IconButton,
   Menu,
@@ -23,6 +26,9 @@ import { styled } from '@mui/material/styles'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import BoltIcon from '@mui/icons-material/Bolt'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import CloseIcon from '@mui/icons-material/Close'
 import HandshakeIcon from '@mui/icons-material/Handshake'
 import LayersIcon from '@mui/icons-material/Layers'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -90,6 +96,23 @@ const IconBadge = styled('span')(({ theme }) => ({
   background: 'linear-gradient(135deg, rgba(239, 108, 47, 0.18), rgba(239, 108, 47, 0.04))',
   color: theme.palette.primary.dark,
 }))
+
+type ProjectGalleryItem = {
+  src: string
+  alt: string
+  description: string
+}
+
+type Project = {
+  image: string
+  imageAlt: string
+  title: string
+  description: string
+  tags: string[]
+  status?: string
+  links?: { label: string; href: string }[]
+  gallery: ProjectGalleryItem[]
+}
 
 const PrimaryButton = styled(Button)(({ theme }) => ({
   borderRadius: 999,
@@ -235,6 +258,7 @@ const ProjectCard = ({
   tags,
   status,
   links,
+  onOpen,
 }: {
   image: string
   imageAlt: string
@@ -243,6 +267,7 @@ const ProjectCard = ({
   tags: string[]
   status?: string
   links?: { label: string; href: string }[]
+  onOpen?: () => void
 }) => (
   <Box
     sx={{
@@ -253,20 +278,57 @@ const ProjectCard = ({
       boxShadow: '0 30px 70px rgba(15, 76, 92, 0.18)',
     }}
   >
-    <GlassCard elevation={0} sx={{ position: 'relative', overflow: 'hidden' }}>
+    <GlassCard
+      elevation={0}
+      sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        cursor: onOpen ? 'pointer' : 'default',
+      }}
+      role={onOpen ? 'button' : undefined}
+      tabIndex={onOpen ? 0 : undefined}
+      aria-label={onOpen ? `Open ${title} gallery` : undefined}
+      onClick={onOpen}
+      onKeyDown={(event) => {
+        if (!onOpen) return
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onOpen()
+        }
+      }}
+    >
       <Stack spacing={2.5}>
-        <Box
-          component="img"
-          src={image}
-          alt={imageAlt}
-          sx={{
-            width: '100%',
-            height: { xs: 210, sm: 240 },
-            objectFit: 'cover',
-            borderRadius: 10,
-            boxShadow: '0 16px 32px rgba(15, 76, 92, 0.16)',
-          }}
-        />
+        {image ? (
+          <Box
+            component="img"
+            src={image}
+            alt={imageAlt}
+            sx={{
+              width: '100%',
+              height: { xs: 210, sm: 240 },
+              objectFit: 'cover',
+              borderRadius: 10,
+              boxShadow: '0 16px 32px rgba(15, 76, 92, 0.16)',
+            }}
+          />
+        ) : (
+          <Box
+            sx={{
+              width: '100%',
+              height: { xs: 210, sm: 240 },
+              borderRadius: 10,
+              border: '1px dashed rgba(15, 76, 92, 0.3)',
+              backgroundColor: 'rgba(255,255,255,0.6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="overline" color="text.secondary">
+              Add cover image
+            </Typography>
+          </Box>
+        )}
         {status && (
           <Stack direction="row" spacing={1} alignItems="center">
             <TagChip label={status} size="small" />
@@ -292,6 +354,7 @@ const ProjectCard = ({
                 variant="outlined"
                 href={link.href}
                 endIcon={<ArrowOutwardIcon fontSize="small" />}
+                onClick={(event) => event.stopPropagation()}
                 sx={{ borderRadius: 999, textTransform: 'none' }}
               >
                 {link.label}
@@ -329,6 +392,8 @@ const ProcessStep = ({
 function App() {
   const [scrollY, setScrollY] = useState(0)
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   useEffect(() => {
     let raf = 0
@@ -349,6 +414,30 @@ function App() {
 
   const closeMobileMenu = () => {
     setMobileMenuAnchor(null)
+  }
+
+  const openProjectGallery = (project: Project) => {
+    setSelectedProject(project)
+    setActiveImageIndex(0)
+  }
+
+  const closeProjectGallery = () => {
+    setSelectedProject(null)
+    setActiveImageIndex(0)
+  }
+
+  const goToNextImage = () => {
+    if (!selectedProject) return
+    setActiveImageIndex((current) =>
+      (current + 1) % selectedProject.gallery.length,
+    )
+  }
+
+  const goToPreviousImage = () => {
+    if (!selectedProject) return
+    setActiveImageIndex((current) =>
+      (current - 1 + selectedProject.gallery.length) % selectedProject.gallery.length,
+    )
   }
 
   const theme = useMemo(
@@ -458,9 +547,9 @@ function App() {
     },
   ]
 
-  const projects = [
+  const projects: Project[] = [
     {
-      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      image: '',
       imageAlt: 'Placeholder for Moose Jaw Food Bank booking and admin web app',
       title: 'Moose Jaw Food Bank Booking + Admin Web App',
       description:
@@ -470,9 +559,29 @@ function App() {
       links: [
         { label: 'Live App', href: 'https://app.mjfoodbank.org' },
       ],
+      gallery: [
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the primary dashboard view shown to staff and volunteers.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the client booking flow highlighting key steps.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for analytics and reporting screens used by administrators.',
+        },
+      ],
     },
     {
-      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      image: '',
       imageAlt: 'Placeholder for Moose Jaw Food Bank Android app',
       title: 'Moose Jaw Food Bank Android App',
       description:
@@ -485,27 +594,87 @@ function App() {
           href: 'https://play.google.com/store/apps/details?id=org.mjfoodbank.app.twa&pcampaignid=web_share',
         },
       ],
+      gallery: [
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the mobile home screen showing quick actions.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the booking calendar and appointment details view.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the volunteer tools and visit history screen.',
+        },
+      ],
     },
     {
-      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      image: '',
       imageAlt: 'Placeholder for IVR phone booking system',
       title: 'IVR Phone + Text Booking System',
       description:
         'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
       tags: ['IVR', 'Voice', 'SMS'],
       status: 'Completed',
+      gallery: [
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the IVR call flow map and prompts.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the SMS booking confirmation messages.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the admin tooling used to manage scripts.',
+        },
+      ],
     },
   ]
 
-  const upcomingProjects = [
+  const upcomingProjects: Project[] = [
     {
-      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      image: '',
       imageAlt: 'Placeholder for transit route planning app',
       title: 'Live Transit Route Finder',
       description:
         'Find the right bus service, see the nearest stop to board, and track vehicles in real time.',
       tags: ['Transit', 'Live Tracking', 'Routing'],
       status: 'Upcoming',
+      gallery: [
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for the real-time map view and bus markers.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for route planning inputs and arrival predictions.',
+        },
+        {
+          src: '',
+          alt: 'Project image placeholder',
+          description:
+            'Placeholder description for service alerts and stop-level details.',
+        },
+      ],
     },
   ]
 
@@ -825,7 +994,10 @@ function App() {
                             animationDelay: `${index * 0.15}s`,
                           }}
                         >
-                          <ProjectCard {...project} />
+                          <ProjectCard
+                            {...project}
+                            onOpen={() => openProjectGallery(project)}
+                          />
                         </Box>
                       ))}
                     </Stack>
@@ -845,7 +1017,10 @@ function App() {
                             animationDelay: `${(projects.length + index) * 0.15}s`,
                           }}
                         >
-                          <ProjectCard {...project} />
+                          <ProjectCard
+                            {...project}
+                            onOpen={() => openProjectGallery(project)}
+                          />
                         </Box>
                       ))}
                     </Stack>
@@ -1042,6 +1217,114 @@ function App() {
             </GlassCard>
           </Container>
         </Section>
+        <Dialog
+          open={Boolean(selectedProject)}
+          onClose={closeProjectGallery}
+          fullWidth
+          maxWidth="md"
+        >
+          <DialogTitle sx={{ pb: 1 }}>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h5">
+                  {selectedProject?.title ?? 'Project Gallery'}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {selectedProject?.description ?? 'Project image carousel.'}
+                </Typography>
+              </Box>
+              <IconButton aria-label="Close project gallery" onClick={closeProjectGallery}>
+                <CloseIcon />
+              </IconButton>
+            </Stack>
+          </DialogTitle>
+          <DialogContent sx={{ pt: 2 }}>
+            {selectedProject && selectedProject.gallery.length > 0 && (
+              <Stack spacing={3}>
+                <Box
+                  sx={{
+                    borderRadius: 16,
+                    border: '1px solid rgba(15, 76, 92, 0.2)',
+                    background:
+                      'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,238,230,0.8))',
+                    padding: { xs: 2, sm: 3 },
+                    position: 'relative',
+                  }}
+                >
+                  {selectedProject.gallery[activeImageIndex].src ? (
+                    <Box
+                      component="img"
+                      src={selectedProject.gallery[activeImageIndex].src}
+                      alt={selectedProject.gallery[activeImageIndex].alt}
+                      sx={{
+                        width: '100%',
+                        maxHeight: { xs: 280, sm: 360 },
+                        objectFit: 'cover',
+                        borderRadius: 12,
+                        boxShadow: '0 18px 40px rgba(15, 76, 92, 0.16)',
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: { xs: 240, sm: 320 },
+                        borderRadius: 12,
+                        border: '1px dashed rgba(15, 76, 92, 0.35)',
+                        backgroundColor: 'rgba(255,255,255,0.7)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Typography variant="overline" color="text.secondary">
+                        Add project image
+                      </Typography>
+                    </Box>
+                  )}
+                  <IconButton
+                    aria-label="Previous image"
+                    onClick={goToPreviousImage}
+                    disabled={selectedProject.gallery.length <= 1}
+                    sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: { xs: 8, sm: 16 },
+                      transform: 'translateY(-50%)',
+                      bgcolor: 'rgba(255,255,255,0.9)',
+                      border: '1px solid rgba(15, 76, 92, 0.15)',
+                    }}
+                  >
+                    <ChevronLeftIcon />
+                  </IconButton>
+                  <IconButton
+                    aria-label="Next image"
+                    onClick={goToNextImage}
+                    disabled={selectedProject.gallery.length <= 1}
+                    sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      right: { xs: 8, sm: 16 },
+                      transform: 'translateY(-50%)',
+                      bgcolor: 'rgba(255,255,255,0.9)',
+                      border: '1px solid rgba(15, 76, 92, 0.15)',
+                    }}
+                  >
+                    <ChevronRightIcon />
+                  </IconButton>
+                </Box>
+                <Stack spacing={1}>
+                  <Typography variant="overline" color="text.secondary">
+                    Image {activeImageIndex + 1} of {selectedProject.gallery.length}
+                  </Typography>
+                  <Typography variant="body1">
+                    {selectedProject.gallery[activeImageIndex].description}
+                  </Typography>
+                </Stack>
+              </Stack>
+            )}
+          </DialogContent>
+        </Dialog>
       </Box>
     </ThemeProvider>
   )
