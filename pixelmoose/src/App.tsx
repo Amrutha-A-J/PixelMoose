@@ -100,6 +100,35 @@ const GhostButton = styled(Button)(({ theme }) => ({
   border: '1px solid rgba(38, 42, 47, 0.2)',
 }))
 
+const HeroPanel = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: 36,
+  padding: theme.spacing(3, 3, 3.5),
+  background: 'linear-gradient(140deg, rgba(255,255,255,0.92), rgba(255,255,255,0.55))',
+  border: '1px solid rgba(255,255,255,0.7)',
+  boxShadow: '0 28px 80px rgba(24, 20, 16, 0.16)',
+  backdropFilter: 'blur(16px)',
+  overflow: 'hidden',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: -80,
+    right: -40,
+    width: 200,
+    height: 200,
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(239,108,47,0.25), transparent 70%)',
+  },
+}))
+
+const HeroMetric = styled(Paper)(({ theme }) => ({
+  borderRadius: 18,
+  padding: theme.spacing(1.6, 2),
+  backgroundColor: 'rgba(255,255,255,0.9)',
+  border: '1px solid rgba(15, 76, 92, 0.12)',
+  boxShadow: '0 14px 32px rgba(24, 20, 16, 0.1)',
+}))
+
 const Section = styled('section')(({ theme }) => ({
   position: 'relative',
   padding: theme.spacing(10, 0),
@@ -278,13 +307,13 @@ function App() {
         typography: {
           fontFamily: '"Space Grotesk", sans-serif',
           h1: {
-            fontFamily: '"Playfair Display", serif',
+            fontFamily: '"Space Grotesk", sans-serif',
             fontWeight: 700,
             fontSize: 'clamp(2.6rem, 3.5vw, 4.4rem)',
             lineHeight: 1.05,
           },
           h2: {
-            fontFamily: '"Playfair Display", serif',
+            fontFamily: '"Space Grotesk", sans-serif',
             fontWeight: 700,
             fontSize: 'clamp(2rem, 2.4vw, 3.1rem)',
           },
@@ -400,6 +429,29 @@ function App() {
     { label: 'Contact', href: '#contact' },
   ]
 
+  const heroMetrics = [
+    { value: '2-4 wks', label: 'Discovery to prototype' },
+    { value: '1 team', label: 'Design, build, launch' },
+  ]
+
+  const heroHighlights = [
+    {
+      icon: <BoltIcon fontSize="small" />,
+      title: 'Paperless ops',
+      detail: 'Forms, approvals, records',
+    },
+    {
+      icon: <LayersIcon fontSize="small" />,
+      title: 'Admin clarity',
+      detail: 'Dashboards + reporting',
+    },
+    {
+      icon: <RocketLaunchIcon fontSize="small" />,
+      title: 'Mobile-ready',
+      detail: 'Android + iOS delivery',
+    },
+  ]
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -408,7 +460,7 @@ function App() {
           '*': { boxSizing: 'border-box' },
           body: {
             background:
-              'radial-gradient(circle at top left, #F9EFE3 0%, #F7F3EE 35%, #F2F6F8 100%)',
+              'radial-gradient(circle at top left, var(--brand-cream) 0%, var(--brand-sand) 35%, var(--brand-mist) 100%)',
           },
           '@keyframes float': {
             '0%, 100%': { transform: 'translateY(0px)' },
@@ -510,7 +562,7 @@ function App() {
             <Grid container spacing={6} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Stack spacing={3}>
-                  <TagChip label="Moose Jaw Digital Studio" size="small" />
+                  <TagChip label="Pixel Moose Digital Studio" size="small" />
                   <Typography variant="h1">
                     Digitize your business with custom software and mobile apps.
                   </Typography>
@@ -538,63 +590,84 @@ function App() {
                 </Stack>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    position: 'relative',
-                    borderRadius: 32,
-                    overflow: 'hidden',
-                    padding: { xs: 3, md: 4 },
-                    background:
-                      'linear-gradient(150deg, rgba(255,255,255,0.9), rgba(255,255,255,0.55))',
-                    border: '1px solid rgba(255,255,255,0.7)',
-                    boxShadow: '0 24px 70px rgba(24, 20, 16, 0.18)',
-                    transform: `translateY(${scrollY * -0.1}px)`,
-                  }}
-                >
-                  <Stack spacing={3}>
-                    <Box
-                      component="img"
-                      src={heroImage}
-                      alt="Team reviewing workflow on a laptop"
-                      sx={{
-                        width: '100%',
-                        height: { xs: 200, sm: 240 },
-                        objectFit: 'cover',
-                        borderRadius: 10,
-                      }}
-                    />
-                    <LogoWordmark logoSize={{ xs: 160, sm: 190, md: 220 }} />
-                    <Typography variant="h5">
-                      Replace paper with a system your team actually enjoys.
-                    </Typography>
-                    <Stack spacing={2}>
-                      {[
-                        'Paperless forms, approvals, and records',
-                        'Admin dashboards that keep work flowing',
-                        'Android + iOS apps for on-the-go teams',
-                      ].map((item) => (
-                        <Stack key={item} direction="row" spacing={2} alignItems="center">
-                          <Box
-                            component="span"
-                            sx={{
-                              width: 36,
-                              height: 36,
-                              borderRadius: '50%',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              bgcolor: 'rgba(15, 76, 92, 0.12)',
-                              color: 'secondary.main',
-                            }}
-                          >
-                            <BoltIcon fontSize="small" />
+                <HeroPanel style={{ transform: `translateY(${scrollY * -0.1}px)` }}>
+                  <Stack spacing={2.5} sx={{ position: 'relative', zIndex: 1 }}>
+                    <Stack direction="row" spacing={1.5} alignItems="center">
+                      <TagChip label="Workflow-first delivery" size="small" />
+                      <Typography variant="overline" color="text.secondary">
+                        Moose Jaw, SK
+                      </Typography>
+                    </Stack>
+                    <Box sx={{ position: 'relative' }}>
+                      <Box
+                        component="img"
+                        src={heroImage}
+                        alt="Team reviewing workflow on a laptop"
+                        sx={{
+                          width: '100%',
+                          height: { xs: 200, sm: 240 },
+                          objectFit: 'cover',
+                          borderRadius: 18,
+                          boxShadow: '0 18px 40px rgba(24, 20, 16, 0.18)',
+                          transform: 'rotate(-1deg)',
+                        }}
+                      />
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          right: 16,
+                          bottom: -18,
+                          px: 2,
+                          py: 1,
+                          borderRadius: 999,
+                          bgcolor: 'rgba(15, 76, 92, 0.9)',
+                          color: 'common.white',
+                          fontWeight: 600,
+                          fontSize: '0.8rem',
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        Built for busy teams
+                      </Box>
+                    </Box>
+                    <Grid container spacing={2}>
+                      {heroMetrics.map((metric) => (
+                        <Grid item xs={12} sm={6} key={metric.label}>
+                          <HeroMetric elevation={0}>
+                            <Typography variant="h5">{metric.value}</Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {metric.label}
+                            </Typography>
+                          </HeroMetric>
+                        </Grid>
+                      ))}
+                    </Grid>
+                    <Stack spacing={1.5}>
+                      {heroHighlights.map((item) => (
+                        <GlassCard
+                          key={item.title}
+                          elevation={0}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 2,
+                            padding: 2,
+                          }}
+                        >
+                          <IconBadge>{item.icon}</IconBadge>
+                          <Box>
+                            <Typography variant="subtitle1" fontWeight={700}>
+                              {item.title}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {item.detail}
+                            </Typography>
                           </Box>
-                          <Typography variant="body2">{item}</Typography>
-                        </Stack>
+                        </GlassCard>
                       ))}
                     </Stack>
                   </Stack>
-                </Box>
+                </HeroPanel>
               </Grid>
             </Grid>
           </Container>
