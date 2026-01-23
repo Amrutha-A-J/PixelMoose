@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactElement } from 'react'
 import {
   AppBar,
@@ -34,6 +34,9 @@ import LayersIcon from '@mui/icons-material/Layers'
 import MenuIcon from '@mui/icons-material/Menu'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import StorefrontIcon from '@mui/icons-material/Storefront'
+import ZoomInIcon from '@mui/icons-material/ZoomIn'
+import ZoomOutIcon from '@mui/icons-material/ZoomOut'
+import RestartAltIcon from '@mui/icons-material/RestartAlt'
 
 const LogoLockup = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -435,6 +438,9 @@ function App() {
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const [zoomLevel, setZoomLevel] = useState(1)
+  const pinchStartDistanceRef = useRef<number | null>(null)
+  const pinchStartZoomRef = useRef(1)
 
   useEffect(() => {
     let raf = 0
@@ -460,11 +466,13 @@ function App() {
   const openProjectGallery = (project: Project) => {
     setSelectedProject(project)
     setActiveImageIndex(0)
+    setZoomLevel(1)
   }
 
   const closeProjectGallery = () => {
     setSelectedProject(null)
     setActiveImageIndex(0)
+    setZoomLevel(1)
   }
 
   const goToNextImage = () => {
@@ -479,6 +487,52 @@ function App() {
     setActiveImageIndex((current) =>
       (current - 1 + selectedProject.gallery.length) % selectedProject.gallery.length,
     )
+  }
+
+  useEffect(() => {
+    setZoomLevel(1)
+  }, [activeImageIndex])
+
+  const clampZoom = (value: number) => Math.min(3, Math.max(1, value))
+
+  const handleZoomIn = () => {
+    setZoomLevel((current) => clampZoom(Number((current + 0.25).toFixed(2))))
+  }
+
+  const handleZoomOut = () => {
+    setZoomLevel((current) => clampZoom(Number((current - 0.25).toFixed(2))))
+  }
+
+  const handleZoomReset = () => {
+    setZoomLevel(1)
+  }
+
+  const handlePinchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length !== 2) return
+    const [touchOne, touchTwo] = event.touches
+    const distance = Math.hypot(
+      touchTwo.clientX - touchOne.clientX,
+      touchTwo.clientY - touchOne.clientY,
+    )
+    pinchStartDistanceRef.current = distance
+    pinchStartZoomRef.current = zoomLevel
+  }
+
+  const handlePinchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length !== 2 || pinchStartDistanceRef.current === null) return
+    const [touchOne, touchTwo] = event.touches
+    const distance = Math.hypot(
+      touchTwo.clientX - touchOne.clientX,
+      touchTwo.clientY - touchOne.clientY,
+    )
+    const scale = distance / pinchStartDistanceRef.current
+    setZoomLevel(clampZoom(Number((pinchStartZoomRef.current * scale).toFixed(2))))
+  }
+
+  const handlePinchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length < 2) {
+      pinchStartDistanceRef.current = null
+    }
   }
 
   const theme = useMemo(
@@ -1279,22 +1333,42 @@ function App() {
                 >
                   {selectedProject.gallery[activeImageIndex].src ? (
                     <Box
-                      component="img"
-                      src={selectedProject.gallery[activeImageIndex].src}
-                      alt={selectedProject.gallery[activeImageIndex].alt}
+                      onTouchStart={handlePinchStart}
+                      onTouchMove={handlePinchMove}
+                      onTouchEnd={handlePinchEnd}
+                      onTouchCancel={handlePinchEnd}
                       sx={{
                         width: '100%',
-                        maxHeight: { xs: 280, sm: 360 },
-                        objectFit: 'cover',
+                        height: { xs: 280, sm: 360 },
                         borderRadius: 10,
-                        boxShadow: '0 18px 40px rgba(15, 76, 92, 0.16)',
+                        overflow: 'auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(255,255,255,0.75)',
+                        touchAction: 'pinch-zoom',
                       }}
-                    />
+                    >
+                      <Box
+                        component="img"
+                        src={selectedProject.gallery[activeImageIndex].src}
+                        alt={selectedProject.gallery[activeImageIndex].alt}
+                        sx={{
+                          width: `${zoomLevel * 100}%`,
+                          height: `${zoomLevel * 100}%`,
+                          maxWidth: 'none',
+                          maxHeight: 'none',
+                          objectFit: 'contain',
+                          borderRadius: 10,
+                          boxShadow: '0 18px 40px rgba(15, 76, 92, 0.16)',
+                        }}
+                      />
+                    </Box>
                   ) : (
                     <Box
                       sx={{
                         width: '100%',
-                        height: { xs: 240, sm: 320 },
+                        height: { xs: 280, sm: 360 },
                         borderRadius: 12,
                         border: '1px dashed rgba(15, 76, 92, 0.35)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
@@ -1338,6 +1412,37 @@ function App() {
                   >
                     <ChevronRightIcon />
                   </IconButton>
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    alignItems="center"
+                    sx={{
+                      position: 'absolute',
+                      top: 12,
+                      right: 12,
+                      backgroundColor: 'rgba(255,255,255,0.9)',
+                      borderRadius: 999,
+                      border: '1px solid rgba(15, 76, 92, 0.15)',
+                      padding: '4px 8px',
+                    }}
+                  >
+                    <IconButton aria-label="Zoom out" size="small" onClick={handleZoomOut}>
+                      <ZoomOutIcon fontSize="small" />
+                    </IconButton>
+                    <Typography variant="caption" sx={{ minWidth: 46, textAlign: 'center' }}>
+                      {Math.round(zoomLevel * 100)}%
+                    </Typography>
+                    <IconButton aria-label="Zoom in" size="small" onClick={handleZoomIn}>
+                      <ZoomInIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton
+                      aria-label="Reset zoom"
+                      size="small"
+                      onClick={handleZoomReset}
+                    >
+                      <RestartAltIcon fontSize="small" />
+                    </IconButton>
+                  </Stack>
                 </Box>
                 <Stack spacing={1}>
                   <Typography variant="overline" color="text.secondary">
