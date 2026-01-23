@@ -287,13 +287,18 @@ const ProjectCard = ({
       background:
         'linear-gradient(135deg, rgba(239,108,47,0.28), rgba(15,76,92,0.2))',
       boxShadow: '0 30px 70px rgba(15, 76, 92, 0.18)',
+      height: '100%',
     }}
   >
-  <GlassCard
+    <GlassCard
       elevation={0}
       sx={{
         position: 'relative',
         overflow: 'hidden',
+        height: '100%',
+        minHeight: { xs: 'auto', md: 560 },
+        display: 'flex',
+        flexDirection: 'column',
         cursor: onOpen ? 'pointer' : 'default',
         '&:hover .project-preview-overlay': {
           opacity: 1,
@@ -312,7 +317,7 @@ const ProjectCard = ({
         }
       }}
     >
-      <Stack spacing={2.5}>
+      <Stack spacing={2.5} sx={{ flex: 1 }}>
         {image ? (
           <Box sx={{ position: 'relative' }}>
             <Box
@@ -719,8 +724,9 @@ function App() {
       ],
     },
     {
-      image: `${projectImageBase}/mj_foodbank_ivr_preview.svg`,
-      imageAlt: 'Illustrated preview of the IVR phone and text booking system',
+      image:
+        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'Smartphone on a desk representing voice and SMS support',
       title: 'IVR Phone + Text Booking System',
       description:
         'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
@@ -1091,11 +1097,13 @@ function App() {
                 </Typography>
                 <Grid container spacing={4}>
                   {allProjects.map((project, index) => (
-                    <Grid item xs={12} md={6} key={project.title}>
+                    <Grid item xs={12} md={6} key={project.title} sx={{ display: 'flex' }}>
                       <Box
                         sx={{
                           animation: 'reveal 0.8s ease both',
                           animationDelay: `${index * 0.15}s`,
+                          flex: 1,
+                          display: 'flex',
                         }}
                       >
                         <ProjectCard
