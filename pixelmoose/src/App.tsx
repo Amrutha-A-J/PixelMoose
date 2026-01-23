@@ -8,6 +8,9 @@ import {
   Container,
   CssBaseline,
   Grid,
+  IconButton,
+  Menu,
+  MenuItem,
   Paper,
   Stack,
   ThemeProvider,
@@ -22,6 +25,7 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import BoltIcon from '@mui/icons-material/Bolt'
 import HandshakeIcon from '@mui/icons-material/Handshake'
 import LayersIcon from '@mui/icons-material/Layers'
+import MenuIcon from '@mui/icons-material/Menu'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 
@@ -209,6 +213,7 @@ const ProcessStep = ({
 
 function App() {
   const [scrollY, setScrollY] = useState(0)
+  const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null)
 
   useEffect(() => {
     let raf = 0
@@ -222,6 +227,14 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const openMobileMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMenuAnchor(event.currentTarget)
+  }
+
+  const closeMobileMenu = () => {
+    setMobileMenuAnchor(null)
+  }
 
   const theme = useMemo(
     () =>
@@ -350,6 +363,13 @@ function App() {
     },
   ]
 
+  const navLinks = [
+    { label: 'Work', href: '#work' },
+    { label: 'Services', href: '#services' },
+    { label: 'Process', href: '#process' },
+    { label: 'Contact', href: '#contact' },
+  ]
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -409,30 +429,49 @@ function App() {
             color: 'text.primary',
           }}
         >
-          <Toolbar>
+          <Toolbar sx={{ gap: { xs: 1.5, md: 3 } }}>
             <LogoWordmark logoSize={{ xs: 112, sm: 136, md: 160 }} />
             <Box sx={{ flexGrow: 1 }} />
             <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button color="inherit" component="a" href="#work">
-                Work
-              </Button>
-              <Button color="inherit" component="a" href="#services">
-                Services
-              </Button>
-              <Button color="inherit" component="a" href="#process">
-                Process
-              </Button>
-              <Button color="inherit" component="a" href="#contact">
-                Contact
-              </Button>
+              {navLinks.map((link) => (
+                <Button key={link.href} color="inherit" component="a" href={link.href}>
+                  {link.label}
+                </Button>
+              ))}
             </Stack>
             <PrimaryButton
               variant="contained"
-              sx={{ ml: { xs: 'auto', md: 3 } }}
+              sx={{ ml: { xs: 'auto', md: 3 }, display: { xs: 'none', md: 'inline-flex' } }}
               href="#contact"
             >
               Start a Project
             </PrimaryButton>
+            <IconButton
+              color="inherit"
+              aria-label="Open navigation menu"
+              onClick={openMobileMenu}
+              sx={{ display: { xs: 'inline-flex', md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={mobileMenuAnchor}
+              open={Boolean(mobileMenuAnchor)}
+              onClose={closeMobileMenu}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+              {navLinks.map((link) => (
+                <MenuItem
+                  key={link.href}
+                  component="a"
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                >
+                  {link.label}
+                </MenuItem>
+              ))}
+            </Menu>
           </Toolbar>
         </AppBar>
 
