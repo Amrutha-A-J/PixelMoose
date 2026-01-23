@@ -323,15 +323,20 @@ function App() {
           h2: {
             fontFamily: '"Space Grotesk", sans-serif',
             fontWeight: 700,
-            fontSize: 'clamp(2rem, 2.4vw, 3.1rem)',
+            fontSize: 'clamp(2.3rem, 2.9vw, 3.5rem)',
           },
           h3: {
             fontWeight: 700,
-            fontSize: 'clamp(1.6rem, 2vw, 2.3rem)',
+            fontSize: 'clamp(1.85rem, 2.4vw, 2.7rem)',
           },
           h5: {
             fontWeight: 700,
-            fontSize: '1.15rem',
+            fontSize: '1.3rem',
+          },
+          overline: {
+            fontWeight: 700,
+            fontSize: '0.95rem',
+            letterSpacing: '0.08em',
           },
           body1: {
             fontSize: '1.05rem',
