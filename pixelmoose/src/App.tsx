@@ -89,20 +89,13 @@ const TagChip = styled(Chip)(({ theme }) => ({
   color: theme.palette.text.primary,
 }))
 
-const MainTitleChip = styled(TagChip)(({ theme }) => ({
+const SectionKicker = styled(TagChip)(({ theme }) => ({
+  fontSize: '1rem',
+  padding: theme.spacing(0.6, 2.6),
   height: 'auto',
-  fontFamily: theme.typography.h1.fontFamily,
-  fontWeight: 700,
   letterSpacing: '0.06em',
-  '& .MuiChip-label': {
-    fontSize: 'clamp(2.1rem, 3vw, 3.6rem)',
-    padding: theme.spacing(1.2, 3.6),
-  },
-}))
-
-const SectionKicker = styled(MainTitleChip)({
   textTransform: 'uppercase',
-})
+}))
 
 const IconBadge = styled('span')(({ theme }) => ({
   width: 54,
@@ -224,8 +217,8 @@ const SectionTitle = ({
 }) => (
   <Stack spacing={2} sx={{ maxWidth: 620 }}>
     <SectionKicker label={kicker} />
-    <Typography variant="h3">{title}</Typography>
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant="h2">{title}</Typography>
+    <Typography variant="body1" color="text.secondary">
       {subtitle}
     </Typography>
   </Stack>
@@ -580,7 +573,7 @@ function App() {
           h1: {
             fontFamily: '"Fraunces", serif',
             fontWeight: 700,
-            fontSize: 'clamp(2.1rem, 2.7vw, 3.4rem)',
+            fontSize: 'clamp(2.6rem, 3.5vw, 4.4rem)',
             lineHeight: 1.05,
           },
           h2: {
@@ -591,7 +584,7 @@ function App() {
           h3: {
             fontFamily: '"Fraunces", serif',
             fontWeight: 700,
-            fontSize: 'clamp(1.6rem, 2.1vw, 2.4rem)',
+            fontSize: 'clamp(1.85rem, 2.4vw, 2.7rem)',
           },
           h5: {
             fontWeight: 700,
@@ -951,9 +944,8 @@ function App() {
             <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Stack spacing={3}>
-                  <MainTitleChip label="Pixel Moose Digital Studio" />
                   <Typography variant="h1">
-                    Digitize your business with custom software, built for people who do the work.
+                    Pixel Moose Digital Studio
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
                     Moose Jaw has plenty of WordPress website shops. Pixel Moose Studio is
@@ -1058,9 +1050,9 @@ function App() {
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
-                  kicker="Featured Work"
-                  title="Custom platforms that cut busywork."
-                  subtitle="A snapshot of completed and upcoming projects focused on real-world operations."
+                  kicker="Custom platforms that cut busywork."
+                  title="Featured Work"
+                  subtitle=""
                 />
               </Box>
               <GlassCard
@@ -1105,9 +1097,7 @@ function App() {
                 </Stack>
               </GlassCard>
               <Stack spacing={2}>
-                <Typography variant="overline" color="text.secondary">
-                  Projects
-                </Typography>
+                <Typography variant="h4">Projects</Typography>
                 <Grid container spacing={4}>
                   {allProjects.map((project, index) => (
                     <Grid item xs={12} md={6} key={project.title} sx={{ display: 'flex' }}>
@@ -1137,8 +1127,8 @@ function App() {
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
-                  kicker="Services"
-                  title="End-to-end delivery, no templates."
+                  title="Services"
+                  kicker="End-to-end delivery, no templates."
                   subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
                 />
               </Box>
@@ -1257,8 +1247,8 @@ function App() {
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
-                  kicker="Process"
-                  title="Practical delivery from discovery to launch."
+                  kicker="Practical delivery from discovery to launch"
+                  title="Process"
                   subtitle="We keep stakeholders aligned and focus on removing friction from daily operations."
                 />
               </Box>
