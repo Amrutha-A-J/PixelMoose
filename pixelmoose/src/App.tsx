@@ -39,29 +39,10 @@ const LogoWordmark = ({
   <LogoLockup>
     <Box
       component="img"
-      src="/images/Logo/PixelMoose_Logo.png"
-      alt="Pixel Moose Studio logo"
+      src="/images/Logo/PixelMoose_logo.png"
+      alt="Pixel Moose logo"
       sx={{ width: logoSize, height: logoSize }}
     />
-    <Stack spacing={0} sx={{ lineHeight: 1 }}>
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: 700, letterSpacing: '0.02em', lineHeight: 1.1 }}
-      >
-        Pixel Moose
-      </Typography>
-      <Typography
-        variant="caption"
-        sx={{
-          fontWeight: 600,
-          letterSpacing: '0.24em',
-          textTransform: 'uppercase',
-          lineHeight: 1,
-        }}
-      >
-        Studio
-      </Typography>
-    </Stack>
   </LogoLockup>
 )
 
@@ -302,64 +283,64 @@ function App() {
 
   const services = [
     {
-      title: 'Product Strategy',
+      title: 'Business Digitization',
       description:
-        'Discovery, UX direction, and roadmaps that balance community needs with measurable business outcomes.',
+        'We map your paper-heavy workflows and replace them with simple, reliable digital systems.',
       icon: <AutoAwesomeIcon />,
     },
     {
-      title: 'Platform Design',
+      title: 'Custom Web Applications',
       description:
-        'Design systems, UI kits, and front-end buildouts that keep every screen cohesive and modern.',
+        'Bespoke platforms that streamline admin work, keep teams aligned, and reduce manual errors.',
       icon: <LayersIcon />,
     },
     {
-      title: 'Custom Development',
+      title: 'Android + iOS Apps',
       description:
-        'Robust web and mobile builds with scalable architecture, QA workflows, and launch support.',
+        'Native-feeling mobile apps for field teams, customers, and staff on the move.',
       icon: <RocketLaunchIcon />,
     },
   ]
 
   const projects = [
     {
-      title: 'Moose Jaw Food Bank: Booking Suite',
+      title: 'Paperless Intake System',
       description:
-        'A booking experience that helps staff coordinate appointments, volunteers, and pantry logistics with clarity.',
-      tags: ['Web App', 'Scheduling', 'Community'],
+        'Digitized intake and approvals that replace paper forms and cut down on manual follow-ups.',
+      tags: ['Workflow', 'Automation', 'Web App'],
     },
     {
-      title: 'Moose Jaw Food Bank: Admin HQ',
+      title: 'Admin Command Center',
       description:
-        'Centralized administrative tooling for inventory, client profiles, and daily service operations.',
+        'Unified dashboards for tasks, records, and reporting so teams can move faster.',
       tags: ['Admin', 'Operations', 'Reporting'],
     },
     {
-      title: 'Moose Jaw Food Bank: Android App',
+      title: 'Android + iOS Companion App',
       description:
-        'Mobile companion for field teams to stay connected and update records on the go.',
-      tags: ['Android', 'Mobile UX', 'Sync'],
+        'Mobile tools for staff and customers to access services without a desktop.',
+      tags: ['Mobile', 'Android', 'iOS'],
     },
   ]
 
   const process = [
     {
       step: '01',
-      title: 'Ground the mission',
+      title: 'Map the workflow',
       description:
-        'We interview teams and local partners to uncover the constraints, success metrics, and moments that matter.',
+        'We document what happens today, where paper slows things down, and where automation helps most.',
     },
     {
       step: '02',
-      title: 'Prototype fast',
+      title: 'Design and build',
       description:
-        'Interactive prototypes and content models align stakeholders before we build with confidence.',
+        'We design the screens and build the system with clear milestones and weekly check-ins.',
     },
     {
       step: '03',
-      title: 'Launch and refine',
+      title: 'Launch with support',
       description:
-        'We deliver production-ready platforms and continue to iterate on analytics and user feedback.',
+        'We ship, train your team, and iterate so the platform keeps getting better.',
     },
   ]
 
@@ -457,12 +438,12 @@ function App() {
                 <Stack spacing={3}>
                   <TagChip label="Moose Jaw Digital Studio" size="small" />
                   <Typography variant="h1">
-                    Modern civic tech with a bold prairie attitude.
+                    Digitize your business with custom software and mobile apps.
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
-                    Pixel Moose Studio builds daring web platforms and mobile tools for
-                    community-minded organizations. From Moose Jaw, we craft booking, admin,
-                    and mobile systems that make vital services easier to run.
+                    Moose Jaw has plenty of WordPress website shops. Pixel Moose Studio is
+                    different: we build custom-coded applications that reduce paper, smooth
+                    out admin work, and deliver Android + iOS apps many local firms do not offer.
                   </Typography>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <PrimaryButton variant="contained" endIcon={<ArrowOutwardIcon />}>
@@ -471,7 +452,7 @@ function App() {
                     <GhostButton variant="outlined">Schedule a Call</GhostButton>
                   </Stack>
                   <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-                    {['UX Strategy', 'Product Design', 'React + MUI', 'Mobile UX'].map((label) => (
+                    {['Custom Web Apps', 'Workflow Automation', 'Android + iOS', 'Paperless Ops'].map((label) => (
                       <Chip
                         key={label}
                         label={label}
@@ -499,13 +480,13 @@ function App() {
                   <Stack spacing={3}>
                     <LogoWordmark logoSize={82} />
                     <Typography variant="h5">
-                      Digital products with local impact and global polish.
+                      Replace paper with a system your team actually enjoys.
                     </Typography>
                     <Stack spacing={2}>
                       {[
-                        'Booking and admin tooling for Moose Jaw Food Bank',
-                        'Android app for staff, volunteers, and service teams',
-                        'Modern dashboards that simplify decision-making',
+                        'Paperless forms, approvals, and records',
+                        'Admin dashboards that keep work flowing',
+                        'Android + iOS apps for on-the-go teams',
                       ].map((item) => (
                         <Stack key={item} direction="row" spacing={2} alignItems="center">
                           <Box
@@ -538,9 +519,9 @@ function App() {
           <Container>
             <Grid container spacing={4}>
               {[
-                { value: '4+ yrs', label: 'Building civic-minded products' },
-                { value: '12', label: 'Active partner teams supported' },
-                { value: '3', label: 'Moose Jaw Food Bank platforms delivered' },
+                { value: 'Custom', label: 'Built around your workflows' },
+                { value: 'Paperless', label: 'Less admin, fewer errors' },
+                { value: 'Mobile', label: 'Android + iOS ready' },
               ].map((stat, index) => (
                 <Grid item xs={12} md={4} key={stat.label}>
                   <Box
@@ -563,8 +544,8 @@ function App() {
               <Grid item xs={12} md={5}>
                 <SectionTitle
                   kicker="Featured Work"
-                  title="Local platforms that scale with care."
-                  subtitle="From appointment systems to administrative HQs, we build cohesive experiences that respect the people using them every day."
+                  title="Custom platforms that cut busywork."
+                  subtitle="From intake systems to mobile apps, we design and build tools that make operations smoother and more efficient."
                 />
               </Grid>
               <Grid item xs={12} md={7}>
@@ -592,8 +573,8 @@ function App() {
               <Grid item xs={12} md={4}>
                 <SectionTitle
                   kicker="Capabilities"
-                  title="Design systems and builds that feel unified."
-                  subtitle="We create repeatable templates for every UI element so the entire experience feels consistent, no matter the platform."
+                  title="End-to-end delivery, no templates."
+                  subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
                 />
               </Grid>
               <Grid item xs={12} md={8}>
@@ -624,18 +605,18 @@ function App() {
                   <Stack spacing={3}>
                     <TagChip label="Studio Culture" size="small" />
                     <Typography variant="h3">
-                      We mix prairie grit with progressive UX.
+                      Not just a website shop.
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Pixel Moose Studio is a Moose Jaw-based team focused on modern business
-                      platforms for community organizations. We translate local insights into
-                      standout digital experiences.
+                      Pixel Moose Studio is a Moose Jaw-based team focused on digitizing
+                      business operations. We build custom-coded software that removes paper,
+                      smooths admin work, and keeps teams moving.
                     </Typography>
                     <Stack spacing={2}>
                       {[
-                        { icon: <StorefrontIcon />, label: 'Local-first partnerships' },
-                        { icon: <HandshakeIcon />, label: 'Human-centered collaboration' },
-                        { icon: <BoltIcon />, label: 'Swift launches and iteration' },
+                        { icon: <StorefrontIcon />, label: 'Moose Jaw based, built for real teams' },
+                        { icon: <HandshakeIcon />, label: 'Hands-on discovery and delivery' },
+                        { icon: <BoltIcon />, label: 'Paperless workflows, fast outcomes' },
                       ].map((item) => (
                         <Stack key={item.label} direction="row" spacing={2} alignItems="center">
                           <Box
@@ -670,10 +651,10 @@ function App() {
                   }}
                 >
                   {[
-                    { title: 'UI Template Kits', detail: 'Reusable components for consistent UX' },
-                    { title: 'Admin Dashboards', detail: 'Data-rich layouts that feel simple' },
-                    { title: 'Mobile Experience', detail: 'Touch-first journeys and flows' },
-                    { title: 'Brand Expression', detail: 'Bold visuals and motion layers' },
+                    { title: 'Workflow Mapping', detail: 'Clear steps from paper to digital' },
+                    { title: 'Admin Dashboards', detail: 'Simple views for complex work' },
+                    { title: 'Mobile Apps', detail: 'Android + iOS for staff and customers' },
+                    { title: 'Custom Integrations', detail: 'Connect tools without spreadsheets' },
                   ].map((item, index) => (
                     <GlassCard
                       key={item.title}
@@ -703,8 +684,8 @@ function App() {
               <Grid item xs={12} md={4}>
                 <SectionTitle
                   kicker="Process"
-                  title="Focused collaboration from vision to launch."
-                  subtitle="Our workflow keeps stakeholders aligned and delivers modern interfaces with purposeful motion."
+                  title="Practical delivery from discovery to launch."
+                  subtitle="We keep stakeholders aligned and focus on removing friction from daily operations."
                 />
               </Grid>
               <Grid item xs={12} md={8}>
@@ -735,11 +716,11 @@ function App() {
                   <Stack spacing={2}>
                     <TagChip label="Ready to Build?" size="small" />
                     <Typography variant="h3">
-                      Let us shape the next chapter of your digital service.
+                      Ready to go paperless?
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Tell us about your organization, and we will craft a modern, cohesive
-                      platform with a consistent UI template library.
+                      Tell us about your workflow, and we will design a custom system that
+                      streamlines admin work and delivers the mobile tools your team needs.
                     </Typography>
                   </Stack>
                 </Grid>
