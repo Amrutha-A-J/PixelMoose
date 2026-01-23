@@ -188,12 +188,14 @@ const ProjectCard = ({
   title,
   description,
   tags,
+  links,
 }: {
   image: string
   imageAlt: string
   title: string
   description: string
   tags: string[]
+  links?: { label: string; href: string }[]
 }) => (
   <GlassCard elevation={0}>
     <Stack spacing={2.5}>
@@ -219,6 +221,22 @@ const ProjectCard = ({
           <Chip key={tag} label={tag} size="small" sx={{ borderRadius: 999 }} />
         ))}
       </Stack>
+      {links && links.length > 0 && (
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          {links.map((link) => (
+            <Button
+              key={link.href}
+              size="small"
+              variant="outlined"
+              href={link.href}
+              endIcon={<ArrowOutwardIcon fontSize="small" />}
+              sx={{ borderRadius: 999, textTransform: 'none' }}
+            >
+              {link.label}
+            </Button>
+          ))}
+        </Stack>
+      )}
     </Stack>
   </GlassCard>
 )
@@ -363,31 +381,48 @@ function App() {
 
   const projects = [
     {
-      image:
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Dashboard screens on a laptop',
-      title: 'Paperless Intake System',
+      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      imageAlt: 'Placeholder for Moose Jaw Food Bank booking and admin web app',
+      title: 'Moose Jaw Food Bank Booking + Admin Web App',
       description:
-        'Digitized intake and approvals that replace paper forms and cut down on manual follow-ups.',
-      tags: ['Workflow', 'Automation', 'Web App'],
+        'Clients and volunteers book appointments and view visit history. Staff manage visits, food distribution, donation tracking, timesheets, leave, and trends.',
+      tags: ['Web App', 'Booking', 'Operations'],
+      links: [
+        { label: 'Live App', href: 'https://app.mjfoodbank.org' },
+      ],
     },
     {
-      image:
-        'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Team collaborating around a table with notebooks',
-      title: 'Admin Command Center',
+      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      imageAlt: 'Placeholder for Moose Jaw Food Bank Android app',
+      title: 'Moose Jaw Food Bank Android App',
       description:
-        'Unified dashboards for tasks, records, and reporting so teams can move faster.',
-      tags: ['Admin', 'Operations', 'Reporting'],
+        'Android app for clients and volunteers to book appointments and manage visits on the go.',
+      tags: ['Android', 'Mobile', 'TWA'],
+      links: [
+        {
+          label: 'Play Store',
+          href: 'https://play.google.com/store/apps/details?id=org.mjfoodbank.app.twa&pcampaignid=web_share',
+        },
+      ],
     },
     {
-      image:
-        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mobile devices showing apps in use',
-      title: 'Android + iOS Companion App',
+      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      imageAlt: 'Placeholder for IVR phone booking system',
+      title: 'IVR Phone + Text Booking System',
       description:
-        'Mobile tools for staff and customers to access services without a desktop.',
-      tags: ['Mobile', 'Android', 'iOS'],
+        'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
+      tags: ['IVR', 'Voice', 'SMS'],
+    },
+  ]
+
+  const upcomingProjects = [
+    {
+      image: `${import.meta.env.BASE_URL}images/projects/placeholder.svg`,
+      imageAlt: 'Placeholder for transit route planning app',
+      title: 'Live Transit Route Finder',
+      description:
+        'Find the right bus service, see the nearest stop to board, and track vehicles in real time.',
+      tags: ['Transit', 'Live Tracking', 'Routing'],
     },
   ]
 
@@ -632,22 +667,47 @@ function App() {
                 <SectionTitle
                   kicker="Featured Work"
                   title="Custom platforms that cut busywork."
-                  subtitle="From intake systems to mobile apps, we design and build tools that make operations smoother and more efficient."
+                  subtitle="A snapshot of completed and upcoming projects focused on real-world operations."
                 />
               </Grid>
               <Grid item xs={12} md={7}>
-                <Stack spacing={3}>
-                  {projects.map((project, index) => (
-                    <Box
-                      key={project.title}
-                      sx={{
-                        animation: 'reveal 0.8s ease both',
-                        animationDelay: `${index * 0.15}s`,
-                      }}
-                    >
-                      <ProjectCard {...project} />
-                    </Box>
-                  ))}
+                <Stack spacing={4}>
+                  <Stack spacing={2}>
+                    <Typography variant="overline" color="text.secondary">
+                      Completed Projects
+                    </Typography>
+                    <Stack spacing={3}>
+                      {projects.map((project, index) => (
+                        <Box
+                          key={project.title}
+                          sx={{
+                            animation: 'reveal 0.8s ease both',
+                            animationDelay: `${index * 0.15}s`,
+                          }}
+                        >
+                          <ProjectCard {...project} />
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Stack>
+                  <Stack spacing={2}>
+                    <Typography variant="overline" color="text.secondary">
+                      Upcoming Project
+                    </Typography>
+                    <Stack spacing={3}>
+                      {upcomingProjects.map((project, index) => (
+                        <Box
+                          key={project.title}
+                          sx={{
+                            animation: 'reveal 0.8s ease both',
+                            animationDelay: `${(projects.length + index) * 0.15}s`,
+                          }}
+                        >
+                          <ProjectCard {...project} />
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Stack>
                 </Stack>
               </Grid>
             </Grid>
