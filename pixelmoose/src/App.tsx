@@ -190,6 +190,19 @@ const Section = styled('section')(({ theme }) => ({
   },
 }))
 
+const PageContainer = styled(Container)(({ theme }) => ({
+  paddingLeft: theme.spacing(3),
+  paddingRight: theme.spacing(3),
+  [theme.breakpoints.up('sm')]: {
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+  },
+  [theme.breakpoints.up('md')]: {
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(5),
+  },
+}))
+
 const WorkSection = styled(Section)({
   background:
     'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,243,230,0.95) 45%, rgba(248,238,230,0.75) 100%)',
@@ -940,7 +953,7 @@ function App() {
         </AppBar>
 
         <Section>
-          <Container>
+          <PageContainer>
             <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Stack spacing={3}>
@@ -1019,11 +1032,11 @@ function App() {
                 </HeroGraphicPanel>
               </Grid>
             </Grid>
-          </Container>
+          </PageContainer>
         </Section>
 
         <Section>
-          <Container>
+          <PageContainer>
             <Grid container spacing={4}>
               {[
                 { value: 'Custom', label: 'Built around your workflows' },
@@ -1042,11 +1055,11 @@ function App() {
                 </Grid>
               ))}
             </Grid>
-          </Container>
+          </PageContainer>
         </Section>
 
         <WorkSection id="work">
-          <Container>
+          <PageContainer>
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
@@ -1119,11 +1132,11 @@ function App() {
                 </Grid>
               </Stack>
             </Stack>
-          </Container>
+          </PageContainer>
         </WorkSection>
 
         <Section id="services">
-          <Container>
+          <PageContainer>
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
@@ -1147,11 +1160,11 @@ function App() {
                 ))}
               </Grid>
             </Stack>
-          </Container>
+          </PageContainer>
         </Section>
 
         <Section>
-          <Container>
+          <PageContainer>
             <Grid container spacing={{ xs: 3, md: 5 }}>
               <Grid item xs={12} md={6}>
                 <GlassCard elevation={0} sx={{ height: '100%' }}>
@@ -1239,11 +1252,11 @@ function App() {
                 </Box>
               </Grid>
             </Grid>
-          </Container>
+          </PageContainer>
         </Section>
 
         <Section id="process">
-          <Container>
+          <PageContainer>
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
@@ -1267,11 +1280,11 @@ function App() {
                 ))}
               </Grid>
             </Stack>
-          </Container>
+          </PageContainer>
         </Section>
 
         <Section id="contact">
-          <Container>
+          <PageContainer>
             <GlassCard elevation={0}>
               <Grid container spacing={4} alignItems="center">
                 <Grid item xs={12} md={8}>
@@ -1306,7 +1319,7 @@ function App() {
                 </Grid>
               </Grid>
             </GlassCard>
-          </Container>
+          </PageContainer>
         </Section>
         <Dialog
           open={Boolean(selectedProject)}
