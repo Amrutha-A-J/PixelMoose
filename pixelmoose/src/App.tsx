@@ -60,9 +60,15 @@ const GlassCard = styled(Paper)(({ theme }) => ({
   borderRadius: 28,
   padding: theme.spacing(3.5),
   border: '1px solid rgba(255,255,255,0.6)',
-  background: 'linear-gradient(140deg, rgba(255,255,255,0.88), rgba(255,255,255,0.55))',
+  background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(252,245,238,0.62))',
   boxShadow: '0 24px 60px rgba(13, 17, 23, 0.12)',
   backdropFilter: 'blur(14px)',
+  transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
+  '&:hover': {
+    transform: 'translateY(-4px)',
+    boxShadow: '0 34px 80px rgba(13, 17, 23, 0.18)',
+    borderColor: 'rgba(239,108,47,0.35)',
+  },
 }))
 
 const TagChip = styled(Chip)(({ theme }) => ({
@@ -70,7 +76,8 @@ const TagChip = styled(Chip)(({ theme }) => ({
   fontWeight: 600,
   letterSpacing: '0.02em',
   border: '1px solid rgba(38, 42, 47, 0.12)',
-  backgroundColor: theme.palette.common.white,
+  backgroundColor: 'rgba(255,255,255,0.9)',
+  color: theme.palette.text.primary,
 }))
 
 const IconBadge = styled('span')(({ theme }) => ({
@@ -80,8 +87,8 @@ const IconBadge = styled('span')(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'rgba(239, 108, 47, 0.12)',
-  color: theme.palette.primary.main,
+  background: 'linear-gradient(135deg, rgba(239, 108, 47, 0.18), rgba(239, 108, 47, 0.04))',
+  color: theme.palette.primary.dark,
 }))
 
 const PrimaryButton = styled(Button)(({ theme }) => ({
@@ -90,6 +97,11 @@ const PrimaryButton = styled(Button)(({ theme }) => ({
   fontWeight: 700,
   textTransform: 'none',
   boxShadow: '0 16px 40px rgba(239, 108, 47, 0.35)',
+  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 22px 50px rgba(239, 108, 47, 0.4)',
+  },
 }))
 
 const GhostButton = styled(Button)(({ theme }) => ({
@@ -98,6 +110,12 @@ const GhostButton = styled(Button)(({ theme }) => ({
   fontWeight: 700,
   textTransform: 'none',
   border: '1px solid rgba(38, 42, 47, 0.2)',
+  transition: 'transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    borderColor: 'rgba(15, 76, 92, 0.35)',
+    backgroundColor: 'rgba(255,255,255,0.65)',
+  },
 }))
 
 const HeroGraphicPanel = styled('div')(({ theme }) => ({
@@ -117,11 +135,22 @@ const HeroGraphicPanel = styled('div')(({ theme }) => ({
       'radial-gradient(circle at 20% 20%, rgba(239,108,47,0.16), transparent 55%)',
     pointerEvents: 'none',
   },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    backgroundImage:
+      'radial-gradient(rgba(15,76,92,0.18) 1px, transparent 1px)',
+    backgroundSize: '22px 22px',
+    opacity: 0.15,
+    pointerEvents: 'none',
+  },
 }))
 
 const Section = styled('section')(({ theme }) => ({
   position: 'relative',
   padding: theme.spacing(10, 0),
+  scrollMarginTop: theme.spacing(12),
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(14, 0),
   },
@@ -349,17 +378,18 @@ function App() {
         typography: {
           fontFamily: '"Space Grotesk", sans-serif',
           h1: {
-            fontFamily: '"Space Grotesk", sans-serif',
+            fontFamily: '"Fraunces", serif',
             fontWeight: 700,
             fontSize: 'clamp(2.6rem, 3.5vw, 4.4rem)',
             lineHeight: 1.05,
           },
           h2: {
-            fontFamily: '"Space Grotesk", sans-serif',
+            fontFamily: '"Fraunces", serif',
             fontWeight: 700,
             fontSize: 'clamp(2.3rem, 2.9vw, 3.5rem)',
           },
           h3: {
+            fontFamily: '"Fraunces", serif',
             fontWeight: 700,
             fontSize: 'clamp(1.85rem, 2.4vw, 2.7rem)',
           },
@@ -376,6 +406,9 @@ function App() {
             fontSize: '1.05rem',
             lineHeight: 1.7,
           },
+          body2: {
+            lineHeight: 1.7,
+          },
         },
         components: {
           MuiButton: {
@@ -386,16 +419,23 @@ function App() {
               },
             },
           },
+          MuiChip: {
+            styleOverrides: {
+              root: {
+                borderRadius: 999,
+              },
+            },
+          },
         },
       }),
     [],
   )
 
   const heroGraphic =
-    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80'
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80'
 
   const studioImage =
-    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80'
+    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80'
 
   const services = [
     {
@@ -510,9 +550,12 @@ function App() {
         styles={{
           '*': { boxSizing: 'border-box' },
           body: {
-            background:
-              'radial-gradient(circle at top left, var(--brand-cream) 0%, var(--brand-sand) 35%, var(--brand-mist) 100%)',
+            backgroundColor: 'var(--brand-sand)',
+            backgroundImage:
+              'radial-gradient(circle at top left, rgba(255,230,205,0.85) 0%, rgba(247,243,238,0.95) 38%, rgba(232,240,244,0.9) 100%), linear-gradient(120deg, rgba(255,255,255,0.9), rgba(245,239,230,0.6))',
+            backgroundAttachment: 'fixed',
           },
+          a: { color: 'inherit', textDecoration: 'none' },
           '@keyframes float': {
             '0%, 100%': { transform: 'translateY(0px)' },
             '50%': { transform: 'translateY(-14px)' },
@@ -557,9 +600,10 @@ function App() {
           color="transparent"
           elevation={0}
           sx={{
-            bgcolor: 'rgba(247, 243, 238, 0.75)',
+            bgcolor: 'rgba(247, 243, 238, 0.82)',
             backdropFilter: 'blur(12px)',
             color: 'text.primary',
+            borderBottom: '1px solid rgba(15, 76, 92, 0.08)',
           }}
         >
           <Toolbar sx={{ gap: { xs: 1.5, md: 3 } }}>
@@ -615,7 +659,7 @@ function App() {
                 <Stack spacing={3}>
                   <TagChip label="Pixel Moose Digital Studio" size="small" />
                   <Typography variant="h1">
-                    Digitize your business with custom software and mobile apps.
+                    Digitize your business with custom software, built for people who do the work.
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
                     Moose Jaw has plenty of WordPress website shops. Pixel Moose Studio is
@@ -623,10 +667,16 @@ function App() {
                     out admin work, and deliver Android + iOS apps many local firms do not offer.
                   </Typography>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                    <PrimaryButton variant="contained" endIcon={<ArrowOutwardIcon />}>
+                    <PrimaryButton
+                      variant="contained"
+                      endIcon={<ArrowOutwardIcon />}
+                      href="#work"
+                    >
                       View Our Work
                     </PrimaryButton>
-                    <GhostButton variant="outlined">Schedule a Call</GhostButton>
+                    <GhostButton variant="outlined" href="#contact">
+                      Schedule a Call
+                    </GhostButton>
                   </Stack>
                   <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
                     {['Custom Web Apps', 'Workflow Automation', 'Android + iOS', 'Paperless Ops'].map((label) => (
