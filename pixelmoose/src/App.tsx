@@ -28,8 +28,42 @@ import StorefrontIcon from '@mui/icons-material/Storefront'
 const LogoLockup = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(2),
+  gap: theme.spacing(1.75),
 }))
+
+const LogoWordmark = ({
+  logoSize = 56,
+}: {
+  logoSize?: number
+}) => (
+  <LogoLockup>
+    <Box
+      component="img"
+      src="/images/Logo/PixelMoose_Logo.png"
+      alt="Pixel Moose Studio logo"
+      sx={{ width: logoSize, height: logoSize }}
+    />
+    <Stack spacing={0} sx={{ lineHeight: 1 }}>
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 700, letterSpacing: '0.02em', lineHeight: 1.1 }}
+      >
+        Pixel Moose
+      </Typography>
+      <Typography
+        variant="caption"
+        sx={{
+          fontWeight: 600,
+          letterSpacing: '0.24em',
+          textTransform: 'uppercase',
+          lineHeight: 1,
+        }}
+      >
+        Studio
+      </Typography>
+    </Stack>
+  </LogoLockup>
+)
 
 const GlassCard = styled(Paper)(({ theme }) => ({
   borderRadius: 28,
@@ -380,18 +414,16 @@ function App() {
         />
         <AppBar
           position="sticky"
+          color="transparent"
           elevation={0}
-          sx={{ bgcolor: 'rgba(247, 243, 238, 0.75)', backdropFilter: 'blur(12px)' }}
+          sx={{
+            bgcolor: 'rgba(247, 243, 238, 0.75)',
+            backdropFilter: 'blur(12px)',
+            color: 'text.primary',
+          }}
         >
           <Toolbar>
-            <LogoLockup>
-              <Box
-                component="img"
-                src="/images/Logo/PixelMoose_Logo.png"
-                alt="Pixel Moose Studio logo"
-                sx={{ width: 46, height: 46 }}
-              />
-            </LogoLockup>
+            <LogoWordmark logoSize={58} />
             <Box sx={{ flexGrow: 1 }} />
             <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button color="inherit" component="a" href="#work">
@@ -465,14 +497,7 @@ function App() {
                   }}
                 >
                   <Stack spacing={3}>
-                    <LogoLockup>
-                      <Box
-                        component="img"
-                        src="/images/Logo/PixelMoose_Logo.png"
-                        alt="Pixel Moose Studio logo"
-                        sx={{ width: 84, height: 84 }}
-                      />
-                    </LogoLockup>
+                    <LogoWordmark logoSize={82} />
                     <Typography variant="h5">
                       Digital products with local impact and global polish.
                     </Typography>
