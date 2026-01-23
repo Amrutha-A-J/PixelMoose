@@ -667,16 +667,16 @@ function App() {
 
         <Section id="work">
           <Container>
-            <Grid container spacing={6}>
-              <Grid item xs={12} md={5}>
+            <Stack spacing={{ xs: 4, md: 6 }}>
+              <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
                   kicker="Featured Work"
                   title="Custom platforms that cut busywork."
                   subtitle="A snapshot of completed and upcoming projects focused on real-world operations."
                 />
-              </Grid>
-              <Grid item xs={12} md={7}>
-                <Stack spacing={4}>
+              </Box>
+              <Grid container spacing={4}>
+                <Grid item xs={12} md={6}>
                   <Stack spacing={2}>
                     <Typography variant="overline" color="text.secondary">
                       Completed Projects
@@ -695,6 +695,8 @@ function App() {
                       ))}
                     </Stack>
                   </Stack>
+                </Grid>
+                <Grid item xs={12} md={6}>
                   <Stack spacing={2}>
                     <Typography variant="overline" color="text.secondary">
                       Upcoming Project
@@ -713,39 +715,37 @@ function App() {
                       ))}
                     </Stack>
                   </Stack>
-                </Stack>
+                </Grid>
               </Grid>
-            </Grid>
+            </Stack>
           </Container>
         </Section>
 
         <Section id="services">
           <Container>
-            <Grid container spacing={6} alignItems="center">
-              <Grid item xs={12} md={4}>
+            <Stack spacing={{ xs: 4, md: 6 }}>
+              <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
                   kicker="Capabilities"
                   title="End-to-end delivery, no templates."
                   subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
                 />
+              </Box>
+              <Grid container spacing={3}>
+                {services.map((service, index) => (
+                  <Grid item xs={12} md={4} key={service.title}>
+                    <Box
+                      sx={{
+                        animation: 'reveal 0.8s ease both',
+                        animationDelay: `${index * 0.12}s`,
+                      }}
+                    >
+                      <ServiceCard {...service} />
+                    </Box>
+                  </Grid>
+                ))}
               </Grid>
-              <Grid item xs={12} md={8}>
-                <Grid container spacing={3}>
-                  {services.map((service, index) => (
-                    <Grid item xs={12} md={4} key={service.title}>
-                      <Box
-                        sx={{
-                          animation: 'reveal 0.8s ease both',
-                          animationDelay: `${index * 0.12}s`,
-                        }}
-                      >
-                        <ServiceCard {...service} />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-            </Grid>
+            </Stack>
           </Container>
         </Section>
 
@@ -843,31 +843,29 @@ function App() {
 
         <Section id="process">
           <Container>
-            <Grid container spacing={6}>
-              <Grid item xs={12} md={4}>
+            <Stack spacing={{ xs: 4, md: 6 }}>
+              <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
                   kicker="Process"
                   title="Practical delivery from discovery to launch."
                   subtitle="We keep stakeholders aligned and focus on removing friction from daily operations."
                 />
+              </Box>
+              <Grid container spacing={3}>
+                {process.map((step, index) => (
+                  <Grid item xs={12} md={4} key={step.step}>
+                    <Box
+                      sx={{
+                        animation: 'reveal 0.8s ease both',
+                        animationDelay: `${index * 0.15}s`,
+                      }}
+                    >
+                      <ProcessStep {...step} />
+                    </Box>
+                  </Grid>
+                ))}
               </Grid>
-              <Grid item xs={12} md={8}>
-                <Grid container spacing={3}>
-                  {process.map((step, index) => (
-                    <Grid item xs={12} md={4} key={step.step}>
-                      <Box
-                        sx={{
-                          animation: 'reveal 0.8s ease both',
-                          animationDelay: `${index * 0.15}s`,
-                        }}
-                      >
-                        <ProcessStep {...step} />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-            </Grid>
+            </Stack>
           </Container>
         </Section>
 
