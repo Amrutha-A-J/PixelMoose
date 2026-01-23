@@ -328,7 +328,7 @@ const ProjectCard = ({
                 width: '100%',
                 height: { xs: 210, sm: 240 },
                 objectFit: 'cover',
-                borderRadius: 10,
+                borderRadius: '20px',
                 boxShadow: '0 16px 32px rgba(15, 76, 92, 0.16)',
               }}
             />
@@ -338,7 +338,7 @@ const ProjectCard = ({
                 sx={{
                   position: 'absolute',
                   inset: 0,
-                  borderRadius: 10,
+                  borderRadius: '20px',
                   background:
                     'linear-gradient(180deg, rgba(15,76,92,0.05) 0%, rgba(15,76,92,0.6) 100%)',
                   display: 'flex',
@@ -365,7 +365,7 @@ const ProjectCard = ({
             sx={{
               width: '100%',
               height: { xs: 210, sm: 240 },
-              borderRadius: 10,
+              borderRadius: '20px',
               border: '1px dashed rgba(15, 76, 92, 0.3)',
               backgroundColor: 'rgba(255,255,255,0.6)',
               display: 'flex',
@@ -514,7 +514,9 @@ function App() {
 
   const handlePinchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     if (event.touches.length !== 2) return
-    const [touchOne, touchTwo] = event.touches
+    const touchOne = event.touches.item(0)
+    const touchTwo = event.touches.item(1)
+    if (!touchOne || !touchTwo) return
     const distance = Math.hypot(
       touchTwo.clientX - touchOne.clientX,
       touchTwo.clientY - touchOne.clientY,
@@ -525,7 +527,9 @@ function App() {
 
   const handlePinchMove = (event: React.TouchEvent<HTMLDivElement>) => {
     if (event.touches.length !== 2 || pinchStartDistanceRef.current === null) return
-    const [touchOne, touchTwo] = event.touches
+    const touchOne = event.touches.item(0)
+    const touchTwo = event.touches.item(1)
+    if (!touchOne || !touchTwo) return
     const distance = Math.hypot(
       touchTwo.clientX - touchOne.clientX,
       touchTwo.clientY - touchOne.clientY,
@@ -651,8 +655,9 @@ function App() {
 
   const projects: Project[] = [
     {
-      image: `${projectImageBase}/mj_foodbank_app_preview.svg`,
-      imageAlt: 'Illustrated preview of the Moose Jaw Food Bank web app',
+      image:
+        'https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'Team planning a booking workflow on a whiteboard',
       title: 'Moose Jaw Food Bank Booking + Admin Web App',
       description:
         'Clients and volunteers book appointments and view visit history. Staff manage visits, food distribution, donation tracking, timesheets, leave, and trends.',
@@ -683,8 +688,9 @@ function App() {
       ],
     },
     {
-      image: `${projectImageBase}/mj_foodbank_android_preview.svg`,
-      imageAlt: 'Illustrated preview of the Moose Jaw Food Bank Android app',
+      image:
+        'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'Android phone on a desk showing an app experience',
       title: 'Moose Jaw Food Bank Android App',
       description:
         'Android app for clients and volunteers to book appointments and manage visits on the go.',
@@ -988,7 +994,7 @@ function App() {
                         width: '100%',
                         height: { xs: 240, sm: 320, md: 360 },
                         objectFit: 'contain',
-                        borderRadius: 18,
+                        borderRadius: '20px',
                         boxShadow: '0 18px 40px rgba(24, 20, 16, 0.16)',
                         bgcolor: 'rgba(255,255,255,0.7)',
                         padding: { xs: 2, sm: 3 },
@@ -1161,7 +1167,7 @@ function App() {
                         width: '100%',
                         height: { xs: 180, sm: 220 },
                         objectFit: 'cover',
-                        borderRadius: 10,
+                        borderRadius: '20px',
                       }}
                     />
                     <TagChip label="Studio Culture" size="small" />
@@ -1331,7 +1337,7 @@ function App() {
               <Stack spacing={3}>
                 <Box
                   sx={{
-                    borderRadius: 16,
+                    borderRadius: '20px',
                     border: '1px solid rgba(15, 76, 92, 0.2)',
                     background:
                       'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,238,230,0.8))',
@@ -1348,7 +1354,7 @@ function App() {
                       sx={{
                         width: '100%',
                         height: { xs: 280, sm: 360 },
-                        borderRadius: 10,
+                        borderRadius: '20px',
                         overflow: 'auto',
                         display: 'flex',
                         alignItems: 'center',
@@ -1364,20 +1370,20 @@ function App() {
                         sx={{
                           width: `${zoomLevel * 100}%`,
                           height: `${zoomLevel * 100}%`,
-                          maxWidth: 'none',
-                          maxHeight: 'none',
-                          objectFit: 'contain',
-                          borderRadius: 10,
-                          boxShadow: '0 18px 40px rgba(15, 76, 92, 0.16)',
-                        }}
-                      />
-                    </Box>
+                        maxWidth: 'none',
+                        maxHeight: 'none',
+                        objectFit: 'contain',
+                        borderRadius: '20px',
+                        boxShadow: '0 18px 40px rgba(15, 76, 92, 0.16)',
+                      }}
+                    />
+                  </Box>
                   ) : (
                     <Box
                       sx={{
                         width: '100%',
                         height: { xs: 280, sm: 360 },
-                        borderRadius: 12,
+                        borderRadius: '20px',
                         border: '1px dashed rgba(15, 76, 92, 0.35)',
                         backgroundColor: 'rgba(255,255,255,0.7)',
                         display: 'flex',
