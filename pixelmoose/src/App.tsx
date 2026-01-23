@@ -423,7 +423,6 @@ function App() {
             <PrimaryButton
               variant="contained"
               sx={{ ml: { xs: 'auto', md: 3 } }}
-              component="a"
               href="#contact"
             >
               Start a Project
