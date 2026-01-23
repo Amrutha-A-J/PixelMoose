@@ -1130,7 +1130,7 @@ function App() {
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
                 <SectionTitle
-                  kicker="Capabilities"
+                  kicker="Services"
                   title="End-to-end delivery, no templates."
                   subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
                 />
