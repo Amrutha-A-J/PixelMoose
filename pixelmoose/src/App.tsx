@@ -555,10 +555,12 @@ function App() {
     },
   ]
 
+  const projectImageBase = `${import.meta.env.BASE_URL}images/projects`
+
   const projects: Project[] = [
     {
-      image: '',
-      imageAlt: 'Placeholder for Moose Jaw Food Bank booking and admin web app',
+      image: `${projectImageBase}/mj_foodbank_app/mobile_view_client.JPG`,
+      imageAlt: 'Moose Jaw Food Bank web app on mobile view',
       title: 'Moose Jaw Food Bank Booking + Admin Web App',
       description:
         'Clients and volunteers book appointments and view visit history. Staff manage visits, food distribution, donation tracking, timesheets, leave, and trends.',
@@ -569,28 +571,28 @@ function App() {
       ],
       gallery: [
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_app/mobile_view_client.JPG`,
+          alt: 'Mobile client booking view for the food bank app',
           description:
-            'Placeholder description for the primary dashboard view shown to staff and volunteers.',
+            'Client booking view optimized for quick mobile check-ins and appointment details.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_app/foodbank_visit_trends.png`,
+          alt: 'Food bank visit trends dashboard',
           description:
-            'Placeholder description for the client booking flow highlighting key steps.',
+            'Visit trends dashboard highlighting seasonal demand and appointment volume.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_app/warehouse_dashbaord.png`,
+          alt: 'Food bank warehouse dashboard',
           description:
-            'Placeholder description for analytics and reporting screens used by administrators.',
+            'Operations dashboard for warehouse inventory, pickups, and distribution planning.',
         },
       ],
     },
     {
-      image: '',
-      imageAlt: 'Placeholder for Moose Jaw Food Bank Android app',
+      image: `${projectImageBase}/mj_foodbank_android/Image (1).jpg`,
+      imageAlt: 'Moose Jaw Food Bank Android app preview',
       title: 'Moose Jaw Food Bank Android App',
       description:
         'Android app for clients and volunteers to book appointments and manage visits on the go.',
@@ -604,28 +606,34 @@ function App() {
       ],
       gallery: [
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_android/Image (1).jpg`,
+          alt: 'Android app home screen for the food bank',
           description:
-            'Placeholder description for the mobile home screen showing quick actions.',
+            'Home screen focused on quick actions for bookings and visit history.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_android/Image (2).jpg`,
+          alt: 'Android booking calendar view',
           description:
-            'Placeholder description for the booking calendar and appointment details view.',
+            'Booking calendar view for selecting dates and confirming appointment times.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_android/Image (3).jpg`,
+          alt: 'Android app visit details screen',
           description:
-            'Placeholder description for the volunteer tools and visit history screen.',
+            'Visit details and volunteer tools for managing on-site activity.',
+        },
+        {
+          src: `${projectImageBase}/mj_foodbank_android/Image (4).png`,
+          alt: 'Android app secondary screen view',
+          description:
+            'Additional Android screen for supporting appointment workflows.',
         },
       ],
     },
     {
-      image: '',
-      imageAlt: 'Placeholder for IVR phone booking system',
+      image: `${projectImageBase}/mj_foodbank_IVR/Image (1).jpg`,
+      imageAlt: 'IVR phone booking system call flow',
       title: 'IVR Phone + Text Booking System',
       description:
         'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
@@ -633,22 +641,22 @@ function App() {
       status: 'Completed',
       gallery: [
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_IVR/Image (1).jpg`,
+          alt: 'IVR call flow overview',
           description:
-            'Placeholder description for the IVR call flow map and prompts.',
+            'IVR call flow map that guides callers through booking prompts.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_IVR/Image (2).jpg`,
+          alt: 'SMS booking confirmation preview',
           description:
-            'Placeholder description for the SMS booking confirmation messages.',
+            'SMS confirmations and reminders for scheduled appointments.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: `${projectImageBase}/mj_foodbank_IVR/Image (3).jpg`,
+          alt: 'IVR admin tooling',
           description:
-            'Placeholder description for the admin tooling used to manage scripts.',
+            'Admin tools for managing IVR scripts, routing, and call outcomes.',
         },
       ],
     },
@@ -656,8 +664,9 @@ function App() {
 
   const upcomingProjects: Project[] = [
     {
-      image: '',
-      imageAlt: 'Placeholder for transit route planning app',
+      image:
+        'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'City bus traveling through an urban corridor',
       title: 'Live Transit Route Finder',
       description:
         'Find the right bus service, see the nearest stop to board, and track vehicles in real time.',
@@ -665,22 +674,22 @@ function App() {
       status: 'Upcoming',
       gallery: [
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Bus lane with vehicles in motion',
           description:
-            'Placeholder description for the real-time map view and bus markers.',
+            'Real-time map view with bus locations and nearby stops.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: 'https://images.unsplash.com/photo-1505236731920-5f9a6e86d210?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Transit stop sign with arrivals information',
           description:
-            'Placeholder description for route planning inputs and arrival predictions.',
+            'Route planning inputs paired with arrival predictions and ETAs.',
         },
         {
-          src: '',
-          alt: 'Project image placeholder',
+          src: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
+          alt: 'City street with buses and commuters',
           description:
-            'Placeholder description for service alerts and stop-level details.',
+            'Service alerts, stop-level details, and rider updates.',
         },
       ],
     },
