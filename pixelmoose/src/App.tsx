@@ -39,7 +39,7 @@ const LogoWordmark = ({
   <LogoLockup>
     <Box
       component="img"
-      src="/images/Logo/PixelMoose_logo.png"
+      src={`${import.meta.env.BASE_URL}images/Logo/PixelMoose_logo.png`}
       alt="Pixel Moose logo"
       sx={{ width: logoSize, height: 'auto' }}
     />
