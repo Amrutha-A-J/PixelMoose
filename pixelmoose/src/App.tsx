@@ -286,12 +286,16 @@ const ProjectCard = ({
       boxShadow: '0 30px 70px rgba(15, 76, 92, 0.18)',
     }}
   >
-    <GlassCard
+  <GlassCard
       elevation={0}
       sx={{
         position: 'relative',
         overflow: 'hidden',
         cursor: onOpen ? 'pointer' : 'default',
+        '&:hover .project-preview-overlay': {
+          opacity: 1,
+          transform: 'translateY(0)',
+        },
       }}
       role={onOpen ? 'button' : undefined}
       tabIndex={onOpen ? 0 : undefined}
@@ -307,18 +311,47 @@ const ProjectCard = ({
     >
       <Stack spacing={2.5}>
         {image ? (
-          <Box
-            component="img"
-            src={image}
-            alt={imageAlt}
-            sx={{
-              width: '100%',
-              height: { xs: 210, sm: 240 },
-              objectFit: 'cover',
-              borderRadius: 10,
-              boxShadow: '0 16px 32px rgba(15, 76, 92, 0.16)',
-            }}
-          />
+          <Box sx={{ position: 'relative' }}>
+            <Box
+              component="img"
+              src={image}
+              alt={imageAlt}
+              sx={{
+                width: '100%',
+                height: { xs: 210, sm: 240 },
+                objectFit: 'cover',
+                borderRadius: 10,
+                boxShadow: '0 16px 32px rgba(15, 76, 92, 0.16)',
+              }}
+            />
+            {onOpen && (
+              <Box
+                className="project-preview-overlay"
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: 10,
+                  background:
+                    'linear-gradient(180deg, rgba(15,76,92,0.05) 0%, rgba(15,76,92,0.6) 100%)',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  justifyContent: 'flex-start',
+                  padding: 2,
+                  opacity: 0,
+                  transform: 'translateY(6px)',
+                  transition: 'opacity 0.25s ease, transform 0.25s ease',
+                  pointerEvents: 'none',
+                }}
+              >
+                <Typography
+                  variant="overline"
+                  sx={{ color: '#FFFFFF', letterSpacing: '0.16em' }}
+                >
+                  Click to see images
+                </Typography>
+              </Box>
+            )}
+          </Box>
         ) : (
           <Box
             sx={{
@@ -559,8 +592,8 @@ function App() {
 
   const projects: Project[] = [
     {
-      image: `${projectImageBase}/mj_foodbank_app/mobile_view_client.JPG`,
-      imageAlt: 'Moose Jaw Food Bank web app on mobile view',
+      image: `${projectImageBase}/mj_foodbank_app_preview.svg`,
+      imageAlt: 'Illustrated preview of the Moose Jaw Food Bank web app',
       title: 'Moose Jaw Food Bank Booking + Admin Web App',
       description:
         'Clients and volunteers book appointments and view visit history. Staff manage visits, food distribution, donation tracking, timesheets, leave, and trends.',
@@ -591,8 +624,8 @@ function App() {
       ],
     },
     {
-      image: `${projectImageBase}/mj_foodbank_android/Image (1).jpg`,
-      imageAlt: 'Moose Jaw Food Bank Android app preview',
+      image: `${projectImageBase}/mj_foodbank_android_preview.svg`,
+      imageAlt: 'Illustrated preview of the Moose Jaw Food Bank Android app',
       title: 'Moose Jaw Food Bank Android App',
       description:
         'Android app for clients and volunteers to book appointments and manage visits on the go.',
@@ -632,8 +665,8 @@ function App() {
       ],
     },
     {
-      image: `${projectImageBase}/mj_foodbank_IVR/Image (1).jpg`,
-      imageAlt: 'IVR phone booking system call flow',
+      image: `${projectImageBase}/mj_foodbank_ivr_preview.svg`,
+      imageAlt: 'Illustrated preview of the IVR phone and text booking system',
       title: 'IVR Phone + Text Booking System',
       description:
         'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
@@ -1253,7 +1286,7 @@ function App() {
                         width: '100%',
                         maxHeight: { xs: 280, sm: 360 },
                         objectFit: 'cover',
-                        borderRadius: 12,
+                        borderRadius: 10,
                         boxShadow: '0 18px 40px rgba(15, 76, 92, 0.16)',
                       }}
                     />
