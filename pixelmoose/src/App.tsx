@@ -948,7 +948,7 @@ function App() {
 
         <Section>
           <Container>
-            <Grid container spacing={6} alignItems="center">
+            <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Stack spacing={3}>
                   <MainTitleChip label="Pixel Moose Digital Studio" />
@@ -1162,7 +1162,7 @@ function App() {
 
         <Section>
           <Container>
-            <Grid container spacing={5}>
+            <Grid container spacing={{ xs: 3, md: 5 }}>
               <Grid item xs={12} md={6}>
                 <GlassCard elevation={0} sx={{ height: '100%' }}>
                   <Stack spacing={3}>
