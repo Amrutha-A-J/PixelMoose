@@ -89,13 +89,20 @@ const TagChip = styled(Chip)(({ theme }) => ({
   color: theme.palette.text.primary,
 }))
 
-const SectionKicker = styled(TagChip)(({ theme }) => ({
-  fontSize: '1rem',
-  padding: theme.spacing(0.6, 2.6),
+const MainTitleChip = styled(TagChip)(({ theme }) => ({
   height: 'auto',
+  fontFamily: theme.typography.h1.fontFamily,
+  fontWeight: 700,
   letterSpacing: '0.06em',
-  textTransform: 'uppercase',
+  '& .MuiChip-label': {
+    fontSize: 'clamp(2.1rem, 3vw, 3.6rem)',
+    padding: theme.spacing(1.2, 3.6),
+  },
 }))
+
+const SectionKicker = styled(MainTitleChip)({
+  textTransform: 'uppercase',
+})
 
 const IconBadge = styled('span')(({ theme }) => ({
   width: 54,
@@ -217,8 +224,8 @@ const SectionTitle = ({
 }) => (
   <Stack spacing={2} sx={{ maxWidth: 620 }}>
     <SectionKicker label={kicker} />
-    <Typography variant="h2">{title}</Typography>
-    <Typography variant="body1" color="text.secondary">
+    <Typography variant="h3">{title}</Typography>
+    <Typography variant="body2" color="text.secondary">
       {subtitle}
     </Typography>
   </Stack>
@@ -573,7 +580,7 @@ function App() {
           h1: {
             fontFamily: '"Fraunces", serif',
             fontWeight: 700,
-            fontSize: 'clamp(2.6rem, 3.5vw, 4.4rem)',
+            fontSize: 'clamp(2.1rem, 2.7vw, 3.4rem)',
             lineHeight: 1.05,
           },
           h2: {
@@ -584,7 +591,7 @@ function App() {
           h3: {
             fontFamily: '"Fraunces", serif',
             fontWeight: 700,
-            fontSize: 'clamp(1.85rem, 2.4vw, 2.7rem)',
+            fontSize: 'clamp(1.6rem, 2.1vw, 2.4rem)',
           },
           h5: {
             fontWeight: 700,
@@ -944,7 +951,7 @@ function App() {
             <Grid container spacing={6} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Stack spacing={3}>
-                  <TagChip label="Pixel Moose Digital Studio" size="small" />
+                  <MainTitleChip label="Pixel Moose Digital Studio" />
                   <Typography variant="h1">
                     Digitize your business with custom software, built for people who do the work.
                   </Typography>
