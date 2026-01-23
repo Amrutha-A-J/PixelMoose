@@ -32,16 +32,22 @@ const LogoLockup = styled('div')(({ theme }) => ({
 }))
 
 const LogoWordmark = ({
-  logoSize = 56,
+  logoSize = { xs: 96, sm: 112, md: 128 },
 }: {
-  logoSize?: number
+  logoSize?: {
+    xs?: number
+    sm?: number
+    md?: number
+    lg?: number
+    xl?: number
+  } | number
 }) => (
   <LogoLockup>
     <Box
       component="img"
       src={`${import.meta.env.BASE_URL}images/Logo/PixelMoose_logo.png`}
       alt="Pixel Moose logo"
-      sx={{ width: logoSize, height: 'auto' }}
+      sx={{ width: logoSize, height: 'auto', maxWidth: '100%' }}
     />
   </LogoLockup>
 )
@@ -404,7 +410,7 @@ function App() {
           }}
         >
           <Toolbar>
-            <LogoWordmark logoSize={58} />
+            <LogoWordmark logoSize={{ xs: 112, sm: 136, md: 160 }} />
             <Box sx={{ flexGrow: 1 }} />
             <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button color="inherit" component="a" href="#work">
@@ -477,7 +483,7 @@ function App() {
                   }}
                 >
                   <Stack spacing={3}>
-                    <LogoWordmark logoSize={82} />
+                    <LogoWordmark logoSize={{ xs: 160, sm: 190, md: 220 }} />
                     <Typography variant="h5">
                       Replace paper with a system your team actually enjoys.
                     </Typography>
