@@ -41,7 +41,7 @@ const LogoWordmark = ({
       component="img"
       src="/images/Logo/PixelMoose_logo.png"
       alt="Pixel Moose logo"
-      sx={{ width: logoSize, height: logoSize }}
+      sx={{ width: logoSize, height: 'auto' }}
     />
   </LogoLockup>
 )
