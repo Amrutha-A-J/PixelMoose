@@ -156,7 +156,7 @@ const Section = styled('section')(({ theme }) => ({
   },
 }))
 
-const WorkSection = styled(Section)(({ theme }) => ({
+const WorkSection = styled(Section)(() => ({
   background:
     'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,243,230,0.95) 45%, rgba(248,238,230,0.75) 100%)',
   borderTop: '1px solid rgba(255,255,255,0.9)',
