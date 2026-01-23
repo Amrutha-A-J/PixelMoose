@@ -678,6 +678,8 @@ function App() {
     },
   ]
 
+  const allProjects = [...projects, ...upcomingProjects]
+
   const impactStats = [
     { value: `${projects.length}`, label: 'Projects featured' },
     { value: `${upcomingProjects.length}`, label: 'In the pipeline' },
@@ -979,54 +981,28 @@ function App() {
                   ))}
                 </Stack>
               </GlassCard>
-              <Grid container spacing={4}>
-                <Grid item xs={12} md={6}>
-                  <Stack spacing={2}>
-                    <Typography variant="overline" color="text.secondary">
-                      Completed Projects
-                    </Typography>
-                    <Stack spacing={3}>
-                      {projects.map((project, index) => (
-                        <Box
-                          key={project.title}
-                          sx={{
-                            animation: 'reveal 0.8s ease both',
-                            animationDelay: `${index * 0.15}s`,
-                          }}
-                        >
-                          <ProjectCard
-                            {...project}
-                            onOpen={() => openProjectGallery(project)}
-                          />
-                        </Box>
-                      ))}
-                    </Stack>
-                  </Stack>
+              <Stack spacing={2}>
+                <Typography variant="overline" color="text.secondary">
+                  Projects
+                </Typography>
+                <Grid container spacing={4}>
+                  {allProjects.map((project, index) => (
+                    <Grid item xs={12} md={6} key={project.title}>
+                      <Box
+                        sx={{
+                          animation: 'reveal 0.8s ease both',
+                          animationDelay: `${index * 0.15}s`,
+                        }}
+                      >
+                        <ProjectCard
+                          {...project}
+                          onOpen={() => openProjectGallery(project)}
+                        />
+                      </Box>
+                    </Grid>
+                  ))}
                 </Grid>
-                <Grid item xs={12} md={6}>
-                  <Stack spacing={2}>
-                    <Typography variant="overline" color="text.secondary">
-                      Upcoming Project
-                    </Typography>
-                    <Stack spacing={3}>
-                      {upcomingProjects.map((project, index) => (
-                        <Box
-                          key={project.title}
-                          sx={{
-                            animation: 'reveal 0.8s ease both',
-                            animationDelay: `${(projects.length + index) * 0.15}s`,
-                          }}
-                        >
-                          <ProjectCard
-                            {...project}
-                            onOpen={() => openProjectGallery(project)}
-                          />
-                        </Box>
-                      ))}
-                    </Stack>
-                  </Stack>
-                </Grid>
-              </Grid>
+              </Stack>
             </Stack>
           </Container>
         </WorkSection>
