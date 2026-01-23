@@ -100,11 +100,11 @@ const GhostButton = styled(Button)(({ theme }) => ({
   border: '1px solid rgba(38, 42, 47, 0.2)',
 }))
 
-const HeroPanel = styled('div')(({ theme }) => ({
+const HeroGraphicPanel = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: 36,
-  padding: theme.spacing(3, 3, 3.5),
-  background: 'linear-gradient(140deg, rgba(255,255,255,0.92), rgba(255,255,255,0.55))',
+  padding: theme.spacing(3),
+  background: 'linear-gradient(150deg, rgba(255,255,255,0.92), rgba(252,245,238,0.7))',
   border: '1px solid rgba(255,255,255,0.7)',
   boxShadow: '0 28px 80px rgba(24, 20, 16, 0.16)',
   backdropFilter: 'blur(16px)',
@@ -112,21 +112,11 @@ const HeroPanel = styled('div')(({ theme }) => ({
   '&::before': {
     content: '""',
     position: 'absolute',
-    top: -80,
-    right: -40,
-    width: 200,
-    height: 200,
-    borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(239,108,47,0.25), transparent 70%)',
+    inset: 0,
+    background:
+      'radial-gradient(circle at 20% 20%, rgba(239,108,47,0.16), transparent 55%)',
+    pointerEvents: 'none',
   },
-}))
-
-const HeroMetric = styled(Paper)(({ theme }) => ({
-  borderRadius: 18,
-  padding: theme.spacing(1.6, 2),
-  backgroundColor: 'rgba(255,255,255,0.9)',
-  border: '1px solid rgba(15, 76, 92, 0.12)',
-  boxShadow: '0 14px 32px rgba(24, 20, 16, 0.1)',
 }))
 
 const Section = styled('section')(({ theme }) => ({
@@ -344,8 +334,8 @@ function App() {
     [],
   )
 
-  const heroImage =
-    'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=80'
+  const heroGraphic =
+    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80'
 
   const studioImage =
     'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80'
@@ -427,29 +417,6 @@ function App() {
     { label: 'Services', href: '#services' },
     { label: 'Process', href: '#process' },
     { label: 'Contact', href: '#contact' },
-  ]
-
-  const heroMetrics = [
-    { value: '2-4 wks', label: 'Discovery to prototype' },
-    { value: '1 team', label: 'Design, build, launch' },
-  ]
-
-  const heroHighlights = [
-    {
-      icon: <BoltIcon fontSize="small" />,
-      title: 'Paperless ops',
-      detail: 'Forms, approvals, records',
-    },
-    {
-      icon: <LayersIcon fontSize="small" />,
-      title: 'Admin clarity',
-      detail: 'Dashboards + reporting',
-    },
-    {
-      icon: <RocketLaunchIcon fontSize="small" />,
-      title: 'Mobile-ready',
-      detail: 'Android + iOS delivery',
-    },
   ]
 
   return (
@@ -590,7 +557,7 @@ function App() {
                 </Stack>
               </Grid>
               <Grid item xs={12} md={6}>
-                <HeroPanel style={{ transform: `translateY(${scrollY * -0.1}px)` }}>
+                <HeroGraphicPanel style={{ transform: `translateY(${scrollY * -0.08}px)` }}>
                   <Stack spacing={2.5} sx={{ position: 'relative', zIndex: 1 }}>
                     <Stack direction="row" spacing={1.5} alignItems="center">
                       <TagChip label="Workflow-first delivery" size="small" />
@@ -598,76 +565,38 @@ function App() {
                         Moose Jaw, SK
                       </Typography>
                     </Stack>
-                    <Box sx={{ position: 'relative' }}>
-                      <Box
-                        component="img"
-                        src={heroImage}
-                        alt="Team reviewing workflow on a laptop"
-                        sx={{
-                          width: '100%',
-                          height: { xs: 200, sm: 240 },
-                          objectFit: 'cover',
-                          borderRadius: 18,
-                          boxShadow: '0 18px 40px rgba(24, 20, 16, 0.18)',
-                          transform: 'rotate(-1deg)',
-                        }}
-                      />
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          right: 16,
-                          bottom: -18,
-                          px: 2,
-                          py: 1,
-                          borderRadius: 999,
-                          bgcolor: 'rgba(15, 76, 92, 0.9)',
-                          color: 'common.white',
-                          fontWeight: 600,
-                          fontSize: '0.8rem',
-                          letterSpacing: '0.02em',
-                        }}
-                      >
-                        Built for busy teams
+                    <Box
+                      component="img"
+                      src={heroGraphic}
+                      alt="Abstract graphic illustrating a connected workflow"
+                      sx={{
+                        width: '100%',
+                        height: { xs: 240, sm: 320, md: 360 },
+                        objectFit: 'contain',
+                        borderRadius: 18,
+                        boxShadow: '0 18px 40px rgba(24, 20, 16, 0.16)',
+                        bgcolor: 'rgba(255,255,255,0.7)',
+                        padding: { xs: 2, sm: 3 },
+                      }}
+                    />
+                    <GlassCard
+                      elevation={0}
+                      sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2 }}
+                    >
+                      <IconBadge>
+                        <BoltIcon fontSize="small" />
+                      </IconBadge>
+                      <Box>
+                        <Typography variant="subtitle1" fontWeight={700}>
+                          Modern, custom systems
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Clean dashboards, smart workflows, mobile-ready experiences.
+                        </Typography>
                       </Box>
-                    </Box>
-                    <Grid container spacing={2}>
-                      {heroMetrics.map((metric) => (
-                        <Grid item xs={12} sm={6} key={metric.label}>
-                          <HeroMetric elevation={0}>
-                            <Typography variant="h5">{metric.value}</Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {metric.label}
-                            </Typography>
-                          </HeroMetric>
-                        </Grid>
-                      ))}
-                    </Grid>
-                    <Stack spacing={1.5}>
-                      {heroHighlights.map((item) => (
-                        <GlassCard
-                          key={item.title}
-                          elevation={0}
-                          sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 2,
-                            padding: 2,
-                          }}
-                        >
-                          <IconBadge>{item.icon}</IconBadge>
-                          <Box>
-                            <Typography variant="subtitle1" fontWeight={700}>
-                              {item.title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {item.detail}
-                            </Typography>
-                          </Box>
-                        </GlassCard>
-                      ))}
-                    </Stack>
+                    </GlassCard>
                   </Stack>
-                </HeroPanel>
+                </HeroGraphicPanel>
               </Grid>
             </Grid>
           </Container>
@@ -890,15 +819,25 @@ function App() {
                     <Typography variant="body2" color="text.secondary">
                       Tell us about your workflow, and we will design a custom system that
                       streamlines admin work and delivers the mobile tools your team needs.
+                      We are email-only right now, so send details and we will reply quickly.
                     </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <Stack spacing={2}>
-                    <PrimaryButton variant="contained" endIcon={<ArrowOutwardIcon />}>
-                      Book a Discovery Call
+                    <PrimaryButton
+                      variant="contained"
+                      endIcon={<ArrowOutwardIcon />}
+                      href="mailto:pixelmoose.development@gmail.com"
+                    >
+                      Email Pixel Moose
                     </PrimaryButton>
-                    <GhostButton variant="outlined">hello@pixelmoose.studio</GhostButton>
+                    <GhostButton
+                      variant="outlined"
+                      href="mailto:pixelmoose.development@gmail.com"
+                    >
+                      pixelmoose.development@gmail.com
+                    </GhostButton>
                   </Stack>
                 </Grid>
               </Grid>
