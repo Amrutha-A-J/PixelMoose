@@ -127,6 +127,22 @@ const Section = styled('section')(({ theme }) => ({
   },
 }))
 
+const WorkSection = styled(Section)(({ theme }) => ({
+  background:
+    'linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,243,230,0.95) 45%, rgba(248,238,230,0.75) 100%)',
+  borderTop: '1px solid rgba(255,255,255,0.9)',
+  borderBottom: '1px solid rgba(255,255,255,0.9)',
+  overflow: 'hidden',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    background:
+      'radial-gradient(circle at 15% 20%, rgba(239,108,47,0.18), transparent 45%), radial-gradient(circle at 85% 30%, rgba(15,76,92,0.16), transparent 50%)',
+    pointerEvents: 'none',
+  },
+}))
+
 const SectionTitle = ({
   kicker,
   title,
@@ -188,6 +204,7 @@ const ProjectCard = ({
   title,
   description,
   tags,
+  status,
   links,
 }: {
   image: string
@@ -195,50 +212,67 @@ const ProjectCard = ({
   title: string
   description: string
   tags: string[]
+  status?: string
   links?: { label: string; href: string }[]
 }) => (
-  <GlassCard elevation={0}>
-    <Stack spacing={2.5}>
-      <Box
-        component="img"
-        src={image}
-        alt={imageAlt}
-        sx={{
-          width: '100%',
-          height: { xs: 180, sm: 200 },
-          objectFit: 'cover',
-          borderRadius: 8,
-        }}
-      />
-      <Stack spacing={1}>
-        <Typography variant="h5">{title}</Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </Stack>
-      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-        {tags.map((tag) => (
-          <Chip key={tag} label={tag} size="small" sx={{ borderRadius: 999 }} />
-        ))}
-      </Stack>
-      {links && links.length > 0 && (
+  <Box
+    sx={{
+      p: 0.6,
+      borderRadius: 30,
+      background:
+        'linear-gradient(135deg, rgba(239,108,47,0.28), rgba(15,76,92,0.2))',
+      boxShadow: '0 30px 70px rgba(15, 76, 92, 0.18)',
+    }}
+  >
+    <GlassCard elevation={0} sx={{ position: 'relative', overflow: 'hidden' }}>
+      <Stack spacing={2.5}>
+        <Box
+          component="img"
+          src={image}
+          alt={imageAlt}
+          sx={{
+            width: '100%',
+            height: { xs: 210, sm: 240 },
+            objectFit: 'cover',
+            borderRadius: 10,
+            boxShadow: '0 16px 32px rgba(15, 76, 92, 0.16)',
+          }}
+        />
+        {status && (
+          <Stack direction="row" spacing={1} alignItems="center">
+            <TagChip label={status} size="small" />
+          </Stack>
+        )}
+        <Stack spacing={1}>
+          <Typography variant="h5">{title}</Typography>
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        </Stack>
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-          {links.map((link) => (
-            <Button
-              key={link.href}
-              size="small"
-              variant="outlined"
-              href={link.href}
-              endIcon={<ArrowOutwardIcon fontSize="small" />}
-              sx={{ borderRadius: 999, textTransform: 'none' }}
-            >
-              {link.label}
-            </Button>
+          {tags.map((tag) => (
+            <Chip key={tag} label={tag} size="small" sx={{ borderRadius: 999 }} />
           ))}
         </Stack>
-      )}
-    </Stack>
-  </GlassCard>
+        {links && links.length > 0 && (
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            {links.map((link) => (
+              <Button
+                key={link.href}
+                size="small"
+                variant="outlined"
+                href={link.href}
+                endIcon={<ArrowOutwardIcon fontSize="small" />}
+                sx={{ borderRadius: 999, textTransform: 'none' }}
+              >
+                {link.label}
+              </Button>
+            ))}
+          </Stack>
+        )}
+      </Stack>
+    </GlassCard>
+  </Box>
 )
 
 const ProcessStep = ({
@@ -392,6 +426,7 @@ function App() {
       description:
         'Clients and volunteers book appointments and view visit history. Staff manage visits, food distribution, donation tracking, timesheets, leave, and trends.',
       tags: ['Web App', 'Booking', 'Operations'],
+      status: 'Completed',
       links: [
         { label: 'Live App', href: 'https://app.mjfoodbank.org' },
       ],
@@ -403,6 +438,7 @@ function App() {
       description:
         'Android app for clients and volunteers to book appointments and manage visits on the go.',
       tags: ['Android', 'Mobile', 'TWA'],
+      status: 'Completed',
       links: [
         {
           label: 'Play Store',
@@ -417,6 +453,7 @@ function App() {
       description:
         'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
       tags: ['IVR', 'Voice', 'SMS'],
+      status: 'Completed',
     },
   ]
 
@@ -428,7 +465,14 @@ function App() {
       description:
         'Find the right bus service, see the nearest stop to board, and track vehicles in real time.',
       tags: ['Transit', 'Live Tracking', 'Routing'],
+      status: 'Upcoming',
     },
+  ]
+
+  const impactStats = [
+    { value: `${projects.length}`, label: 'Projects featured' },
+    { value: `${upcomingProjects.length}`, label: 'In the pipeline' },
+    { value: 'Moose Jaw', label: 'Local delivery' },
   ]
 
   const process = [
@@ -665,7 +709,7 @@ function App() {
           </Container>
         </Section>
 
-        <Section id="work">
+        <WorkSection id="work">
           <Container>
             <Stack spacing={{ xs: 4, md: 6 }}>
               <Box sx={{ maxWidth: 720 }}>
@@ -675,6 +719,47 @@ function App() {
                   subtitle="A snapshot of completed and upcoming projects focused on real-world operations."
                 />
               </Box>
+              <GlassCard
+                elevation={0}
+                sx={{
+                  display: 'grid',
+                  gap: { xs: 3, md: 4 },
+                  alignItems: 'center',
+                  gridTemplateColumns: { xs: '1fr', md: '1.4fr 0.6fr' },
+                  border: '1px solid rgba(239,108,47,0.25)',
+                  boxShadow: '0 34px 80px rgba(239, 108, 47, 0.18)',
+                }}
+              >
+                <Stack spacing={2}>
+                  <Typography variant="h3">
+                    Projects that remove the paper pileup.
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    Each build starts with the real workflow, then turns it into a clean,
+                    searchable system the team can trust.
+                  </Typography>
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    {['Workflow-first', 'Ops dashboards', 'Mobile-ready', 'Custom integrations'].map((label) => (
+                      <Chip
+                        key={label}
+                        label={label}
+                        variant="outlined"
+                        sx={{ borderRadius: 999 }}
+                      />
+                    ))}
+                  </Stack>
+                </Stack>
+                <Stack spacing={2}>
+                  {impactStats.map((stat) => (
+                    <Box key={stat.label}>
+                      <Typography variant="h4">{stat.value}</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {stat.label}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Stack>
+              </GlassCard>
               <Grid container spacing={4}>
                 <Grid item xs={12} md={6}>
                   <Stack spacing={2}>
@@ -719,7 +804,7 @@ function App() {
               </Grid>
             </Stack>
           </Container>
-        </Section>
+        </WorkSection>
 
         <Section id="services">
           <Container>
