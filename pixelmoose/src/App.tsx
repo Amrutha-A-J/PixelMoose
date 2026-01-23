@@ -86,6 +86,14 @@ const TagChip = styled(Chip)(({ theme }) => ({
   color: theme.palette.text.primary,
 }))
 
+const SectionKicker = styled(TagChip)(({ theme }) => ({
+  fontSize: '1rem',
+  padding: theme.spacing(0.6, 2.6),
+  height: 'auto',
+  letterSpacing: '0.06em',
+  textTransform: 'uppercase',
+}))
+
 const IconBadge = styled('span')(({ theme }) => ({
   width: 54,
   height: 54,
@@ -205,7 +213,7 @@ const SectionTitle = ({
   subtitle: string
 }) => (
   <Stack spacing={2} sx={{ maxWidth: 620 }}>
-    <TagChip label={kicker} size="small" />
+    <SectionKicker label={kicker} />
     <Typography variant="h2">{title}</Typography>
     <Typography variant="body1" color="text.secondary">
       {subtitle}
