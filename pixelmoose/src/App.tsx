@@ -164,16 +164,31 @@ const ServiceCard = ({
 )
 
 const ProjectCard = ({
+  image,
+  imageAlt,
   title,
   description,
   tags,
 }: {
+  image: string
+  imageAlt: string
   title: string
   description: string
   tags: string[]
 }) => (
   <GlassCard elevation={0}>
     <Stack spacing={2.5}>
+      <Box
+        component="img"
+        src={image}
+        alt={imageAlt}
+        sx={{
+          width: '100%',
+          height: { xs: 180, sm: 200 },
+          objectFit: 'cover',
+          borderRadius: 8,
+        }}
+      />
       <Stack spacing={1}>
         <Typography variant="h5">{title}</Typography>
         <Typography variant="body2" color="text.secondary">
@@ -300,6 +315,12 @@ function App() {
     [],
   )
 
+  const heroImage =
+    'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=80'
+
+  const studioImage =
+    'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80'
+
   const services = [
     {
       title: 'Business Digitization',
@@ -323,18 +344,27 @@ function App() {
 
   const projects = [
     {
+      image:
+        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'Dashboard screens on a laptop',
       title: 'Paperless Intake System',
       description:
         'Digitized intake and approvals that replace paper forms and cut down on manual follow-ups.',
       tags: ['Workflow', 'Automation', 'Web App'],
     },
     {
+      image:
+        'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'Team collaborating around a table with notebooks',
       title: 'Admin Command Center',
       description:
         'Unified dashboards for tasks, records, and reporting so teams can move faster.',
       tags: ['Admin', 'Operations', 'Reporting'],
     },
     {
+      image:
+        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80',
+      imageAlt: 'Mobile devices showing apps in use',
       title: 'Android + iOS Companion App',
       description:
         'Mobile tools for staff and customers to access services without a desktop.',
@@ -522,6 +552,17 @@ function App() {
                   }}
                 >
                   <Stack spacing={3}>
+                    <Box
+                      component="img"
+                      src={heroImage}
+                      alt="Team reviewing workflow on a laptop"
+                      sx={{
+                        width: '100%',
+                        height: { xs: 200, sm: 240 },
+                        objectFit: 'cover',
+                        borderRadius: 10,
+                      }}
+                    />
                     <LogoWordmark logoSize={{ xs: 160, sm: 190, md: 220 }} />
                     <Typography variant="h5">
                       Replace paper with a system your team actually enjoys.
@@ -647,6 +688,17 @@ function App() {
               <Grid item xs={12} md={6}>
                 <GlassCard elevation={0} sx={{ height: '100%' }}>
                   <Stack spacing={3}>
+                    <Box
+                      component="img"
+                      src={studioImage}
+                      alt="Studio team collaborating around a table"
+                      sx={{
+                        width: '100%',
+                        height: { xs: 180, sm: 220 },
+                        objectFit: 'cover',
+                        borderRadius: 10,
+                      }}
+                    />
                     <TagChip label="Studio Culture" size="small" />
                     <Typography variant="h3">
                       Not just a website shop.
