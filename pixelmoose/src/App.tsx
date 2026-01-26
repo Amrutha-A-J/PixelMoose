@@ -38,6 +38,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
 import ZoomOutIcon from '@mui/icons-material/ZoomOut'
 import RestartAltIcon from '@mui/icons-material/RestartAlt'
+import * as mammoth from 'mammoth/mammoth.browser'
 
 const LogoLockup = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -124,6 +125,16 @@ type Project = {
   status?: string
   links?: { label: string; href: string }[]
   gallery: ProjectGalleryItem[]
+}
+
+type BlogPost = {
+  id: string
+  title: string
+  date: string
+  summary: string
+  tags: string[]
+  docxPath: string
+  readTime?: string
 }
 
 const PrimaryButton = styled(Button)(({ theme }) => ({
@@ -460,6 +471,11 @@ function App() {
   const [zoomLevel, setZoomLevel] = useState(1)
   const pinchStartDistanceRef = useRef<number | null>(null)
   const pinchStartZoomRef = useRef(1)
+  const [page, setPage] = useState<'home' | 'blog'>('home')
+  const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null)
+  const [blogHtml, setBlogHtml] = useState('')
+  const [blogLoading, setBlogLoading] = useState(false)
+  const [blogError, setBlogError] = useState('')
 
   useEffect(() => {
     let raf = 0
@@ -472,6 +488,30 @@ function App() {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const blogHash = '#/blog'
+    const sectionHashes = new Set(['#work', '#services', '#process', '#contact'])
+
+    const handleHashChange = () => {
+      const { hash } = window.location
+      const nextPage = hash.startsWith(blogHash) ? 'blog' : 'home'
+      setPage(nextPage)
+
+      if (nextPage === 'home' && sectionHashes.has(hash)) {
+        requestAnimationFrame(() => {
+          const target = document.querySelector(hash)
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      } else if (nextPage === 'blog') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }
+
+    handleHashChange()
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
   const openMobileMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -494,6 +534,17 @@ function App() {
     setZoomLevel(1)
   }
 
+  const openBlogPost = (post: BlogPost) => {
+    setSelectedBlogPost(post)
+  }
+
+  const closeBlogPost = () => {
+    setSelectedBlogPost(null)
+    setBlogHtml('')
+    setBlogError('')
+    setBlogLoading(false)
+  }
+
   const goToNextImage = () => {
     if (!selectedProject) return
     setActiveImageIndex((current) =>
@@ -511,6 +562,43 @@ function App() {
   useEffect(() => {
     setZoomLevel(1)
   }, [activeImageIndex])
+
+  useEffect(() => {
+    if (!selectedBlogPost) return
+    let isActive = true
+    const loadDocx = async () => {
+      setBlogLoading(true)
+      setBlogError('')
+      setBlogHtml('')
+      try {
+        const response = await fetch(selectedBlogPost.docxPath)
+        if (!response.ok) {
+          throw new Error('Unable to load the Word document.')
+        }
+        const arrayBuffer = await response.arrayBuffer()
+        const result = await mammoth.convertToHtml({ arrayBuffer })
+        if (!isActive) return
+        setBlogHtml(result.value)
+      } catch (error) {
+        if (!isActive) return
+        setBlogError(
+          error instanceof Error
+            ? error.message
+            : 'Unable to render the Word document.',
+        )
+      } finally {
+        if (isActive) {
+          setBlogLoading(false)
+        }
+      }
+    }
+
+    void loadDocx()
+
+    return () => {
+      isActive = false
+    }
+  }, [selectedBlogPost])
 
   const clampZoom = (value: number) => Math.min(3, Math.max(1, value))
 
@@ -742,9 +830,8 @@ function App() {
       ],
     },
     {
-      image:
-        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Smartphone on a desk representing voice and SMS support',
+      image: `${projectImageBase}/mj_foodbank_IVR/IVR_Cover.png`,
+      imageAlt: 'IVR phone booking cover image',
       title: 'IVR Phone + Text Booking System',
       description:
         'Full automated voice booking and SMS support so clients without internet can still schedule appointments.',
@@ -814,6 +901,8 @@ function App() {
     { value: 'Moose Jaw', label: 'Local delivery' },
   ]
 
+  const blogPosts: BlogPost[] = []
+
   const process = [
     {
       step: '01',
@@ -839,6 +928,7 @@ function App() {
     { label: 'Work', href: '#work' },
     { label: 'Services', href: '#services' },
     { label: 'Process', href: '#process' },
+    { label: 'Blog', href: '#/blog' },
     { label: 'Contact', href: '#contact' },
   ]
 
@@ -951,6 +1041,7 @@ function App() {
           </Toolbar>
         </AppBar>
 
+        {page === 'home' && (
         <Section>
           <PageContainer>
             <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
@@ -1320,6 +1411,75 @@ function App() {
             </GlassCard>
           </PageContainer>
         </Section>
+        )}
+
+        {page === 'blog' && (
+          <Section>
+            <PageContainer>
+              <Stack spacing={{ xs: 4, md: 6 }}>
+                <Box sx={{ maxWidth: 720 }}>
+                  <SectionTitle
+                    kicker="Notes from the studio"
+                    title="Blog"
+                    subtitle="Thoughts on digitizing operations, product, and workflow automation."
+                  />
+                </Box>
+                {blogPosts.length > 0 ? (
+                  <Grid container spacing={3}>
+                    {blogPosts.map((post, index) => (
+                      <Grid item xs={12} md={4} key={post.id}>
+                        <Box
+                          sx={{
+                            animation: 'reveal 0.8s ease both',
+                            animationDelay: `${index * 0.12}s`,
+                          }}
+                        >
+                          <GlassCard elevation={0} sx={{ height: '100%' }}>
+                            <Stack spacing={2}>
+                              <TagChip label={post.date} size="small" />
+                              <Typography variant="h5">{post.title}</Typography>
+                              <Typography variant="body2" color="text.secondary">
+                                {post.summary}
+                              </Typography>
+                              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                                {post.tags.map((tag) => (
+                                  <Chip
+                                    key={`${post.id}-${tag}`}
+                                    label={tag}
+                                    size="small"
+                                    sx={{ borderRadius: 999 }}
+                                  />
+                                ))}
+                              </Stack>
+                              <Stack direction="row" spacing={2} alignItems="center">
+                                <PrimaryButton
+                                  variant="contained"
+                                  size="small"
+                                  onClick={() => openBlogPost(post)}
+                                >
+                                  Read article
+                                </PrimaryButton>
+                                {post.readTime && (
+                                  <Typography variant="caption" color="text.secondary">
+                                    {post.readTime}
+                                  </Typography>
+                                )}
+                              </Stack>
+                            </Stack>
+                          </GlassCard>
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                ) : (
+                  <GlassCard elevation={0}>
+                    <Typography variant="h5">No posts yet.</Typography>
+                  </GlassCard>
+                )}
+              </Stack>
+            </PageContainer>
+          </Section>
+        )}
         <Box
           component="footer"
           sx={{
@@ -1395,6 +1555,7 @@ function App() {
                     { label: 'Work', href: '#work' },
                     { label: 'Services', href: '#services' },
                     { label: 'Process', href: '#process' },
+                    { label: 'Blog', href: '#/blog' },
                     { label: 'Contact', href: '#contact' },
                   ].map((link) => (
                     <Button
@@ -1604,6 +1765,86 @@ function App() {
                   </Typography>
                 </Stack>
               </Stack>
+            )}
+          </DialogContent>
+        </Dialog>
+        <Dialog
+          open={Boolean(selectedBlogPost)}
+          onClose={closeBlogPost}
+          fullWidth
+          maxWidth="md"
+        >
+          <DialogTitle sx={{ pb: 1 }}>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h5">
+                  {selectedBlogPost?.title ?? 'Blog Post'}
+                </Typography>
+                <Stack direction="row" spacing={1.5} alignItems="center">
+                  {selectedBlogPost?.date && (
+                    <Typography variant="body2" color="text.secondary">
+                      {selectedBlogPost.date}
+                    </Typography>
+                  )}
+                  {selectedBlogPost?.readTime && (
+                    <TagChip label={selectedBlogPost.readTime} size="small" />
+                  )}
+                </Stack>
+              </Box>
+              <IconButton aria-label="Close blog post" onClick={closeBlogPost}>
+                <CloseIcon />
+              </IconButton>
+            </Stack>
+          </DialogTitle>
+          <DialogContent sx={{ pt: 2 }}>
+            {blogLoading && (
+              <Typography variant="body2" color="text.secondary">
+                Loading Word document...
+              </Typography>
+            )}
+            {blogError && (
+              <Typography variant="body2" color="error">
+                {blogError}
+              </Typography>
+            )}
+            {!blogLoading && !blogError && (
+              <>
+                {blogHtml ? (
+                  <Box
+                    className="blog-content"
+                    sx={{
+                      '& h1, & h2, & h3': {
+                        fontFamily: '"Fraunces", serif',
+                        fontWeight: 700,
+                        marginTop: 2.5,
+                        marginBottom: 1,
+                      },
+                      '& p': { marginBottom: 2 },
+                      '& strong': { fontWeight: 700 },
+                      '& em': { fontStyle: 'italic' },
+                      '& ul, & ol': { paddingLeft: 3, marginBottom: 2 },
+                      '& li': { marginBottom: 1 },
+                      '& blockquote': {
+                        borderLeft: '3px solid rgba(15, 76, 92, 0.3)',
+                        paddingLeft: 2,
+                        color: 'text.secondary',
+                        marginBottom: 2,
+                      },
+                      '& img': {
+                        maxWidth: '100%',
+                        borderRadius: '16px',
+                        boxShadow: '0 14px 30px rgba(15, 76, 92, 0.15)',
+                        marginBottom: 2,
+                      },
+                    }}
+                    dangerouslySetInnerHTML={{ __html: blogHtml }}
+                  />
+                ) : (
+                  <Typography variant="body2" color="text.secondary">
+                    This Word document does not contain readable content yet.
+                  </Typography>
+                )}
+              </>
             )}
           </DialogContent>
         </Dialog>
