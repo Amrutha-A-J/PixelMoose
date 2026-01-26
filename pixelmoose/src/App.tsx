@@ -1209,7 +1209,11 @@ function App() {
                   </GlassCard>
                   <Stack spacing={2}>
                     <Typography variant="h4">Projects</Typography>
-                    <Grid container spacing={4}>
+                    <Grid
+                      container
+                      rowSpacing={{ xs: 4, md: 4 }}
+                      columnSpacing={{ xs: 0, md: 4 }}
+                    >
                       {allProjects.map((project, index) => (
                         <Grid item xs={12} md={6} key={project.title} sx={{ display: 'flex' }}>
                           <Box
