@@ -1247,7 +1247,11 @@ function App() {
                       subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
                     />
                   </Box>
-                  <Grid container spacing={3}>
+                  <Grid
+                    container
+                    rowSpacing={{ xs: 3, md: 3 }}
+                    columnSpacing={{ xs: 0, md: 3 }}
+                  >
                     {services.map((service, index) => (
                       <Grid item xs={12} md={4} key={service.title}>
                         <Box
