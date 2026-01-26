@@ -1042,282 +1042,283 @@ function App() {
         </AppBar>
 
         {page === 'home' && (
-        <Section>
-          <PageContainer>
-            <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
-              <Grid item xs={12} md={6}>
-                <Stack spacing={3}>
-                  <Typography variant="h1">
-                    Pixel Moose Digital Studio
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    Moose Jaw has plenty of WordPress website shops. Pixel Moose Studio is
-                    different: we build custom-coded applications that reduce paper, smooth
-                    out admin work, and deliver Android + iOS apps many local firms do not offer.
-                  </Typography>
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                    <PrimaryButton
-                      variant="contained"
-                      endIcon={<ArrowOutwardIcon />}
-                      href="#work"
-                    >
-                      View Our Work
-                    </PrimaryButton>
-                    <GhostButton variant="outlined" href="#contact">
-                      Schedule a Call
-                    </GhostButton>
-                  </Stack>
-                  <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-                    {['Custom Web Apps', 'Workflow Automation', 'Android + iOS', 'Paperless Ops'].map((label) => (
-                      <Chip
-                        key={label}
-                        label={label}
-                        variant="outlined"
-                        sx={{ borderRadius: 999 }}
-                      />
-                    ))}
-                  </Stack>
-                </Stack>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <HeroGraphicPanel
-                  sx={{
-                    transform: {
-                      xs: 'none',
-                      md: `translateY(${scrollY * -0.08}px)`,
-                    },
-                  }}
-                >
-                  <Stack spacing={2.5} sx={{ position: 'relative', zIndex: 1 }}>
-                    <Stack direction="row" spacing={1.5} alignItems="center">
-                      <TagChip label="Workflow-first delivery" size="small" />
-                      <Typography variant="overline" color="text.secondary">
-                        Moose Jaw, SK
+          <>
+            <Section>
+              <PageContainer>
+                <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
+                  <Grid item xs={12} md={6}>
+                    <Stack spacing={3}>
+                      <Typography variant="h1">
+                        Pixel Moose Digital Studio
                       </Typography>
+                      <Typography variant="body1" color="text.secondary">
+                        Moose Jaw has plenty of WordPress website shops. Pixel Moose Studio is
+                        different: we build custom-coded applications that reduce paper, smooth
+                        out admin work, and deliver Android + iOS apps many local firms do not offer.
+                      </Typography>
+                      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                        <PrimaryButton
+                          variant="contained"
+                          endIcon={<ArrowOutwardIcon />}
+                          href="#work"
+                        >
+                          View Our Work
+                        </PrimaryButton>
+                        <GhostButton variant="outlined" href="#contact">
+                          Schedule a Call
+                        </GhostButton>
+                      </Stack>
+                      <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+                        {['Custom Web Apps', 'Workflow Automation', 'Android + iOS', 'Paperless Ops'].map((label) => (
+                          <Chip
+                            key={label}
+                            label={label}
+                            variant="outlined"
+                            sx={{ borderRadius: 999 }}
+                          />
+                        ))}
+                      </Stack>
                     </Stack>
-                    <Box
-                      component="img"
-                      src={heroGraphic}
-                      alt="Abstract graphic illustrating a connected workflow"
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <HeroGraphicPanel
                       sx={{
-                        width: '100%',
-                        height: { xs: 240, sm: 320, md: 360 },
-                        objectFit: 'contain',
-                        borderRadius: '20px',
-                        boxShadow: '0 18px 40px rgba(24, 20, 16, 0.16)',
-                        bgcolor: 'rgba(255,255,255,0.7)',
-                        padding: { xs: 2, sm: 3 },
+                        transform: {
+                          xs: 'none',
+                          md: `translateY(${scrollY * -0.08}px)`,
+                        },
                       }}
-                    />
-                    <GlassCard
-                      elevation={0}
-                      sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2 }}
                     >
-                      <IconBadge>
-                        <BoltIcon fontSize="small" />
-                      </IconBadge>
-                      <Box>
-                        <Typography variant="subtitle1" fontWeight={700}>
-                          Modern, custom systems
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          Clean dashboards, smart workflows, mobile-ready experiences.
-                        </Typography>
-                      </Box>
-                    </GlassCard>
-                  </Stack>
-                </HeroGraphicPanel>
-              </Grid>
-            </Grid>
-          </PageContainer>
-        </Section>
-
-        <Section>
-          <PageContainer>
-            <Grid container spacing={4}>
-              {[
-                { value: 'Custom', label: 'Built around your workflows' },
-                { value: 'Paperless', label: 'Less admin, fewer errors' },
-                { value: 'Mobile', label: 'Android + iOS ready' },
-              ].map((stat, index) => (
-                <Grid item xs={12} md={4} key={stat.label}>
-                  <Box
-                    sx={{
-                      animation: 'reveal 0.8s ease both',
-                      animationDelay: `${index * 0.12}s`,
-                    }}
-                  >
-                    <StatCard value={stat.value} label={stat.label} />
-                  </Box>
+                      <Stack spacing={2.5} sx={{ position: 'relative', zIndex: 1 }}>
+                        <Stack direction="row" spacing={1.5} alignItems="center">
+                          <TagChip label="Workflow-first delivery" size="small" />
+                          <Typography variant="overline" color="text.secondary">
+                            Moose Jaw, SK
+                          </Typography>
+                        </Stack>
+                        <Box
+                          component="img"
+                          src={heroGraphic}
+                          alt="Abstract graphic illustrating a connected workflow"
+                          sx={{
+                            width: '100%',
+                            height: { xs: 240, sm: 320, md: 360 },
+                            objectFit: 'contain',
+                            borderRadius: '20px',
+                            boxShadow: '0 18px 40px rgba(24, 20, 16, 0.16)',
+                            bgcolor: 'rgba(255,255,255,0.7)',
+                            padding: { xs: 2, sm: 3 },
+                          }}
+                        />
+                        <GlassCard
+                          elevation={0}
+                          sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2 }}
+                        >
+                          <IconBadge>
+                            <BoltIcon fontSize="small" />
+                          </IconBadge>
+                          <Box>
+                            <Typography variant="subtitle1" fontWeight={700}>
+                              Modern, custom systems
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              Clean dashboards, smart workflows, mobile-ready experiences.
+                            </Typography>
+                          </Box>
+                        </GlassCard>
+                      </Stack>
+                    </HeroGraphicPanel>
+                  </Grid>
                 </Grid>
-              ))}
-            </Grid>
-          </PageContainer>
-        </Section>
+              </PageContainer>
+            </Section>
 
-        <WorkSection id="work">
-          <PageContainer>
-            <Stack spacing={{ xs: 4, md: 6 }}>
-              <Box sx={{ maxWidth: 720 }}>
-                <SectionTitle
-                  kicker="Custom platforms that cut busywork."
-                  title="Featured Work"
-                  subtitle=""
-                />
-              </Box>
-              <GlassCard
-                elevation={0}
-                sx={{
-                  display: 'grid',
-                  gap: { xs: 3, md: 4 },
-                  alignItems: 'center',
-                  gridTemplateColumns: { xs: '1fr', md: '1.4fr 0.6fr' },
-                  border: '1px solid rgba(239,108,47,0.25)',
-                  boxShadow: '0 34px 80px rgba(239, 108, 47, 0.18)',
-                }}
-              >
-                <Stack spacing={2}>
-                  <Typography variant="h3">
-                    Projects that remove the paper pileup.
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    Each build starts with the real workflow, then turns it into a clean,
-                    searchable system the team can trust.
-                  </Typography>
-                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                    {['Workflow-first', 'Ops dashboards', 'Mobile-ready', 'Custom integrations'].map((label) => (
-                      <Chip
-                        key={label}
-                        label={label}
-                        variant="outlined"
-                        sx={{ borderRadius: 999 }}
-                      />
-                    ))}
-                  </Stack>
-                </Stack>
-                <Stack spacing={2}>
-                  {impactStats.map((stat) => (
-                    <Box key={stat.label}>
-                      <Typography variant="h4">{stat.value}</Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {stat.label}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Stack>
-              </GlassCard>
-              <Stack spacing={2}>
-                <Typography variant="h4">Projects</Typography>
+            <Section>
+              <PageContainer>
                 <Grid container spacing={4}>
-                  {allProjects.map((project, index) => (
-                    <Grid item xs={12} md={6} key={project.title} sx={{ display: 'flex' }}>
+                  {[
+                    { value: 'Custom', label: 'Built around your workflows' },
+                    { value: 'Paperless', label: 'Less admin, fewer errors' },
+                    { value: 'Mobile', label: 'Android + iOS ready' },
+                  ].map((stat, index) => (
+                    <Grid item xs={12} md={4} key={stat.label}>
                       <Box
                         sx={{
                           animation: 'reveal 0.8s ease both',
-                          animationDelay: `${index * 0.15}s`,
-                          flex: 1,
-                          display: 'flex',
+                          animationDelay: `${index * 0.12}s`,
                         }}
                       >
-                        <ProjectCard
-                          {...project}
-                          onOpen={() => openProjectGallery(project)}
-                        />
+                        <StatCard value={stat.value} label={stat.label} />
                       </Box>
                     </Grid>
                   ))}
                 </Grid>
-              </Stack>
-            </Stack>
-          </PageContainer>
-        </WorkSection>
+              </PageContainer>
+            </Section>
 
-        <Section id="services">
-          <PageContainer>
-            <Stack spacing={{ xs: 4, md: 6 }}>
-              <Box sx={{ maxWidth: 720 }}>
-                <SectionTitle
-                  title="Services"
-                  kicker="End-to-end delivery, no templates."
-                  subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
-                />
-              </Box>
-              <Grid container spacing={3}>
-                {services.map((service, index) => (
-                  <Grid item xs={12} md={4} key={service.title}>
-                    <Box
-                      sx={{
-                        animation: 'reveal 0.8s ease both',
-                        animationDelay: `${index * 0.12}s`,
-                      }}
-                    >
-                      <ServiceCard {...service} />
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            </Stack>
-          </PageContainer>
-        </Section>
-
-        <Section>
-          <PageContainer>
-            <Grid container spacing={{ xs: 3, md: 5 }}>
-              <Grid item xs={12} md={6}>
-                <GlassCard elevation={0} sx={{ height: '100%' }}>
-                  <Stack spacing={3}>
-                    <Box
-                      component="img"
-                      src={studioImage}
-                      alt="Studio team collaborating around a table"
-                      sx={{
-                        width: '100%',
-                        height: { xs: 180, sm: 220 },
-                        objectFit: 'cover',
-                        borderRadius: '20px',
-                      }}
+            <WorkSection id="work">
+              <PageContainer>
+                <Stack spacing={{ xs: 4, md: 6 }}>
+                  <Box sx={{ maxWidth: 720 }}>
+                    <SectionTitle
+                      kicker="Custom platforms that cut busywork."
+                      title="Featured Work"
+                      subtitle=""
                     />
-                    <TagChip label="Studio Culture" size="small" />
-                    <Typography variant="h3">
-                      Not just a website shop.
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Pixel Moose Studio is a Moose Jaw-based team focused on digitizing
-                      business operations. We build custom-coded software that removes paper,
-                      smooths admin work, and keeps teams moving.
-                    </Typography>
+                  </Box>
+                  <GlassCard
+                    elevation={0}
+                    sx={{
+                      display: 'grid',
+                      gap: { xs: 3, md: 4 },
+                      alignItems: 'center',
+                      gridTemplateColumns: { xs: '1fr', md: '1.4fr 0.6fr' },
+                      border: '1px solid rgba(239,108,47,0.25)',
+                      boxShadow: '0 34px 80px rgba(239, 108, 47, 0.18)',
+                    }}
+                  >
                     <Stack spacing={2}>
-                      {[
-                        { icon: <StorefrontIcon />, label: 'Moose Jaw based, built for real teams' },
-                        { icon: <HandshakeIcon />, label: 'Hands-on discovery and delivery' },
-                        { icon: <BoltIcon />, label: 'Paperless workflows, fast outcomes' },
-                      ].map((item) => (
-                        <Stack key={item.label} direction="row" spacing={2} alignItems="center">
-                          <Box
-                            component="span"
-                            sx={{
-                              width: 46,
-                              height: 46,
-                              borderRadius: '50%',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              bgcolor: 'rgba(15, 76, 92, 0.12)',
-                              color: 'secondary.main',
-                            }}
-                          >
-                            {item.icon}
-                          </Box>
-                          <Typography variant="body2">{item.label}</Typography>
-                        </Stack>
+                      <Typography variant="h3">
+                        Projects that remove the paper pileup.
+                      </Typography>
+                      <Typography variant="body1" color="text.secondary">
+                        Each build starts with the real workflow, then turns it into a clean,
+                        searchable system the team can trust.
+                      </Typography>
+                      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                        {['Workflow-first', 'Ops dashboards', 'Mobile-ready', 'Custom integrations'].map((label) => (
+                          <Chip
+                            key={label}
+                            label={label}
+                            variant="outlined"
+                            sx={{ borderRadius: 999 }}
+                          />
+                        ))}
+                      </Stack>
+                    </Stack>
+                    <Stack spacing={2}>
+                      {impactStats.map((stat) => (
+                        <Box key={stat.label}>
+                          <Typography variant="h4">{stat.value}</Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {stat.label}
+                          </Typography>
+                        </Box>
                       ))}
                     </Stack>
+                  </GlassCard>
+                  <Stack spacing={2}>
+                    <Typography variant="h4">Projects</Typography>
+                    <Grid container spacing={4}>
+                      {allProjects.map((project, index) => (
+                        <Grid item xs={12} md={6} key={project.title} sx={{ display: 'flex' }}>
+                          <Box
+                            sx={{
+                              animation: 'reveal 0.8s ease both',
+                              animationDelay: `${index * 0.15}s`,
+                              flex: 1,
+                              display: 'flex',
+                            }}
+                          >
+                            <ProjectCard
+                              {...project}
+                              onOpen={() => openProjectGallery(project)}
+                            />
+                          </Box>
+                        </Grid>
+                      ))}
+                    </Grid>
                   </Stack>
-                </GlassCard>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
+                </Stack>
+              </PageContainer>
+            </WorkSection>
+
+            <Section id="services">
+              <PageContainer>
+                <Stack spacing={{ xs: 4, md: 6 }}>
+                  <Box sx={{ maxWidth: 720 }}>
+                    <SectionTitle
+                      title="Services"
+                      kicker="End-to-end delivery, no templates."
+                      subtitle="We design, build, and launch the exact system your business needs, not a cookie-cutter site."
+                    />
+                  </Box>
+                  <Grid container spacing={3}>
+                    {services.map((service, index) => (
+                      <Grid item xs={12} md={4} key={service.title}>
+                        <Box
+                          sx={{
+                            animation: 'reveal 0.8s ease both',
+                            animationDelay: `${index * 0.12}s`,
+                          }}
+                        >
+                          <ServiceCard {...service} />
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Stack>
+              </PageContainer>
+            </Section>
+
+            <Section>
+              <PageContainer>
+                <Grid container spacing={{ xs: 3, md: 5 }}>
+                  <Grid item xs={12} md={6}>
+                    <GlassCard elevation={0} sx={{ height: '100%' }}>
+                      <Stack spacing={3}>
+                        <Box
+                          component="img"
+                          src={studioImage}
+                          alt="Studio team collaborating around a table"
+                          sx={{
+                            width: '100%',
+                            height: { xs: 180, sm: 220 },
+                            objectFit: 'cover',
+                            borderRadius: '20px',
+                          }}
+                        />
+                        <TagChip label="Studio Culture" size="small" />
+                        <Typography variant="h3">
+                          Not just a website shop.
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Pixel Moose Studio is a Moose Jaw-based team focused on digitizing
+                          business operations. We build custom-coded software that removes paper,
+                          smooths admin work, and keeps teams moving.
+                        </Typography>
+                        <Stack spacing={2}>
+                          {[
+                            { icon: <StorefrontIcon />, label: 'Moose Jaw based, built for real teams' },
+                            { icon: <HandshakeIcon />, label: 'Hands-on discovery and delivery' },
+                            { icon: <BoltIcon />, label: 'Paperless workflows, fast outcomes' },
+                          ].map((item) => (
+                            <Stack key={item.label} direction="row" spacing={2} alignItems="center">
+                              <Box
+                                component="span"
+                                sx={{
+                                  width: 46,
+                                  height: 46,
+                                  borderRadius: '50%',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  bgcolor: 'rgba(15, 76, 92, 0.12)',
+                                  color: 'secondary.main',
+                                }}
+                              >
+                                {item.icon}
+                              </Box>
+                              <Typography variant="body2">{item.label}</Typography>
+                            </Stack>
+                          ))}
+                        </Stack>
+                      </Stack>
+                    </GlassCard>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Box
+                      sx={{
                     height: '100%',
                     display: 'grid',
                     gap: 2,
@@ -1418,6 +1419,7 @@ function App() {
             </GlassCard>
           </PageContainer>
         </Section>
+          </>
         )}
 
         {page === 'blog' && (
