@@ -29,6 +29,7 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import CloseIcon from '@mui/icons-material/Close'
+import FacebookIcon from '@mui/icons-material/Facebook'
 import HandshakeIcon from '@mui/icons-material/Handshake'
 import LayersIcon from '@mui/icons-material/Layers'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -1319,6 +1320,134 @@ function App() {
             </GlassCard>
           </PageContainer>
         </Section>
+        <Box
+          component="footer"
+          sx={{
+            position: 'relative',
+            overflow: 'hidden',
+            borderTop: '1px solid rgba(15, 76, 92, 0.12)',
+            background:
+              'linear-gradient(180deg, rgba(248,238,230,0.9) 0%, rgba(255,255,255,0.96) 100%)',
+          }}
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: -120,
+              right: -140,
+              width: 280,
+              height: 280,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(239,108,47,0.2), transparent 70%)',
+              opacity: 0.6,
+              pointerEvents: 'none',
+            }}
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: -120,
+              left: -100,
+              width: 260,
+              height: 260,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(15,76,92,0.2), transparent 70%)',
+              opacity: 0.6,
+              pointerEvents: 'none',
+            }}
+          />
+          <PageContainer sx={{ py: { xs: 6, md: 8 }, position: 'relative', zIndex: 1 }}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={5}>
+                <Stack spacing={2}>
+                  <LogoWordmark logoSize={{ xs: 96, sm: 120, md: 140 }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Pixel Moose Studio designs and builds custom systems that remove paper,
+                    reduce admin friction, and keep teams moving.
+                  </Typography>
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      href="mailto:pixelmoose.development@gmail.com"
+                      sx={{ borderRadius: 999 }}
+                    >
+                      Email us
+                    </Button>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      startIcon={<FacebookIcon fontSize="small" />}
+                      href="https://www.facebook.com/share/17yZcLzNJ1/?mibextid=wwXIfr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ borderRadius: 999 }}
+                    >
+                      Facebook
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <Stack spacing={1.5}>
+                  <Typography variant="h6">Explore</Typography>
+                  {[
+                    { label: 'Work', href: '#work' },
+                    { label: 'Services', href: '#services' },
+                    { label: 'Process', href: '#process' },
+                    { label: 'Contact', href: '#contact' },
+                  ].map((link) => (
+                    <Button
+                      key={link.href}
+                      href={link.href}
+                      color="inherit"
+                      sx={{ justifyContent: 'flex-start', px: 0, width: 'fit-content' }}
+                    >
+                      {link.label}
+                    </Button>
+                  ))}
+                </Stack>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Stack spacing={1.5}>
+                  <Typography variant="h6">Studio</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Moose Jaw, Saskatchewan
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Email-only for now. We reply within one business day.
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    href="mailto:pixelmoose.development@gmail.com"
+                    sx={{ borderRadius: 999, width: 'fit-content' }}
+                  >
+                    pixelmoose.development@gmail.com
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Box
+              sx={{
+                mt: { xs: 4, md: 6 },
+                pt: 2,
+                borderTop: '1px solid rgba(15, 76, 92, 0.12)',
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                gap: 1,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography variant="caption" color="text.secondary">
+                © {new Date().getFullYear()} Pixel Moose Studio. All rights reserved.
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Built for modern teams who want to go paperless.
+              </Typography>
+            </Box>
+          </PageContainer>
+        </Box>
         <Dialog
           open={Boolean(selectedProject)}
           onClose={closeProjectGallery}
