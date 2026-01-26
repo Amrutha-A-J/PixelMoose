@@ -668,8 +668,7 @@ function App() {
 
   const projects: Project[] = [
     {
-      image:
-        'https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=1200&q=80',
+      image: `${projectImageBase}/mj_foodbank_app/mjfoodbank_app_cover.png`,
       imageAlt: 'Team planning a booking workflow on a whiteboard',
       title: 'Moose Jaw Food Bank Booking + Admin Web App',
       description:
@@ -701,8 +700,7 @@ function App() {
       ],
     },
     {
-      image:
-        'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80',
+      image: `${projectImageBase}/mj_foodbank_app/MJ_foodbank_android_cover.png`,
       imageAlt: 'Android phone on a desk showing an app experience',
       title: 'Moose Jaw Food Bank Android App',
       description:
