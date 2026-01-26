@@ -1080,7 +1080,14 @@ function App() {
                 </Stack>
               </Grid>
               <Grid item xs={12} md={6}>
-                <HeroGraphicPanel style={{ transform: `translateY(${scrollY * -0.08}px)` }}>
+                <HeroGraphicPanel
+                  sx={{
+                    transform: {
+                      xs: 'none',
+                      md: `translateY(${scrollY * -0.08}px)`,
+                    },
+                  }}
+                >
                   <Stack spacing={2.5} sx={{ position: 'relative', zIndex: 1 }}>
                     <Stack direction="row" spacing={1.5} alignItems="center">
                       <TagChip label="Workflow-first delivery" size="small" />
