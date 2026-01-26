@@ -1371,7 +1371,11 @@ function App() {
                   subtitle="We keep stakeholders aligned and focus on removing friction from daily operations."
                 />
               </Box>
-              <Grid container spacing={3}>
+              <Grid
+                container
+                rowSpacing={{ xs: 3, md: 3 }}
+                columnSpacing={{ xs: 0, md: 3 }}
+              >
                 {process.map((step, index) => (
                   <Grid item xs={12} md={4} key={step.step}>
                     <Box
@@ -1537,7 +1541,7 @@ function App() {
             <Grid container spacing={4}>
               <Grid item xs={12} md={5}>
                 <Stack spacing={2}>
-                  <LogoWordmark logoSize={{ xs: 128, sm: 120, md: 140 }} />
+                  <LogoWordmark logoSize={{ xs: 160, sm: 120, md: 140 }} />
                   <Typography variant="body2" color="text.secondary">
                     Pixel Moose Studio designs and builds custom systems that remove paper,
                     reduce admin friction, and keep teams moving.
