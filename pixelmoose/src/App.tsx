@@ -996,7 +996,7 @@ function App() {
           }}
         >
           <Toolbar sx={{ gap: { xs: 1.5, md: 3 } }}>
-            <LogoWordmark logoSize={{ xs: 112, sm: 136, md: 160 }} />
+            <LogoWordmark logoSize={{ xs: 152, sm: 136, md: 160 }} />
             <Box sx={{ flexGrow: 1 }} />
             <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
               {navLinks.map((link) => (
@@ -1537,7 +1537,7 @@ function App() {
             <Grid container spacing={4}>
               <Grid item xs={12} md={5}>
                 <Stack spacing={2}>
-                  <LogoWordmark logoSize={{ xs: 96, sm: 120, md: 140 }} />
+                  <LogoWordmark logoSize={{ xs: 128, sm: 120, md: 140 }} />
                   <Typography variant="body2" color="text.secondary">
                     Pixel Moose Studio designs and builds custom systems that remove paper,
                     reduce admin friction, and keep teams moving.
@@ -1566,8 +1566,17 @@ function App() {
                 </Stack>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Stack spacing={1.5}>
-                  <Typography variant="h6">Explore</Typography>
+                <Stack
+                  spacing={{ xs: 1, sm: 1.5 }}
+                  direction={{ xs: 'row', sm: 'column' }}
+                  flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{ flexBasis: { xs: '100%', sm: 'auto' } }}
+                  >
+                    Explore
+                  </Typography>
                   {[
                     { label: 'Work', href: '#work' },
                     { label: 'Services', href: '#services' },
@@ -1579,7 +1588,12 @@ function App() {
                       key={link.href}
                       href={link.href}
                       color="inherit"
-                      sx={{ justifyContent: 'flex-start', px: 0, width: 'fit-content' }}
+                      sx={{
+                        justifyContent: 'flex-start',
+                        px: 0,
+                        width: 'fit-content',
+                        minHeight: 0,
+                      }}
                     >
                       {link.label}
                     </Button>
@@ -1588,7 +1602,7 @@ function App() {
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <Stack spacing={1.5}>
-                  <Typography variant="h6">Studio</Typography>
+                  <Typography variant="h6">PixelMoose Studio</Typography>
                   <Typography variant="body2" color="text.secondary">
                     Moose Jaw, Saskatchewan
                   </Typography>
