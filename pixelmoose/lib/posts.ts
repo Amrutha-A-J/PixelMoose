@@ -40,9 +40,9 @@ export const posts: Post[] = [
     slug: 'foodbank-mobile-apps',
     title: 'Putting the food bank in people’s pockets',
     description:
-      'How the food bank’s booking app went from an installable web app to Android and iOS apps in the stores, built from the same code.',
+      'Getting a food bank’s app onto Google Play and the App Store: a $25 fee, a 28-day test, a borrowed budget for a Mac, and why I chose Capacitor.',
     date: '2026-10-27',
-    readingTime: '5 min read',
+    readingTime: '8 min read',
     cover: { src: '/work/foodbank-android/01.webp', alt: 'The food bank app on a phone' },
   },
   {

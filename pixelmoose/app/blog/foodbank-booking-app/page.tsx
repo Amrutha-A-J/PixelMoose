@@ -165,6 +165,49 @@ export default function Post() {
           </li>
         </ul>
 
+        <h2>What it costs to run</h2>
+        <p>
+          A food bank can’t take on a hosting bill that jumps around from month to month. So the app runs on AWS
+          Lightsail, which charges a fixed monthly price:
+        </p>
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">What</th>
+                <th scope="col">Per month</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Managed PostgreSQL database (40 GB)</td>
+                <td>$15</td>
+              </tr>
+              <tr>
+                <td>Server that runs the app (2 GB memory)</td>
+                <td>$12</td>
+              </tr>
+              <tr>
+                <td>Storage bucket for uploaded files (250 GB)</td>
+                <td>$5</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Total</strong>
+                </td>
+                <td>
+                  <strong>$32 USD</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          That same fixed price covers the booking app, the API behind the Android and iOS apps and the phone line, and
+          since October 2026 the <Link href="/blog/rebuilding-mjfoodbank-org/">public website</Link> too, at no extra
+          cost.
+        </p>
+
         <h2>What changed</h2>
         <p>
           The app went live on <time dateTime="2025-09-02">September 2, 2025</time>. The voicemail inbox stopped being the centre of the day. Clients book themselves, the schedule fills itself, and

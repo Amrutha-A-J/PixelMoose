@@ -5,6 +5,29 @@ import { getPost, PostShell, postMetadata, TechDetails } from '@/components/Post
 const post = getPost('foodbank-mobile-apps')
 export const metadata = postMetadata(post)
 
+const options = [
+  {
+    name: 'Installable web app (PWA)',
+    good: 'Free, and the same code as the website.',
+    bad: 'Not in the app stores, and installing one from a browser menu is something most people don’t know to do.',
+  },
+  {
+    name: 'Trusted Web Activity (Bubblewrap)',
+    good: 'The quickest way onto Google Play, wrapping the website as an Android app.',
+    bad: 'Android only, and little more than the website in a frame, with no real access to the phone’s features.',
+  },
+  {
+    name: 'Rewrite as a native app',
+    good: 'Full access to everything the phone can do.',
+    bad: 'A second, separate app to build and maintain for every feature, on two platforms.',
+  },
+  {
+    name: 'Capacitor',
+    good: 'Real Android and iOS apps built from the same code as the web app, with access to native features like fingerprint and face sign-in, secure storage and push notifications.',
+    bad: 'Some native setup and platform quirks to learn, especially on iOS.',
+  },
+]
+
 export default function Post() {
   return (
     <PostShell post={post}>
@@ -17,46 +40,98 @@ export default function Post() {
         <p>
           Once clients could book their own visits in the{' '}
           <Link href="/blog/foodbank-booking-app/">food bank’s booking app</Link>, the next question was where they
-          would open it. For most of them, the answer was their phone.
+          would open it. For most of them, the answer was their phone. And when people look for an app, they look in the
+          app store.
         </p>
 
-        <h2>Step one: an installable web app</h2>
+        <h2>Android first, because of the cost</h2>
         <p>
-          The booking app started out as a progressive web app (PWA): a website you can add to your home screen so it
-          opens like an app. It worked, and it cost nothing extra to run. But installing a website from a browser menu
-          is not something most people know to do, and when people look for an app, they look in the app store.
+          The app started as an installable web app, which cost nothing. To get into an actual store, Android was the
+          obvious first step: a Google Play developer account is a one-time fee of $25 USD, and that’s it. For a food
+          bank counting every dollar, that settled it.
         </p>
 
-        <h2>Step two: Google Play</h2>
+        <h2>Google’s 28-day wait</h2>
         <p>
-          Soon after the app launched in September 2025, it went onto Google Play. Clients and volunteers could now find “Moose Jaw Food Bank” in
-          the store, install it like any other app, and get straight to booking.
+          New developer accounts can’t just publish on Google Play. Google requires a closed test first: at least 10
+          testers using the app actively for 14 days in a row. I managed to find our testers, but their activity wasn’t
+          high enough, so Google extended the testing period.
         </p>
-
-        <h2>Step three: Android and iOS from the same code</h2>
         <p>
-          In December 2025 I moved both apps onto one shared setup, so the same code that runs the website also ships to
-          Android and iOS. With proper store apps on both platforms, the PWA was no longer needed, so we retired it.
+          After 28 days, they approved it, and the Moose Jaw Food Bank app became available on the Google Play Store.
         </p>
-        <p>This matters more than it sounds for a small organization:</p>
-        <ul>
-          <li>
-            <strong>Every feature reaches everyone at once.</strong> A fix or a new feature in the web app goes out to
-            Android and iOS in the same release, with no second app to keep in sync.
-          </li>
-          <li>
-            <strong>One thing to maintain.</strong> There is no separate mobile codebase, and no mobile developer to hire.
-          </li>
-          <li>
-            <strong>It’s the app people already know.</strong> The screens, wording and steps are the same as on the
-            website, so staff can help anyone, whatever device they’re on.
-          </li>
-        </ul>
 
         <figure className="article-figure">
           <img src="/work/foodbank-android/03.webp" alt="Booking calendar in the mobile app" />
-          <figcaption className="muted">Picking a day and time for a visit.</figcaption>
+          <figcaption className="muted">Picking a day and time for a visit on Android.</figcaption>
         </figure>
+
+        <h2>Choosing how to build it: why Capacitor</h2>
+        <p>
+          To reach iPhones too, I had to rethink how the apps were built. These were the options I weighed:
+        </p>
+        <div className="option-grid">
+          {options.map((o) => (
+            <div className="option" key={o.name}>
+              <h3>{o.name}</h3>
+              <p>
+                <span className="mono accent">Good</span> {o.good}
+              </p>
+              <p>
+                <span className="mono muted">Catch</span> {o.bad}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p>
+          The first Android version was a Trusted Web Activity, because it was the fastest way onto Google Play. But it
+          couldn’t reach iOS, and it couldn’t use the phone’s own features. In December 2025 I moved both platforms to
+          Capacitor, and once real store apps existed on Android and iOS, we retired the installable web app.
+        </p>
+        <p>For a small organization, that choice matters more than it sounds:</p>
+        <ul>
+          <li>
+            <strong>Every feature reaches everyone at once.</strong> A fix or a new feature in the web app goes out to
+            Android and iOS in the same release.
+          </li>
+          <li>
+            <strong>One thing to maintain</strong>, with no separate mobile codebase and no mobile developer to hire.
+          </li>
+          <li>
+            <strong>Real phone features</strong>, like{' '}
+            <Link href="/blog/foodbank-booking-app/">fingerprint and face sign-in</Link> so nobody has to remember a
+            password.
+          </li>
+          <li>
+            <strong>It’s the app people already know.</strong> The screens and steps match the website, so staff can help
+            anyone, whatever device they’re on.
+          </li>
+        </ul>
+
+        <h2>Apple: the expensive one</h2>
+        <p>Apple was a much bigger challenge, mostly because of cost:</p>
+        <ul>
+          <li>
+            Keeping apps in the App Store costs <strong>$99 USD every year</strong>, not once.
+          </li>
+          <li>
+            Building an iOS app requires <strong>a Mac</strong>, and Macs are ridiculously expensive for a small
+            non-profit.
+          </li>
+        </ul>
+        <p>
+          This is where our executive director, Jason Moore, used his super powers. He found the budget for both, and I
+          got to work.
+        </p>
+        <p>
+          Apple doesn’t make you run a testing program like Google does. Instead, their own reviewers manually test every
+          app before it is published. That meant we had to add many things to meet their criteria before the app could
+          pass.
+        </p>
+        <p>
+          Later, I applied for Apple’s non-profit fee waiver, and the food bank was approved. The $99 yearly fee is now
+          waived.
+        </p>
 
         <h2>What people do with it</h2>
         <ul>
@@ -74,23 +149,30 @@ export default function Post() {
         <ul>
           <li>
             <strong>Capacitor shells.</strong> The <code>android/</code> and <code>ios/</code> projects are Capacitor
-            wrappers that load the built React app. They replaced an earlier Bubblewrap Trusted Web Activity, which only
-            covered Android.
+            wrappers that load the built React app. They replaced the earlier Bubblewrap Trusted Web Activity in December
+            2025.
           </li>
           <li>
-            <strong>Same store listing.</strong> The Android app keeps its original application ID so it updates the
-            existing Google Play listing instead of starting a new one; iOS has its own bundle ID, restored automatically
+            <strong>Same store listing.</strong> The Android app kept its original application ID, so it updated the
+            existing Google Play listing instead of starting a new one. iOS has its own bundle ID, restored automatically
             by the sync scripts.
           </li>
           <li>
+            <strong>Native features.</strong> Credentials sit in the device’s secure storage behind the biometric
+            prompt, push notifications go through Firebase, and the API can require a minimum app version so old installs
+            are asked to update.
+          </li>
+          <li>
+            <strong>iOS quirks.</strong> Getting the iOS build right meant fixes to the web view’s touch and keyboard
+            input, and to how sign-in and CSRF protection work for requests coming from a native app.
+          </li>
+          <li>
             <strong>Safe builds.</strong> The mobile build always points at the production API and fails if a localhost
-            address slips into the bundle. The native code also replaces any insecure API setting at runtime as a final
-            safety net.
+            address slips into the bundle; the native code also replaces any insecure API setting at runtime.
           </li>
           <li>
             <strong>Releases.</strong> Android and iOS versions are bumped together, with a changelog grouped by who the
-            change affects: clients, staff, volunteers and agencies. Icons and splash screens are generated from one
-            source image.
+            change affects: clients, staff, volunteers and agencies.
           </li>
         </ul>
       </TechDetails>
@@ -98,6 +180,7 @@ export default function Post() {
       <div className="prose">
         <p>
           If you want your web app in the app stores without building it twice, <Link href="/#contact">get in touch</Link>.
+          And if you’re a non-profit, ask about the fee waivers. They exist.
         </p>
         <p className="signoff">— Ami</p>
       </div>
