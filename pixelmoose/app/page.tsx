@@ -103,7 +103,7 @@ export default function Home() {
 
           <section id="services" className="section" aria-labelledby="services-title">
             <h2 id="services-title" className="label">What we build</h2>
-            <div className="cols">
+            <div className="cols cols-3">
               {services.map((s, i) => (
                 <div className="col" key={s.title}>
                   <span className="mono accent">{pad(i + 1)}</span>

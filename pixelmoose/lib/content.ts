@@ -120,10 +120,12 @@ export const about = [
 ]
 
 export const services = [
+  { title: 'Websites', body: 'Fast, hand-coded websites that are easy to find on Google and look right on every phone — no page builders.' },
   { title: 'Web applications', body: 'Admin portals, booking systems and dashboards built for the exact way your team works.' },
   { title: 'Android + iOS apps', body: 'Mobile apps for staff in the field and customers on the go.' },
   { title: 'Workflow digitization', body: 'We map the paper and spreadsheets, then replace them with something simpler.' },
   { title: 'Integrations', body: 'Phone systems, SMS, payments and the tools you already use, connected.' },
+  { title: 'Anything technical', body: 'Domains, email, hosting, fixing an old system, or just a question. If it’s technical, ask — we’ll help or point you to someone who can.' },
 ]
 
 export const budget = [

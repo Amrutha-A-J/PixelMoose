@@ -314,6 +314,10 @@ h3 {
   gap: 48px 40px;
 }
 
+.cols-3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
 .col {
   display: flex;
   flex-direction: column;
