@@ -865,7 +865,7 @@ a.series-item:hover {
   line-height: 1.55;
 }
 
-.option:last-child {
+.option.is-pick {
   border-color: var(--accent);
 }
 

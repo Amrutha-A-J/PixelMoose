@@ -73,7 +73,7 @@ export default function Post() {
         </p>
         <div className="option-grid">
           {options.map((o) => (
-            <div className="option" key={o.name}>
+            <div className={o.name === 'Capacitor' ? 'option is-pick' : 'option'} key={o.name}>
               <h3>{o.name}</h3>
               <p>
                 <span className="mono accent">Good</span> {o.good}
