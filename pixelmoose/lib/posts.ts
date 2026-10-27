@@ -49,9 +49,9 @@ export const posts: Post[] = [
     slug: 'foodbank-phone-text-booking',
     title: 'Booking a food bank visit by phone or text',
     description:
-      'Not everyone has internet. How I built an automated phone and SMS line so anyone with a phone can book, reschedule or cancel a visit, any time of day.',
+      'Not everyone has a smartphone. How an idea in the shower became an automated phone and text line that books food bank visits, checking every rule live so nobody makes a wasted trip.',
     date: '2026-10-27',
-    readingTime: '5 min read',
+    readingTime: '7 min read',
     cover: { src: '/work/foodbank-ivr/01.webp', alt: 'Phone and text booking for the food bank' },
   },
 ]
