@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://pixelmoose.ca/</loc>
-<lastmod>2026-10-27T19:34:02.840Z</lastmod>
+<lastmod>2026-10-27T19:35:45.487Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1</priority>
 </url>
@@ -11,11 +11,6 @@
 <lastmod>2026-10-27T00:00:00.000Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.7</priority>
-</url>
-<url>
-<loc>https://pixelmoose.ca/blog/app-or-website/</loc>
-<lastmod>2026-10-27T00:00:00.000Z</lastmod>
-<priority>0.6</priority>
 </url>
 <url>
 <loc>https://pixelmoose.ca/blog/building-bnrescues/</loc>
