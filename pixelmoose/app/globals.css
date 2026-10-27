@@ -631,8 +631,18 @@ h3 {
 }
 
 .prose p,
-.prose ul {
+.prose ul,
+.prose ol {
   margin: 0 0 24px;
+}
+
+.prose ol {
+  padding-left: 22px;
+}
+
+.prose code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9em;
 }
 
 .prose h2 {
@@ -762,4 +772,44 @@ h3 {
 
 .tech-body .table-wrap {
   margin-bottom: 24px;
+}
+
+.series {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.series ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.series-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a.series-item:hover {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.series-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.series-item .mono {
+  margin-top: 4px;
+  font-size: 12px;
 }
