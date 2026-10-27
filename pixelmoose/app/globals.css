@@ -813,3 +813,28 @@ a.series-item:hover {
   margin-top: 4px;
   font-size: 12px;
 }
+
+.prose .timeline {
+  list-style: none;
+  padding: 0;
+  border-left: 2px solid var(--line);
+}
+
+.prose .timeline li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0 0 20px 20px;
+  position: relative;
+}
+
+.prose .timeline li::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+}

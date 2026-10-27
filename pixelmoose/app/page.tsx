@@ -30,7 +30,7 @@ export default function Home() {
               <span className="dot" aria-hidden="true" />
               Woman-owned · Hand-coded by Ami · Moose Jaw, Saskatchewan
             </p>
-            <h1>Custom software for small businesses.</h1>
+            <h1>Software for small businesses.</h1>
             <div className="hero-foot">
               <p className="lede muted">
                 A small, local studio building web apps, Android and iOS apps, and phone systems that replace paper

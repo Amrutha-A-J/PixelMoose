@@ -27,6 +27,33 @@ export const posts: Post[] = [
     readingTime: '7 min read',
     cover: { src: '/work/mjfoodbank-site/01.webp', alt: 'The new mjfoodbank.org homepage' },
   },
+  {
+    slug: 'foodbank-booking-app',
+    title: 'From phone tag to a booking app',
+    description:
+      'How an Excel sheet to stop my coworkers counting by hand grew into the app that now runs the Moose Jaw Food Bank: bookings, volunteers, warehouse, deliveries, timesheets and more.',
+    date: '2026-10-27',
+    readingTime: '8 min read',
+    cover: { src: '/work/foodbank-web/03.webp', alt: 'Visit trends dashboard in the food bank app' },
+  },
+  {
+    slug: 'foodbank-mobile-apps',
+    title: 'Putting the food bank in people’s pockets',
+    description:
+      'How the food bank’s booking app went from an installable web app to Android and iOS apps in the stores, built from the same code.',
+    date: '2026-10-27',
+    readingTime: '5 min read',
+    cover: { src: '/work/foodbank-android/01.webp', alt: 'The food bank app on a phone' },
+  },
+  {
+    slug: 'foodbank-phone-text-booking',
+    title: 'Booking a food bank visit by phone or text',
+    description:
+      'Not everyone has internet. How I built an automated phone and SMS line so anyone with a phone can book, reschedule or cancel a visit, any time of day.',
+    date: '2026-10-27',
+    readingTime: '5 min read',
+    cover: { src: '/work/foodbank-ivr/01.webp', alt: 'Phone and text booking for the food bank' },
+  },
 ]
 
 // Everything built for the Moose Jaw Food Bank. An entry links to its post once a post with that slug exists.

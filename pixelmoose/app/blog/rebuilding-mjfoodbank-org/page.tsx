@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { FoodBankSeries } from '@/components/FoodBankSeries'
 import { SiteFooter, SiteHeader } from '@/components/SiteHeader'
 import { site } from '@/lib/content'
-import { foodBankSeries, formatDate, hasPost, posts } from '@/lib/posts'
+import { formatDate, posts } from '@/lib/posts'
 
 const post = posts.find((p) => p.slug === 'rebuilding-mjfoodbank-org')!
 const url = `/blog/${post.slug}/`
@@ -269,30 +270,7 @@ export default function Post() {
             <p className="signoff">— Ami</p>
           </div>
 
-          <aside className="series" aria-labelledby="series-title">
-            <h2 id="series-title" className="label">More from the food bank project</h2>
-            <ul>
-              {foodBankSeries
-                .filter((item) => item.slug !== post.slug)
-                .map((item) => (
-                  <li key={item.slug}>
-                    {hasPost(item.slug) ? (
-                      <Link href={`/blog/${item.slug}/`} className="series-item">
-                        <span className="series-title">{item.title}</span>
-                        <span className="muted">{item.body}</span>
-                        <span className="mono accent">Read the story →</span>
-                      </Link>
-                    ) : (
-                      <div className="series-item">
-                        <span className="series-title">{item.title}</span>
-                        <span className="muted">{item.body}</span>
-                        <span className="mono muted">Story coming soon</span>
-                      </div>
-                    )}
-                  </li>
-                ))}
-            </ul>
-          </aside>
+          <FoodBankSeries current={post.slug} />
         </article>
       </main>
       <SiteFooter />
