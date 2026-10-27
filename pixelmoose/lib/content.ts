@@ -19,12 +19,15 @@ export type Project = {
   kind: string
   description: string
   link?: { label: string; href: string }
+  /** Slug of the blog post telling this project's story. */
+  story?: string
   slides: Slide[]
 }
 
 export const projects: Project[] = [
   {
     slug: 'bnrescues',
+    story: 'building-bnrescues',
     title: 'Brittany Niemi Rescues',
     kind: 'Website + admin',
     description:
@@ -42,6 +45,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'mjfoodbank-site',
+    story: 'rebuilding-mjfoodbank-org',
     title: 'Moose Jaw Food Bank Website',
     kind: 'Website',
     description:
@@ -59,6 +63,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'foodbank-web',
+    story: 'foodbank-booking-app',
     title: 'Food Bank Booking + Admin',
     kind: 'Web app',
     description:
@@ -73,6 +78,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'foodbank-android',
+    story: 'foodbank-mobile-apps',
     title: 'Food Bank Mobile App',
     kind: 'Android + iOS',
     description:
@@ -91,6 +97,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'foodbank-ivr',
+    story: 'foodbank-phone-text-booking',
     title: 'Phone + Text Booking Line',
     kind: 'IVR / SMS',
     description:

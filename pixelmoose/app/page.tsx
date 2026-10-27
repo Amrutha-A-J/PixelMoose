@@ -1,7 +1,9 @@
+import Link from 'next/link'
 import { Carousel } from '@/components/Carousel'
 import { CopyEmail } from '@/components/CopyEmail'
 import { SiteFooter, SiteHeader } from '@/components/SiteHeader'
 import { about, budget, projects, services, site, steps } from '@/lib/content'
+import { formatDate, posts } from '@/lib/posts'
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
@@ -58,15 +60,45 @@ export default function Home() {
                   <h3>{p.title}</h3>
                   <span className="tag mono muted">{p.kind}</span>
                   <p className="muted">{p.description}</p>
-                  {p.link && (
-                    <a className="text-link" href={p.link.href} target="_blank" rel="noopener">
-                      {p.link.label} <span aria-hidden="true">↗</span>
-                    </a>
-                  )}
+                  <div className="project-links">
+                    {p.story && (
+                      <Link className="text-link" href={`/blog/${p.story}/`}>
+                        Read the story <span aria-hidden="true">→</span>
+                      </Link>
+                    )}
+                    {p.link && (
+                      <a className="text-link" href={p.link.href} target="_blank" rel="noopener">
+                        {p.link.label} <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
                 <Carousel slides={p.slides} label={`${p.title} screenshots`} />
               </article>
             ))}
+          </section>
+
+          <section id="blog" className="section" aria-labelledby="blog-title">
+            <div className="section-head">
+              <h2 id="blog-title">From the blog</h2>
+              <Link href="/blog/" className="mono muted">
+                All posts →
+              </Link>
+            </div>
+            <div className="cols cols-3">
+              {posts.slice(0, 3).map((post) => (
+                <Link href={`/blog/${post.slug}/`} className="home-post" key={post.slug}>
+                  <div className="home-post-image">
+                    <img src={post.cover.src} alt="" loading="lazy" />
+                  </div>
+                  <p className="mono muted">
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
+                  </p>
+                  <h3>{post.title}</h3>
+                  <p className="muted">{post.description}</p>
+                </Link>
+              ))}
+            </div>
           </section>
 
           <section id="about" className="section section-roomy" aria-labelledby="about-title">

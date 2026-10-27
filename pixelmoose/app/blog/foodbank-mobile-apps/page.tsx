@@ -58,7 +58,8 @@ export default function Post() {
           high enough, so Google extended the testing period.
         </p>
         <p>
-          After 28 days, they approved it, and the Moose Jaw Food Bank app became available on the Google Play Store.
+          After 28 days, they approved it, and in December 2025 the Moose Jaw Food Bank app became available on the
+          Google Play Store.
         </p>
 
         <figure className="article-figure">
@@ -126,7 +127,7 @@ export default function Post() {
         <p>
           Apple doesn’t make you run a testing program like Google does. Instead, their own reviewers manually test every
           app before it is published. That meant we had to add many things to meet their criteria before the app could
-          pass.
+          pass. In March 2026, the iOS app went live on the App Store.
         </p>
         <p>
           Later, I applied for Apple’s non-profit fee waiver, and the food bank was approved. The $99 yearly fee is now

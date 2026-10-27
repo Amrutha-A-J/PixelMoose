@@ -18,6 +18,7 @@ export function postMetadata(post: Post): Metadata {
       title: post.title,
       description: post.description,
       publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
       authors: [site.founder],
       images: [{ url: post.cover.src, alt: post.cover.alt }],
     },
@@ -33,6 +34,7 @@ export function PostShell({ post, children }: { post: Post; children: React.Reac
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    dateModified: post.updated ?? post.date,
     image: `${site.url}${post.cover.src}`,
     url: `${site.url}/blog/${post.slug}/`,
     author: { '@type': 'Person', name: site.founder },
@@ -49,6 +51,12 @@ export function PostShell({ post, children }: { post: Post; children: React.Reac
             <p className="mono muted">
               <Link href="/blog/">Blog</Link> · <time dateTime={post.date}>{formatDate(post.date)}</time> ·{' '}
               {post.readingTime}
+              {post.updated && (
+                <>
+                  <br />
+                  Updated <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+                </>
+              )}
             </p>
             <h1 className="page-title">{post.title}</h1>
             <p className="lede muted">{post.description}</p>

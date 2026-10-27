@@ -3,12 +3,14 @@ export type Post = {
   title: string
   description: string
   date: string
+  /** Set when a post is revised after it was published. */
+  updated?: string
   readingTime: string
   cover: { src: string; alt: string }
 }
 
-// Newest first. Each post's body lives in app/blog/<slug>/page.tsx.
-export const posts: Post[] = [
+// Each post's body lives in app/blog/<slug>/page.tsx. Sorted newest first below.
+const allPosts: Post[] = [
   {
     slug: 'building-bnrescues',
     title: 'Building a home online for Brittany Niemi Rescues',
@@ -23,7 +25,7 @@ export const posts: Post[] = [
     title: 'Moving the Moose Jaw Food Bank off WordPress',
     description:
       'Why I replaced mjfoodbank.org’s WordPress site with a custom one that works on every screen, is easy to read, and connects straight into the food bank’s booking app.',
-    date: '2026-10-27',
+    date: '2026-10-24',
     readingTime: '7 min read',
     cover: { src: '/work/mjfoodbank-site/01.webp', alt: 'The new mjfoodbank.org homepage' },
   },
@@ -32,7 +34,8 @@ export const posts: Post[] = [
     title: 'From phone tag to a booking app',
     description:
       'How an Excel sheet to stop my coworkers counting by hand grew into the app that now runs the Moose Jaw Food Bank: bookings, volunteers, warehouse, deliveries, timesheets and more.',
-    date: '2026-10-27',
+    date: '2025-09-16',
+    updated: '2026-10-27',
     readingTime: '10 min read',
     cover: { src: '/work/foodbank-web/03.webp', alt: 'Visit trends dashboard in the food bank app' },
   },
@@ -41,7 +44,8 @@ export const posts: Post[] = [
     title: 'Putting the food bank in people’s pockets',
     description:
       'Getting a food bank’s app onto Google Play and the App Store: a $25 fee, a 28-day test, a borrowed budget for a Mac, and why I chose Capacitor.',
-    date: '2026-10-27',
+    date: '2026-03-24',
+    updated: '2026-10-27',
     readingTime: '8 min read',
     cover: { src: '/work/foodbank-android/01.webp', alt: 'The food bank app on a phone' },
   },
@@ -50,11 +54,14 @@ export const posts: Post[] = [
     title: 'Booking a food bank visit by phone or text',
     description:
       'Not everyone has a smartphone. How an idea in the shower became an automated phone and text line that books food bank visits, checking every rule live so nobody makes a wasted trip.',
-    date: '2026-10-27',
+    date: '2026-01-21',
+    updated: '2026-10-27',
     readingTime: '7 min read',
     cover: { src: '/work/foodbank-ivr/01.webp', alt: 'Phone and text booking for the food bank' },
   },
 ]
+
+export const posts = [...allPosts].sort((a, b) => b.date.localeCompare(a.date))
 
 // Everything built for the Moose Jaw Food Bank. An entry links to its post once a post with that slug exists.
 export const foodBankSeries = [
