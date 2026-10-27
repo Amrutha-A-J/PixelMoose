@@ -7,9 +7,9 @@ export const metadata = postMetadata(post)
 
 const timeline = [
   { when: 'First', what: 'An Excel sheet: I logged calls, staff logged visits, and it added up adults, children and weights by itself.' },
-  { when: 'August 2025', what: 'The first client booking portal, showing staff who had booked, and the pantry schedule built around it. Volunteer shift booking, warehouse records and deliveries followed within weeks.' },
-  { when: 'August 2025', what: 'The Android app on Google Play.' },
-  { when: 'September 2025', what: 'Staff timesheets and Sunshine bag tracking.' },
+  { when: 'August 2025', what: 'Building the first client booking portal, showing staff who had booked, and the pantry schedule around it, along with volunteer shift booking, warehouse records and deliveries.' },
+  { when: 'September 2, 2025', what: 'The app goes live.' },
+  { when: 'September 2025', what: 'Staff timesheets and Sunshine bag tracking, and soon after, the Android app on Google Play.' },
   { when: 'December 2025', what: 'Phone booking for people without internet, with text booking added in January 2026.' },
   { when: 'March 2026', what: 'Eligibility reviews.' },
 ]
@@ -105,7 +105,7 @@ export default function Post() {
 
         <h2>What changed</h2>
         <p>
-          The voicemail inbox stopped being the centre of the day. Clients book themselves, the schedule fills itself, and
+          The app went live on <time dateTime="2025-09-02">September 2, 2025</time>. The voicemail inbox stopped being the centre of the day. Clients book themselves, the schedule fills itself, and
           the numbers that used to take an afternoon of careful counting are just there. Staff get to spend that time on
           the people in front of them.
         </p>

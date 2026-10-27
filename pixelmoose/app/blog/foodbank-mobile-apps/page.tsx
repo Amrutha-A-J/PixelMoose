@@ -29,7 +29,7 @@ export default function Post() {
 
         <h2>Step two: Google Play</h2>
         <p>
-          In August 2025 the app went onto Google Play. Clients and volunteers could now find “Moose Jaw Food Bank” in
+          Soon after the app launched in September 2025, it went onto Google Play. Clients and volunteers could now find “Moose Jaw Food Bank” in
           the store, install it like any other app, and get straight to booking.
         </p>
 
