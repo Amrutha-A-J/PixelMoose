@@ -1,9 +1,7 @@
-import Image from 'next/image'
 import { Carousel } from '@/components/Carousel'
 import { CopyEmail } from '@/components/CopyEmail'
-import { ThemeToggle } from '@/components/ThemeToggle'
+import { SiteFooter, SiteHeader } from '@/components/SiteHeader'
 import { about, budget, projects, services, site, steps } from '@/lib/content'
-import logoMark from '@/public/images/Logo/Logo_mark.png'
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
@@ -12,22 +10,7 @@ export default function Home() {
     <>
       <a className="skip" href="#main">Skip to content</a>
       <div className="wrap">
-        <header className="nav">
-          <a href="#top" className="brand" aria-label="Pixel Moose Studio home">
-            <Image src={logoMark} alt="" width={64} height={40} priority />
-            <span className="brand-text">
-              <span className="brand-name">Pixel Moose</span>
-              <span className="brand-sub">Studio</span>
-            </span>
-          </a>
-          <nav aria-label="Primary" className="nav-links">
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-            <ThemeToggle />
-          </nav>
-        </header>
+        <SiteHeader />
 
         <main id="main">
           <section id="top" className="hero">
@@ -161,10 +144,7 @@ export default function Home() {
           </section>
         </main>
 
-        <footer className="footer mono muted">
-          <span>© {new Date().getFullYear()} Pixel Moose Studio</span>
-          <span>Hand-coded by Ami in Moose Jaw, SK</span>
-        </footer>
+        <SiteFooter />
       </div>
     </>
   )

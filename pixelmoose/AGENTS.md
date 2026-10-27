@@ -8,6 +8,7 @@
 ## Working agreements
 - All copy and project data live in `lib/content.ts`; colours are CSS variables in `app/globals.css` (light, dark, and the `data-theme` override).
 - Keep the logo lockup: moose mark left, "Pixel Moose" with small "Studio" below.
+- Blog posts: add an entry to `lib/posts.ts` (newest first) and write the body in `app/blog/<slug>/page.tsx`.
 - Project screenshots go in `public/work/<slug>/` as WebP, max 1600px.
 - Favor accessible contrast and responsive layouts for both desktop and mobile.
 
