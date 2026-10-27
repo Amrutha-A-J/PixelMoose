@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Carousel } from '@/components/Carousel'
+import { CopyEmail } from '@/components/CopyEmail'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { about, budget, projects, services, site, steps } from '@/lib/content'
 import logoMark from '@/public/images/Logo/Logo_mark.png'
@@ -54,7 +55,7 @@ export default function Home() {
                 actually work.
               </p>
               <div className="actions">
-                <a className="btn btn-solid" href={`mailto:${site.email}`}>
+                <a className="btn btn-solid" href="#contact">
                   Start a project <span aria-hidden="true">→</span>
                 </a>
                 <a className="btn btn-line" href="#work">See the work</a>
@@ -140,9 +141,20 @@ export default function Home() {
 
           <section id="contact" className="section section-roomy" aria-labelledby="contact-title">
             <p id="contact-title" className="mono muted">Have a process that runs on paper?</p>
-            <a className="email" href={`mailto:${site.email}`}>
+            <a className="email" href={`mailto:${site.email}?subject=${encodeURIComponent('New project')}`}>
               pixelmoose.development<wbr />@gmail.com
             </a>
+            <div className="actions contact-actions">
+              <CopyEmail email={site.email} />
+              <a
+                className="btn btn-line"
+                href={`https://mail.google.com/mail/?view=cm&to=${site.email}&su=${encodeURIComponent('New project')}`}
+                target="_blank"
+                rel="noopener"
+              >
+                Open in Gmail <span aria-hidden="true">↗</span>
+              </a>
+            </div>
             <p className="muted contact-note">
               Tell us what slows your team down. We reply within two business days with questions, not a sales pitch.
             </p>

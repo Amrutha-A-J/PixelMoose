@@ -248,6 +248,9 @@ h1 {
   border-radius: 999px;
   font-size: 15px;
   font-weight: 500;
+  font-family: inherit;
+  border: 0;
+  cursor: pointer;
 }
 
 .btn-solid {
@@ -257,6 +260,8 @@ h1 {
 
 .btn-line {
   border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
 }
 
 /* Sections */
@@ -478,6 +483,10 @@ h3 {
   border-bottom: 3px solid var(--accent);
   padding-bottom: 6px;
   overflow-wrap: anywhere;
+}
+
+.contact-actions {
+  margin-top: 32px;
 }
 
 .contact-note {
