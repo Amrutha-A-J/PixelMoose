@@ -66,8 +66,9 @@ export default function Post() {
 
           <div className="prose">
             <p>
-              Brittany Niemi runs a cat rescue in Regina with more than thirty cats in her care, and she pays for it out
-              of her own pocket. Food, litter, vet bills, all of it. She deserves a lot more attention than she gets, so
+              Brittany Niemi runs a cat rescue in Regina with more than thirty cats in her care. Food, litter and vet
+              bills are paid out of her own pocket, along with donations from people who believe in what she does. She
+              deserves a lot more attention than she gets, so
               this first post on our blog is about her.
             </p>
 
@@ -168,8 +169,8 @@ export default function Post() {
             <p>
               Building the site was the fun part. The real challenge was finding a home for it. A site like this is not
               just pages: it needs somewhere to run the backend, a database for the cats and applications, and somewhere
-              for uploaded photos to go. Most hosting for that comes with a monthly bill, and every dollar Brittany spends
-              on hosting is a dollar she cannot spend on food or a vet visit.
+              for uploaded photos to go. Most hosting for that comes with a monthly bill, and every dollar of Brittany’s money or
+              her donors’ that goes to hosting is a dollar that cannot go to food or a vet visit.
             </p>
             <p>
               The first version ran on Supabase with a Postgres database. It worked well, but I wanted every piece on one
@@ -233,6 +234,10 @@ export default function Post() {
                   Brittany Niemi Rescues on Facebook
                 </a>{' '}
                 and share her posts.
+              </li>
+              <li>
+                Donate if you can. The rescue runs on Brittany’s own money and donations, and every bit goes to food,
+                litter and vet care.
               </li>
               <li>Share this story with someone who loves cats.</li>
             </ul>
