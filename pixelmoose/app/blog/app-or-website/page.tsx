@@ -65,6 +65,43 @@ export default function Post() {
           without going anywhere near an app store, and it works on every phone and computer the day it launches.
         </p>
 
+        <h2>What about WordPress?</h2>
+        <p>
+          WordPress runs a huge share of the web, and it can be a good choice: for a blog or a content-heavy site, with
+          someone experienced looking after it. But for a lot of small businesses it turns into something heavier than
+          they needed, especially when it is set up without knowing what is happening underneath.
+        </p>
+        <ul>
+          <li>
+            <strong>It gets slow.</strong> A typical WordPress site is a theme, a page builder and a stack of plugins,
+            each loading its own code and styles on every page, whether that page uses them or not. Every plugin you add
+            for one small feature makes every visit a little slower, and phones on mobile data feel it most.
+          </li>
+          <li>
+            <strong>It’s rigid.</strong> The theme decides how your pages are built. As long as you want what the theme
+            wants, it’s easy. The moment you need something it wasn’t designed for, you end up fighting it, or adding
+            another plugin.
+          </li>
+          <li>
+            <strong>It needs looking after.</strong> WordPress, the theme and every plugin need regular updates for
+            security, updates can break each other, and many of the useful plugins charge yearly licences.
+          </li>
+          <li>
+            <strong>It doesn’t join up with your other systems.</strong> If you already have booking or records
+            somewhere else, connecting WordPress to them usually means more plugins and more workarounds.
+          </li>
+        </ul>
+        <p>
+          Site builders like Wix and Squarespace are easier to start with, but you pay every month and you can only do
+          what the builder allows.
+        </p>
+        <p>
+          For a small site that only needs a handful of pages, a lean, hand-coded site is often faster, simpler and
+          cheaper to keep running. That is exactly why the{' '}
+          <Link href="/blog/rebuilding-mjfoodbank-org/">Moose Jaw Food Bank moved off WordPress</Link>: their old site
+          struggled on phones, was hard to read, and carried far more than they needed.
+        </p>
+
         <h2>Start with what your customers need to do</h2>
         <p>
           Forget the technology for a minute. Write down the three things people most often call or message you about.
