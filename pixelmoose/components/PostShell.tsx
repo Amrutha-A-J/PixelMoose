@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { SiteFooter, SiteHeader } from '@/components/SiteHeader'
 import { site } from '@/lib/content'
-import { formatDate, type Post, posts } from '@/lib/posts'
+import { findPost, formatDate, isPublished, type Post } from '@/lib/posts'
 
-export const getPost = (slug: string) => posts.find((p) => p.slug === slug)!
+export const getPost = (slug: string) => findPost(slug)!
 
 export function postMetadata(post: Post): Metadata {
   const url = `/blog/${post.slug}/`
@@ -28,6 +29,8 @@ export function postMetadata(post: Post): Metadata {
 
 // Page frame for a blog post: header, title block, structured data and footer.
 export function PostShell({ post, children }: { post: Post; children: React.ReactNode }) {
+  if (!isPublished(post)) notFound()
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

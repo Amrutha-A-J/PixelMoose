@@ -16,7 +16,7 @@ const allPosts: Post[] = [
     title: 'Does your business need an app, or just a good website?',
     description:
       'A plain-language guide for small businesses and non-profits: what a website, a web app and a store app each cost and do, where WordPress fits, and how to tell which one you actually need.',
-    date: '2026-10-27',
+    date: '2026-11-10',
     readingTime: '9 min read',
     cover: { src: '/work/mjfoodbank-site/03.webp', alt: 'A website open on two phones' },
   },
@@ -70,7 +70,13 @@ const allPosts: Post[] = [
   },
 ]
 
-export const posts = [...allPosts].sort((a, b) => b.date.localeCompare(a.date))
+// A post dated in the future stays hidden until a build on or after its date (Regina time).
+const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Regina' })
+export const isPublished = (post: Post) => post.date <= today
+
+export const posts = allPosts.filter(isPublished).sort((a, b) => b.date.localeCompare(a.date))
+
+export const findPost = (slug: string) => allPosts.find((p) => p.slug === slug)
 
 // Everything built for the Moose Jaw Food Bank. An entry links to its post once a post with that slug exists.
 export const foodBankSeries = [
