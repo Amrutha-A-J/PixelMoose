@@ -137,81 +137,133 @@ export default function Post() {
               couch at the time, and I wanted their pages to do them justice.
             </p>
 
-            <h2>Why Next.js</h2>
+            <h2>Built to be fast</h2>
             <p>
-              The site had to be fast. Most adopters will open it from a Facebook or Instagram link on their phone, maybe
-              on patchy mobile data, and a slow page is a page people close. Next.js let me build it so that:
+              Most adopters will open the site from a Facebook or Instagram link on their phone, maybe on patchy mobile
+              data, and a slow page is a page people close. I built it with Next.js, a modern way of building websites,
+              so that:
             </p>
             <ul>
               <li>
-                <strong>Pages are ready before anyone asks for them.</strong> The public pages are rendered ahead of time
-                and cached close to the visitor, so they load almost instantly instead of being built on every visit.
+                <strong>Pages load almost instantly.</strong> They are prepared ahead of time instead of being built
+                from scratch every time someone visits.
               </li>
               <li>
-                <strong>They stay fresh anyway.</strong> Cached pages refresh every hour, and right away when Brittany
-                edits a cat, so a cat who has just been adopted disappears from the list without her doing anything extra.
+                <strong>They stay up to date anyway.</strong> When Brittany edits a cat or one gets adopted, the site
+                updates right away, with nothing extra for her to do.
               </li>
               <li>
-                <strong>Phones download very little.</strong> Most of the work happens on the server, so the browser
-                gets plain HTML and only a small amount of JavaScript.
+                <strong>It works well on any phone.</strong> Visitors download very little, so it is quick even on a weak
+                signal.
               </li>
               <li>
-                <strong>Google can read it.</strong> Every page has proper titles, descriptions and link previews, so
-                someone searching for cat adoption in Regina can find her, and shared links look right.
+                <strong>People can find it on Google.</strong> Every page is set up so a search for cat adoption near
+                Regina can lead to her, and links shared on social media show a proper preview.
               </li>
               <li>
-                <strong>One codebase does everything</strong>: the public site, the admin, the photo uploads and the
-                emails, which keeps it simple to look after.
+                <strong>She can run it herself.</strong> Adding cats, uploading photos and handling applications all
+                happen in her own admin, so she never has to wait on me.
               </li>
             </ul>
 
             <h2>The hardest part: where it lives</h2>
             <p>
-              Building the site was the fun part. The real challenge was finding a home for it. A site like this is not
-              just pages: it needs somewhere to run the backend, a database for the cats and applications, and somewhere
-              for uploaded photos to go. Most hosting for that comes with a monthly bill, and every dollar of Brittany’s money or
-              her donors’ that goes to hosting is a dollar that cannot go to food or a vet visit.
+              Building the site was the fun part. The real challenge was finding a home for it. A site like this is more
+              than pages: it needs somewhere to keep the cats and applications, somewhere for photos to go, and a way to
+              send email. Most hosting for that comes with a monthly bill, and every dollar of Brittany’s money or her
+              donors’ that goes to hosting is a dollar that cannot go to food or a vet visit.
             </p>
             <p>
-              The first version ran on Supabase with a Postgres database. It worked well, but I wanted every piece on one
-              free plan with plenty of room to spare. So on launch day I moved the whole backend to Cloudflare, where the
-              free tier covers all of it, and a small rescue will never come close to the limits:
+              So I set everything up on free plans from Cloudflare and Brevo, two well-established services:
             </p>
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">Part</th>
-                    <th scope="col">Runs on</th>
-                    <th scope="col">Free allowance</th>
-                    <th scope="col">What the rescue uses</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {stack.map((row) => (
-                    <tr key={row.part}>
-                      <td>{row.part}</td>
-                      <td>{row.tool}</td>
-                      <td>{row.free}</td>
-                      <td>{row.uses}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ul>
+              <li>the website and the rescue’s private admin</li>
+              <li>the records of every cat, application, foster and adoption</li>
+              <li>every cat photo</li>
+              <li>emails, sent from her own bnrescues.com address</li>
+            </ul>
             <p>
-              Emails come from her own address at bnrescues.com through Brevo’s free plan, like new application
-              notifications and password resets.
+              A small rescue uses only a tiny fraction of what those free plans allow, so there is plenty of room to grow
+              before anything would ever cost money.
             </p>
+
             <p className="callout">
               The only thing Brittany pays for is her domain. Everything else costs <strong>$0 a month</strong>.
             </p>
 
+            <details className="tech">
+              <summary>
+                <span>For the technically curious: how it’s built</span>
+                <span className="tech-hint mono muted" aria-hidden="true">Show</span>
+              </summary>
+              <div className="tech-body">
+                <p>
+                  The site is a single Next.js app (App Router, React Server Components) that serves both the public
+                  pages and the rescue’s admin. It runs on <strong>Cloudflare Workers</strong> through OpenNext, and the
+                  whole Worker fits in about 2.3 MiB, under the free plan’s 3 MiB limit.
+                </p>
+                <div className="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Part</th>
+                        <th scope="col">Runs on</th>
+                        <th scope="col">Free allowance</th>
+                        <th scope="col">What the rescue uses</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stack.map((row) => (
+                        <tr key={row.part}>
+                          <td>{row.part}</td>
+                          <td>{row.tool}</td>
+                          <td>{row.free}</td>
+                          <td>{row.uses}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <ul>
+                  <li>
+                    <strong>Supabase to D1.</strong> The first version used Supabase (Postgres, Auth and Storage). On
+                    launch day I moved it to Cloudflare so every piece sits on one free plan: D1 (SQLite) with the same
+                    tables, R2 for photos, and KV for the page cache.
+                  </li>
+                  <li>
+                    <strong>Fast pages that stay fresh.</strong> Public pages use incremental static regeneration: cached
+                    in KV, refreshed hourly, and invalidated immediately through a D1-backed tag cache when the rescue edits
+                    a cat. Refreshing hourly keeps cache writes well under KV’s 1,000 free writes a day.
+                  </li>
+                  <li>
+                    <strong>Logins without a paid auth service.</strong> Admin sign-in uses cookie sessions with PBKDF2
+                    password hashes, and session and password-reset tokens are stored hashed.
+                  </li>
+                  <li>
+                    <strong>Photos.</strong> The admin uploads straight to R2, and photos are served from the site’s own
+                    domain with long-term caching, so there are no download fees.
+                  </li>
+                  <li>
+                    <strong>Email.</strong> Brevo sends from a verified bnrescues.com sender with the domain authenticated
+                    in Cloudflare DNS: application notifications and password resets.
+                  </li>
+                  <li>
+                    <strong>Deploys.</strong> A deploy script builds against an empty local database, so no sample data is
+                    ever baked into the pages, then marks them stale so the first visit renders from the live database.
+                  </li>
+                </ul>
+                <p>
+                  If the site ever outgrows the free plan, Cloudflare’s paid Workers plan is $5 a month. For a rescue
+                  this size, that day is a long way off.
+                </p>
+              </div>
+            </details>
+
             <h2>Launch day</h2>
             <p>
               I started building on October 14, 2026, and bnrescues.com went live on October 27, thirteen days and thirty
-              commits later. Launch day itself was busy: moving the backend to Cloudflare, connecting her domain and
-              email, adding dark mode and bonded pairs, and fixing the last few things you only find on a live site.
+              commits later. Launch day itself was busy: moving everything onto the free hosting, connecting her
+              domain and email, adding dark mode and bonded pairs, and fixing the last few things you only find on a live site.
             </p>
             <p>
               I am so proud, as a developer, to be able to make a difference with what I know how to do. I cannot take in

@@ -710,3 +710,56 @@ h3 {
 .prose tr:last-child td {
   border-bottom: 0;
 }
+
+.tech {
+  margin: 8px 0 32px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.tech summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+
+.tech summary::-webkit-details-marker {
+  display: none;
+}
+
+.tech summary:hover .tech-hint {
+  color: var(--accent);
+}
+
+.tech-hint::after {
+  content: ' +';
+}
+
+.tech[open] .tech-hint {
+  font-size: 0;
+}
+
+.tech[open] .tech-hint::after {
+  content: 'Hide −';
+  font-size: 13px;
+}
+
+.tech[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.tech-body {
+  padding: 24px 20px 4px;
+  font-size: 16px;
+}
+
+.tech-body .table-wrap {
+  margin-bottom: 24px;
+}
