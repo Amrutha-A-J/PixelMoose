@@ -964,3 +964,49 @@ a.series-item:hover {
   opacity: 1;
   color: var(--accent);
 }
+
+/* Principle */
+.principle {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 40px 56px;
+}
+
+.principle-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.principle-questions p {
+  padding-left: 16px;
+  border-left: 2px solid var(--accent);
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.principle-body .statement {
+  margin-bottom: 24px;
+}
+
+.principle-body > p {
+  max-width: 56ch;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.principle-proof {
+  margin-top: 48px;
+}
+
+.principle-proof .text-link {
+  align-self: flex-start;
+}
+
+@media (max-width: 820px) {
+  .principle {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

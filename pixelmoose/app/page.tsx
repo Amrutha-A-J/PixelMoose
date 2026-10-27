@@ -116,6 +116,47 @@ export default function Home() {
             </div>
           </section>
 
+          <section id="principle" className="section section-roomy" aria-labelledby="principle-title">
+            <div className="principle">
+              <div className="principle-questions">
+                <p>Ever filled in a long form, hit submit, and watched the app break?</p>
+                <p>Or called a phone line that sent you round and round?</p>
+              </div>
+              <div className="principle-body">
+                <h2 id="principle-title" className="statement">
+                  Software fits when it’s built by someone who knows how you work.
+                </h2>
+                <p className="muted">
+                  That kind of frustration happens when software is built without understanding the business behind it.
+                  The more I understand how a business really operates, what it needs and what gets in its way, the more
+                  tailor-made the solution becomes. That is the principle behind everything I build.
+                </p>
+                <div className="cols principle-proof">
+                  <div className="col col-rule">
+                    <h3>Moose Jaw Food Bank</h3>
+                    <p className="muted">
+                      I knew how they operated, what they needed and the challenges they faced, from the inside. Their
+                      app, phone line and website were built around exactly that.
+                    </p>
+                    <Link className="text-link" href="/blog/foodbank-booking-app/">
+                      Read the story <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
+                  <div className="col col-rule">
+                    <h3>Brittany Niemi Rescues</h3>
+                    <p className="muted">
+                      I met Brittany and her cats, fostered kittens from her rescue, and built her site around how
+                      adopters and fosters actually find a cat.
+                    </p>
+                    <Link className="text-link" href="/blog/building-bnrescues/">
+                      Read the story <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section id="services" className="section" aria-labelledby="services-title">
             <h2 id="services-title" className="label">What we build</h2>
             <div className="cols cols-3">
