@@ -615,6 +615,10 @@ h3 {
 
 .article-figure img {
   width: 100%;
+  height: auto;
+  /* Tall phone screenshots sit inside the frame instead of running down the page */
+  max-height: min(70vh, 520px);
+  object-fit: contain;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--soft);
@@ -879,4 +883,15 @@ a.series-item:hover {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.series-heading {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.series-intro {
+  margin: 8px 0 24px;
+  font-size: 15px;
 }

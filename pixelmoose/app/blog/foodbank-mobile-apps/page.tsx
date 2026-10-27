@@ -62,8 +62,8 @@ export default function Post() {
         </p>
 
         <figure className="article-figure">
-          <img src="/work/foodbank-android/03.webp" alt="Booking calendar in the mobile app" />
-          <figcaption className="muted">Picking a day and time for a visit on Android.</figcaption>
+          <img src="/work/foodbank-android/03.webp" alt="Booking a volunteer shift in the mobile app" />
+          <figcaption className="muted">Volunteers pick a day and book a shift right from their phone.</figcaption>
         </figure>
 
         <h2>Choosing how to build it: why Capacitor</h2>

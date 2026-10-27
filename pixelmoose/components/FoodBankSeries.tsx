@@ -5,7 +5,10 @@ import { foodBankSeries, hasPost } from '@/lib/posts'
 export function FoodBankSeries({ current }: { current: string }) {
   return (
     <aside className="series" aria-labelledby="series-title">
-      <h2 id="series-title" className="label">More from the food bank project</h2>
+      <h2 id="series-title" className="series-heading">More from the Moose Jaw Food Bank project</h2>
+      <p className="muted series-intro">
+        Everything I’ve built for the Moose Jaw &amp; District Food Bank, one story each.
+      </p>
       <ul>
         {foodBankSeries
           .filter((item) => item.slug !== current)
