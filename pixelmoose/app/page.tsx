@@ -131,11 +131,16 @@ export default function Home() {
                   The more I understand how a business really operates, what it needs and what gets in its way, the more
                   tailor-made the solution becomes. That is the principle behind everything I build.
                 </p>
+                <p className="muted">
+                  That doesn’t mean handing over your business secrets. It means walking me through an ordinary day: who
+                  does what, where things get stuck, and what your customers keep asking for. Anything you share stays
+                  confidential.
+                </p>
                 <div className="cols principle-proof">
                   <div className="col col-rule">
                     <h3>Moose Jaw Food Bank</h3>
                     <p className="muted">
-                      I knew how they operated, what they needed and the challenges they faced, from the inside. Their
+                      I worked there, so I knew how they operated, what they needed and the challenges they faced. Their
                       app, phone line and website were built around exactly that.
                     </p>
                     <Link className="text-link" href="/blog/foodbank-booking-app/">

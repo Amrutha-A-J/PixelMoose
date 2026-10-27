@@ -993,6 +993,7 @@ a.series-item:hover {
 
 .principle-body > p {
   max-width: 56ch;
+  margin-bottom: 16px;
   font-size: 17px;
   line-height: 1.6;
 }
