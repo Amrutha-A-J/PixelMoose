@@ -103,6 +103,68 @@ export default function Post() {
           <figcaption className="muted">The warehouse side: inventory, pickups and distribution.</figcaption>
         </figure>
 
+        <h2>The hard parts</h2>
+        <h3>Building for people who aren’t technical at all</h3>
+        <p>
+          Most of the people using this app are not “tech people”. Some clients had never booked anything online. Some
+          volunteers and staff were more comfortable with paper than with screens. If the app confused anyone, they would
+          go straight back to calling, and the phone tag would start again. So a lot of the work went into small things
+          that stop people getting stuck:
+        </p>
+        <ul>
+          <li>
+            <strong>Sign in with whatever you remember.</strong> Clients can use their client ID or their email address.
+          </li>
+          <li>
+            <strong>Helpful wrong-password messages.</strong> Instead of just “incorrect”, the app reminds people that
+            passwords are case-sensitive, to check Caps Lock and stray spaces, and links straight to a reset. After a few
+            failed tries, it suggests resetting rather than guessing.
+          </li>
+          <li>
+            <strong>Resets that don’t backfire.</strong> Reset emails remind people to check their spam folder, and their
+            old password keeps working until the new one is set, so nobody locks themselves out halfway.
+          </li>
+          <li>
+            <strong>No lost forms.</strong> Pop-up windows only close with their X button, so a stray tap outside doesn’t
+            throw away something half filled in.
+          </li>
+          <li>
+            <strong>Help written for each person</strong>, with separate guides for clients, volunteers, staff and
+            agencies, and the app available in other languages.
+          </li>
+          <li>
+            <strong>Getting online without starting over.</strong> Existing clients can ask for online access with their
+            client ID, and staff approve it and email them a secure setup link.
+          </li>
+          <li>
+            <strong>And a way out of the app entirely:</strong> anyone who can’t or won’t use it can{' '}
+            <Link href="/blog/foodbank-phone-text-booking/">book by phone or text</Link>.
+          </li>
+        </ul>
+
+        <h3>Nobody should have to remember a password</h3>
+        <p>
+          A forgotten password is one of the easiest ways to lose someone who is new to apps, and every lost user meant
+          another phone call. So from the first month after launch, I worked on taking passwords out of the picture:
+        </p>
+        <ul>
+          <li>
+            <strong>Fingerprint and face sign-in</strong> in the{' '}
+            <Link href="/blog/foodbank-mobile-apps/">Android and iOS apps</Link>. Sign in once with a password, and after
+            that a touch or a glance opens the app, with the phone’s PIN as a backup.
+          </li>
+          <li>
+            <strong>Passkeys in the browser</strong>, so people on a computer or phone browser can sign in with their
+            device’s fingerprint, face or screen lock instead of typing a password. They work for clients, volunteers,
+            staff and agencies.
+          </li>
+          <li>
+            <strong>Safe on shared phones.</strong> Fingerprint sign-in is tied to one account per device. If someone else
+            in the household signs in on the same phone, the app asks before switching, and never swaps accounts
+            silently.
+          </li>
+        </ul>
+
         <h2>What changed</h2>
         <p>
           The app went live on <time dateTime="2025-09-02">September 2, 2025</time>. The voicemail inbox stopped being the centre of the day. Clients book themselves, the schedule fills itself, and
@@ -125,6 +187,18 @@ export default function Post() {
             <strong>One backend for everything.</strong> The web app, the Android and iOS apps, and the phone and text
             line all talk to the same API, so a booking made by phone shows up in the staff schedule instantly, and the
             same booking rules apply everywhere.
+          </li>
+          <li>
+            <strong>Passwordless sign-in.</strong> Browser passkeys use WebAuthn and go through the same inactive-account
+            and staff password-expiry checks as password login. In the mobile apps, credentials sit in the device’s
+            secure storage and are unlocked by the biometric prompt, which allows the device PIN or passcode as a
+            fallback.
+          </li>
+          <li>
+            <strong>Sessions that don’t trip people up.</strong> Short-lived access tokens with refresh tokens keep
+            returning users signed in; refresh and login requests are serialized so an old refresh can’t wipe a newer
+            login, and the login rate limit only counts rejected credentials, so a server hiccup never eats into
+            someone’s attempts.
           </li>
           <li>
             <strong>Exports</strong> use a reusable Excel table export, so any staff table can go straight into the

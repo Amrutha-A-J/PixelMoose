@@ -838,3 +838,10 @@ a.series-item:hover {
   height: 10px;
   background: var(--accent);
 }
+
+.prose h3 {
+  margin: 36px 0 14px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}

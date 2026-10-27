@@ -33,7 +33,7 @@ export const posts: Post[] = [
     description:
       'How an Excel sheet to stop my coworkers counting by hand grew into the app that now runs the Moose Jaw Food Bank: bookings, volunteers, warehouse, deliveries, timesheets and more.',
     date: '2026-10-27',
-    readingTime: '8 min read',
+    readingTime: '10 min read',
     cover: { src: '/work/foodbank-web/03.webp', alt: 'Visit trends dashboard in the food bank app' },
   },
   {
