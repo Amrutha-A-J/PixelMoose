@@ -948,3 +948,19 @@ a.series-item:hover {
   object-fit: cover;
   object-position: top;
 }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.back-link:hover {
+  opacity: 1;
+  color: var(--accent);
+}

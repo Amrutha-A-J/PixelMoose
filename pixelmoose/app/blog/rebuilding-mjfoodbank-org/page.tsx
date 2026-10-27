@@ -53,8 +53,11 @@ export default function Post() {
         <article className="article">
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <header className="article-head">
+            <Link href="/blog/" className="back-link">
+              <span aria-hidden="true">←</span> All posts
+            </Link>
             <p className="mono muted">
-              <Link href="/blog/">Blog</Link> · <time dateTime={post.date}>{formatDate(post.date)}</time> ·{' '}
+              <time dateTime={post.date}>{formatDate(post.date)}</time> ·{' '}
               {post.readingTime}
             </p>
             <h1 className="page-title">{post.title}</h1>
