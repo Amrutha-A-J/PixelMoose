@@ -28,10 +28,10 @@ export const projects: Project[] = [
     title: 'Brittany Niemi Rescues',
     kind: 'Website + admin',
     description:
-      'A cat rescue in Regina. Adopters browse and filter cats by age and needs, read each cat’s story, and apply to adopt or foster. The rescue manages its listings from its own login.',
+      'A cat rescue in the Regina area. Adopters browse and filter cats by age and needs, read each cat’s story, and apply to adopt or foster. The rescue manages its listings from its own login.',
     link: { label: 'bnrescues.com', href: 'https://bnrescues.com' },
     slides: [
-      { src: '/work/bnrescues/01.webp', alt: 'Brittany Niemi Rescues homepage in dark mode', caption: 'Homepage for a Regina cat rescue, in dark mode.' },
+      { src: '/work/bnrescues/01.webp', alt: 'Brittany Niemi Rescues homepage in dark mode', caption: 'Homepage for a cat rescue near Regina, in dark mode.' },
       { src: '/work/bnrescues/02.webp', alt: 'Brittany Niemi Rescues homepage in light mode', caption: 'The same homepage in light mode — it follows each visitor’s setting.' },
       { src: '/work/bnrescues/03.webp', alt: 'Homepage on a phone in light and dark mode', caption: 'On a phone, in light and dark.' },
       { src: '/work/bnrescues/04.webp', alt: 'Adoptable cats listing with filters', caption: 'Adoptable cats, filterable by age group, sex and status.' },

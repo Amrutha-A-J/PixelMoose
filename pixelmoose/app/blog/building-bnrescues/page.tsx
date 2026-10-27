@@ -66,7 +66,7 @@ export default function Post() {
 
           <div className="prose">
             <p>
-              Brittany Niemi runs a cat rescue in Regina with more than thirty cats in her care. Food, litter and vet
+              Brittany Niemi runs a cat rescue near Regina with more than thirty cats in her care. Food, litter and vet
               bills are paid out of her own pocket, along with donations from people who believe in what she does. She
               deserves a lot more attention than she gets, so
               this first post on our blog is about her.
@@ -79,7 +79,7 @@ export default function Post() {
               foster, you had to dig through posts and send messages to find out who was still looking for a home.
             </p>
             <p>
-              My husband and I drove to Regina to meet her and her kittens. We were surprised to find she rescues pigeons
+              My husband and I drove out to meet her and her kittens. We were surprised to find she rescues pigeons
               too. She takes in cats and kittens of every age and condition: bottle babies, seniors, and the ones who need
               extra care. She is completely overrun, and she still never says no to a cat in winter, because on the
               prairies in winter, no means death.
