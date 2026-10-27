@@ -182,6 +182,10 @@ export default function Post() {
                 so bookmarks and search results still land in the right place.
               </li>
             </ol>
+            <p>
+              The new mjfoodbank.org went live on <time dateTime="2026-10-22">October 22, 2026</time>, six days after
+              I started.
+            </p>
           </div>
 
           <details className="tech">
